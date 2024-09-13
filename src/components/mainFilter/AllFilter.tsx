@@ -278,7 +278,6 @@ const AllFilter = () => {
                   src={product.img}
                   alt={product.name}
                 />
-                s
                 <div className="mt-4 text-start">
                   <p className="italic text-green-500	text-xs	">{product.type}</p>
                   <h3 className=" text-base">{product.name}</h3>
