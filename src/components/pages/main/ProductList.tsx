@@ -11,22 +11,33 @@ import "../../swiperComponent/style.css";
 
 import { Grid, Pagination } from "swiper/modules";
 import Image from "next/image";
+import useBreakpointValue from "@/hooks/useBreakpointValue";
 
 const ProductList = ({ items }: { items: Product[] }) => {
+  const value = useBreakpointValue(
+    {
+      sm: 2,
+      md: 3,
+      lg: 4,
+      xl: 5,
+    },
+    2
+  );
+
   return (
     <Swiper
       className="mt-6"
       pagination={{ el: ".swiper-pagination-custom", clickable: true }}
       modules={[Pagination, Grid]}
       grid={{
-        rows: 2,
+        rows: value,
         fill: "row",
       }}
-      slidesPerView={2}
-      slidesPerGroup={2}
+      slidesPerView={value}
+      slidesPerGroup={value}
       spaceBetween={10}
     >
-      {items.map((item) => {
+      {items.map(item => {
         return (
           <SwiperSlide key={item.id}>
             <Link

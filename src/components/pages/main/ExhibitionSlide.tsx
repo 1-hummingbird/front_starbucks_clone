@@ -1,14 +1,14 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { Keyboard, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { exhibitions } from "@/datas/dummy/exhibitions";
 
+import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "../../swiperComponent/style.css";
-import Image from "next/image";
 
 const ExhibitionSlide = () => {
   return (
@@ -25,7 +25,7 @@ const ExhibitionSlide = () => {
         loop={true}
         className="w-full"
       >
-        {exhibitions.map((item) => {
+        {exhibitions.map(item => {
           return (
             <SwiperSlide key={item.id}>
               <Image
@@ -39,7 +39,12 @@ const ExhibitionSlide = () => {
             </SwiperSlide>
           );
         })}
-        <div className="swiper-pagination"></div>
+        <div className="flex w-full swiper-footer absolute z-10 justify-end">
+          <div className="flex gap-1 bg-[#00000073]">
+            <div className="swiper-pagination flex text-white swiper-pagination-static px-4"></div>
+            <div className="text-white px-2">전체보기</div>
+          </div>
+        </div>
       </Swiper>
     </section>
   );

@@ -55,3 +55,11 @@
   display: flex;
   justify-content: center;
 }
+
+.swiper-footer {
+  bottom: 0;
+}
+
+.swiper-pagination-static {
+  position: static;
+}
