@@ -11,10 +11,10 @@ export function SelcetButton() {
   return (
     <div className="flex justify-end my-3 px-3">
       <Select>
-        <SelectTrigger className="w-40 justify-center">
+        <SelectTrigger className="w-[100px]">
           <SelectValue placeholder="신상품순" />
         </SelectTrigger>
-        <SelectContent className="font-sm ">
+        <SelectContent className="text-lg ">
           <SelectGroup>
             <SelectItem value="best">추천순</SelectItem>
             <SelectItem value="new">신상품순</SelectItem>

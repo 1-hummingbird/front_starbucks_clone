@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import FilterSection from "./CategoryFilter/FilterSection";
 import ChildrenCategoryList from "./CategoryFilter/ChildrenCategoryList";
 import { SelcetButton } from "./CategoryFilter/SelectButton";
+import Link from "next/link";
 
 const AllFilter = () => {
   const [visibleCategoryIndex, setVisibleCategoryIndex] = useState<
@@ -220,7 +221,7 @@ const AllFilter = () => {
 
           {/* 선택된 항목들 */}
           {selectedParentCategory && (
-            <div className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap text-sm flex-nowrap min-w-max">
+            <div className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap text-sm flex-nowrap w-32 justify-between">
               <span>{selectedParentCategory}</span>
               <button
                 className="px-3"
@@ -234,7 +235,7 @@ const AllFilter = () => {
           {selectedChildCategories.map((child) => (
             <div
               key={child}
-              className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap flex-nowrap min-w-max"
+              className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap flex-nowrap w-32 justify-between"
             >
               <span>{child}</span>
               <button
@@ -251,7 +252,7 @@ const AllFilter = () => {
           ))}
 
           {selectedPrice && (
-            <div className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap flex-nowrap min-w-max">
+            <div className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap flex-nowrap w-32 justify-between">
               <span>{selectedPrice}</span>
               <button className="px-3" onClick={() => setSelectedPrice(null)}>
                 X
