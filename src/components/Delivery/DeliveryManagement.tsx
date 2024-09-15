@@ -7,7 +7,9 @@ function DeliveryManagement() {
 
       <div className=" w-4/5 px-5 leading-8 ">
         <ul className="flex justify-between">
-          <li>이름 주소별칭 기본배송지 </li>
+          <li>
+            <p className="font-bold">이름</p> 주소별칭 기본배송지{" "}
+          </li>
           <li>수정</li>
         </ul>
         <div>
@@ -25,11 +27,10 @@ function DeliveryManagement() {
       </div>
 
       {/* Button */}
-      <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-400" />
-      <div className="">
-        <button className="bg-[#01A862] text-white text-center rounded-full w-3/4 py-4 text-2xl absolute ">
-          <a href="">+ 새 배송지 추가</a>
-        </button>
+      <div>
+        <div className="fixed bottom-0 left-0 w-3/4 text-center bg-[#02A862] text-white py-4 rounded-full ml-9 my-4">
+          <a href="./DeliveryAddress.tsx  ">+ 새 배송지 추가</a>
+        </div>
       </div>
     </>
   );
