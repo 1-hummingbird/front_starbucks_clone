@@ -2,7 +2,7 @@ import React from "react";
 
 const data = {
   addressalias: "집",
-  name: "길동",
+  name: "홍길동",
   zipcode: 12345,
   address: "~~~~~~~~",
   deepaddress: "~~~~~~",
@@ -13,10 +13,10 @@ const data = {
 const PayDelivery = () => {
   return (
     <>
-      <h1 className="ml-9 font-bold text-2xl	">결제하기 </h1>
-      <div className="flex flex-col justify-between min-h-full">
+      <h1 className="ml-8 font-bold text-2xl	">결제하기 </h1>
+      <div className=" ml-8 flex flex-col justify-between pt-5">
         <div className="flex justify-between  py-5">
-          <h4 className=" ml-9 font-bold text-xl">배송 정보</h4>
+          <h4 className=" font-bold text-xl">배송 정보</h4>
           <div>
             <a
               href=""
@@ -27,7 +27,7 @@ const PayDelivery = () => {
           </div>
         </div>
 
-        <div className="ml-9 mb-5">
+        <div className=" mb-5">
           <div className="flex justify-between">
             <div>
               <p>
@@ -50,8 +50,8 @@ const PayDelivery = () => {
             </div>
           </div>
         </div>
-        <hr className=" border-border-solid border-t-[1px] z-20 border-t-slate-400" />
       </div>
+      <hr className=" border-border-solid border-t-[1px] z-20 border-t-slate-400" />
     </>
   );
 };
