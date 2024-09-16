@@ -11,7 +11,7 @@ export function SelcetButton() {
   return (
     <div className="flex justify-end my-3 px-3">
       <Select>
-        <SelectTrigger className="w-[100px]">
+        <SelectTrigger className="w-36">
           <SelectValue placeholder="신상품순" />
         </SelectTrigger>
         <SelectContent className="text-lg ">
