@@ -16,12 +16,11 @@ import useBreakpointValue from "@/hooks/useBreakpointValue";
 const ProductList = ({ items }: { items: Product[] }) => {
   const value = useBreakpointValue(
     {
-      sm: 2,
       md: 3,
       lg: 4,
       xl: 5,
     },
-    2
+    2,
   );
 
   return (
@@ -30,18 +29,18 @@ const ProductList = ({ items }: { items: Product[] }) => {
       pagination={{ el: ".swiper-pagination-custom", clickable: true }}
       modules={[Pagination, Grid]}
       grid={{
-        rows: value,
+        rows: 2,
         fill: "row",
       }}
       slidesPerView={value}
       slidesPerGroup={value}
       spaceBetween={10}
     >
-      {items.map(item => {
+      {items.map((item) => {
         return (
           <SwiperSlide key={item.id}>
             <Link
-              className="w-full flex flex-col items-center "
+              className="flex w-full flex-col items-center"
               href={item.link}
             >
               <Image
@@ -50,7 +49,7 @@ const ProductList = ({ items }: { items: Product[] }) => {
                 width={186}
                 height={186}
               />
-              <p className="w-32 mt-2 text-xs">{item.name}</p>
+              <p className="mt-2 w-32 text-xs">{item.name}</p>
             </Link>
           </SwiperSlide>
         );
