@@ -21,7 +21,6 @@ const useBreakpointValue = <T,>(
 ) => {
   const [width, setWidth] = useState(-1);
 
-  console.log(width);
   useEffect(() => {
     const cb = () => {
       setWidth(window.innerWidth);
