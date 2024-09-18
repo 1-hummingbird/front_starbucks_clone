@@ -182,6 +182,9 @@ const AllFilter = () => {
         onReset={resetSelectedCategories}
         seasons={[]}
         selectedSeason={null}
+        onSeasonClick={function (season: string): void {
+          throw new Error("Function not implemented.");
+        }}
       />
 
       {/* 자식 카테고리 */}
@@ -267,27 +270,26 @@ const AllFilter = () => {
       <div className="grid grid-cols-2 gap-1">
         {filteredProducts.map((product) => (
           <Link href={`/product/${product.id}`} key={product.id}>
-            <a href="">
-              {" "}
-              <div className="flex justify-center transform transition-transform hover:scale-105">
-                <div className="product-content p-6 box-border shadow-lg rounded-lg">
-                  <img
-                    className="w-28 h-28 rounded-lg"
-                    src={product.img}
-                    alt={product.name}
-                  />
-                  <div className="mt-4 text-start">
-                    <p className="italic text-green-500 text-xs">
-                      {product.type}
-                    </p>
-                    <h3 className="text-base">{product.name}</h3>
-                    <p className="text-gray-700 font-semibold">
-                      {product.price} 원
-                    </p>
-                  </div>
+            <div className="flex justify-center transform transition-transform hover:scale-105">
+              <div className="product-content p-6 box-border shadow-lg rounded-lg">
+                <img
+                  className="w-28 h-28 rounded-lg"
+                  src={product.img}
+                  alt={product.name}
+                  width={112}
+                  height={112}
+                />
+                <div className="mt-4 text-start">
+                  <p className="italic text-green-500 text-xs">
+                    {product.type}
+                  </p>
+                  <h3 className="text-base">{product.name}</h3>
+                  <p className="text-gray-700 font-semibold">
+                    {product.price.toLocaleString()} 원
+                  </p>
                 </div>
               </div>
-            </a>
+            </div>
           </Link>
         ))}
       </div>
