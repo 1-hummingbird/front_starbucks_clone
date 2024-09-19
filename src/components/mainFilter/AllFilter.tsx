@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import FilterSection from "./CategoryFilter/FilterSection";
 import ChildrenCategoryList from "./CategoryFilter/ChildrenCategoryList";
 import { SelcetButton } from "./CategoryFilter/SelectButton";
-import { Link } from "lucide-react";
-
+import Link from "next/link";
 const AllFilter = () => {
   const [visibleCategoryIndex, setVisibleCategoryIndex] = useState<
     number | null
@@ -13,7 +12,6 @@ const AllFilter = () => {
     string | null
   >(null);
   const [selectedChildCategories, setSelectedChildCategories] = useState<
-    // 다중 선택을 위한 배열로 변경
     string[]
   >([]);
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);

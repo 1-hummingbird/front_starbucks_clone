@@ -1,5 +1,4 @@
 import React from "react";
-// 더미 데이터 또는 실제 데이터를 가져오는 로직
 const dummyProducts = [
   {
     id: 1,
