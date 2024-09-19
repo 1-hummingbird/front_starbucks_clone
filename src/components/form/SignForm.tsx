@@ -11,7 +11,7 @@ const SignInForm = () => {
   } = useForm<User>();
 
   const onSubmit = (values: User) => {
-    signIn("credentials", {
+    const result = signIn("credentials", {
       loginId: values.loginID,
       password: values.password,
       redirect: true,
