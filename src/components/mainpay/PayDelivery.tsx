@@ -20,7 +20,7 @@ const PayDelivery = () => {
           <div>
             <a
               href=""
-              className="mx-5 rounded-full border-2	 items-center text-gray-500 "
+              className="mx-5 rounded-full border-2	p-1 items-center text-gray-500 "
             >
               변경
             </a>
