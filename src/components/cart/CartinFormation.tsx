@@ -9,7 +9,7 @@ function CartinFormation() {
     <div>
         <input type="checkbox"/> 전체선택
     </div>
-    <div className='gap-2'>
+    <div className=''>
         <button type='button'>선택 삭제</button>
         |
         <button type='button'>전체 삭제</button>
