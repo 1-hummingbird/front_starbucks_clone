@@ -27,5 +27,22 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+
+    - name: Cache node_modules
+      uses: actions/cache@v3
+      with:
+        path: node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node_modules-
+
+    - name: Cache .next build
+      uses: actions/cache@v3
+      with:
+        path: .next
+        key: ${{ runner.os }}-next-build-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-next-build-
+
     - run: npm ci
     - run: npm run build
