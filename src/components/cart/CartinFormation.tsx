@@ -9,7 +9,7 @@ function CartinFormation() {
     <div>
         <input type="checkbox"/> 전체선택
     </div>
-    <div className=''>
+    <div className='gap-2'>
         <button type='button'>선택 삭제</button>
         |
         <button type='button'>전체 삭제</button>
@@ -21,27 +21,39 @@ function CartinFormation() {
         <input className='' type="checkbox" /> 일반 상품
     </div>
     <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-200" />
+    </div>
 
     {/* 상품 정보 */}
-    <div className='flex pl-3'>
-        <input
-        type="checkbox"/>
-        <img
-        className='w-28 h-28' 
-        src="https://image.istarbucks.co.kr/upload/store/skuimg/2024/08/[9300000005363]_20240806161440187.jpg" alt="머그" />
-        
-        <ul className=''>
-            <li className=' flex'>
-                <p>코리아 단청머그</p> 
-                <p> x </p>
-            </li>
-            <li className='flex justify-between'>
-                <p>1</p> 
-                <p>29000원</p>
-            </li>
-        </ul>
+    <div>
+  <ul className='flex justify-between items-start w-full'>
+    {/* Input과 이미지 수평 정렬 및 붙이기 */}
+    <div className='flex items-center'>
+      <input type="checkbox" />
+      <img
+        className='w-28 h-28 ml-2'
+        src="https://image.istarbucks.co.kr/upload/store/skuimg/2024/08/[9300000005363]_20240806161440187.jpg"
+        alt="머그"
+      />
     </div>
+
+    {/* 상품명과 수량/가격 수직 정렬 */}
+    <div className='flex flex-col'>
+      <li className='mb-2'>코리아 단청 머그</li>
+      <div className='flex justify-between w-full'>
+        <li>1</li>
+        <li>29000원</li>
+      </div>
     </div>
+
+    {/* X 표시 */}
+    <li>X</li>
+  </ul>
+</div>
+
+
+    
+
+    
 
     {/* 상품 금액 */}
     <div className='p-3'>
