@@ -1,50 +1,51 @@
 "use client";
 import { User } from "@/app/types/requestType";
 import { signIn } from "next-auth/react";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 
 const SignInForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<User>();
+  const [payload, setPayload] = useState<User>({
+    loginID: "",
+    password: "",
+  });
 
-  const onSubmit = (values: User) => {
-    signIn("credentials", {
-      loginId: values.loginID,
-      password: values.password,
-      redirect: true,
-      callbackUrl: "/",
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPayload({
+      ...payload,
+      [e.target.name]: e.target.value,
     });
-    // console.log(values);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    signIn("credentials", {
+      loginID: payload.loginID,
+      password: payload.password,
+      redirect: false,
+    });
   };
 
   return (
     <section className="mt-20">
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={handleSubmit}
         className="mx-auto flex w-[80%] flex-col items-center justify-center gap-2"
       >
         <div className="mb-4 w-full">
           <input
             type="text"
             placeholder="아이디"
-            {...register("loginID", {
-              required: " 아이디를 입력해주세요",
-            })}
+            name="loginID"
+            onChange={handleChange}
           />
-          <p>{errors.loginID?.message}</p>
         </div>
         <div className="mb-4 w-full">
           <input
             type="password"
             placeholder="비밀번호"
-            {...register("password", {
-              required: " 비밀번호를 입력해주세요",
-            })}
+            name="password"
+            onChange={handleChange}
           />
-          <p>{errors.password?.message}</p>
         </div>
         <button type="submit">로그인</button>
       </form>

@@ -1,3 +1,5 @@
+import NextAuth from "next-auth/next";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -11,6 +13,10 @@ const nextConfig = {
         hostname: "sitem.ssgcdn.com",
       },
     ],
+  },
+  env: {
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
   },
 };
 
