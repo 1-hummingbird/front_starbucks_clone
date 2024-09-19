@@ -1,9 +1,9 @@
 import React from "react";
 
-import { Metadata } from "next";
-import MainHeader from "@/components/MainHeader";
 import BottomNavigationBar from "@/components/BottomNavigationBar";
+import MainHeader from "@/components/MainHeader";
 import TopNavigationBar from "@/components/TopNavigationBar";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Main",
