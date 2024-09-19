@@ -2,13 +2,13 @@ import React from "react";
 
 interface ChildrenCategoryListProps {
   childrenCategories: string[];
-  selectedChildCategory: string | null;
+  selectedChildCategories: string[]; // 다중 선택용 배열
   onChildCategoryClick: (child: string) => void;
 }
 
 const ChildrenCategoryList: React.FC<ChildrenCategoryListProps> = ({
   childrenCategories,
-  selectedChildCategory,
+  selectedChildCategories,
   onChildCategoryClick,
 }) => {
   return (
@@ -19,7 +19,7 @@ const ChildrenCategoryList: React.FC<ChildrenCategoryListProps> = ({
           <li
             key={child}
             className={`cursor-pointer ${
-              selectedChildCategory === child ? "text-green-600" : ""
+              selectedChildCategories.includes(child) ? "text-green-600" : ""
             }`}
             onClick={() => onChildCategoryClick(child)}
           >
