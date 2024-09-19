@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import ScrollUpButton from "@/components/util/ScrollUpButton";
+import AuthProvider from "@/providers/AuthProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
-        <ScrollUpButton />
+        <AuthProvider>
+          {children}
+          <ScrollUpButton />
+        </AuthProvider>
       </body>
     </html>
   );

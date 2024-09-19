@@ -1,14 +1,9 @@
 "use client";
 import { User } from "@/app/types/requestType";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 
-// const schema = z.object({
-//   id: z.string(),
-//   password: z.string(),
-// });
-
 const SignInForm = () => {
-  // const form = useForm();
   const {
     register,
     handleSubmit,
@@ -16,16 +11,22 @@ const SignInForm = () => {
   } = useForm<User>();
 
   const onSubmit = (values: User) => {
-    console.log(values);
+    signIn("credentials", {
+      loginId: values.id,
+      password: values.password,
+      redirect: true,
+      callbackUrl: "/",
+    });
+    // console.log(values);
   };
 
   return (
     <section className="mt-20">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center w-[80%] gap-2 mx-auto"
+        className="mx-auto flex w-[80%] flex-col items-center justify-center gap-2"
       >
-        <div className="w-full mb-4">
+        <div className="mb-4 w-full">
           <input
             type="text"
             placeholder="아이디"
@@ -35,7 +36,7 @@ const SignInForm = () => {
           />
           <p>{errors.id?.message}</p>
         </div>
-        <div className="w-full mb-4">
+        <div className="mb-4 w-full">
           <input
             type="password"
             placeholder="비밀번호"

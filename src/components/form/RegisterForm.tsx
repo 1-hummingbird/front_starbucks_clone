@@ -65,8 +65,8 @@ const RegisterForm = () => {
   };
 
   return (
-    <section className="flex items-center justify-center min-h-screen">
-      <div className="w-full max-w-md p-8 bg-white rounded-lg">
+    <section className="flex min-h-screen items-center justify-center">
+      <div className="w-full max-w-md rounded-lg bg-white p-8">
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <ul className="space-y-4">
             {registerInputFields.map((item) => {
@@ -84,7 +84,7 @@ const RegisterForm = () => {
               );
             })}
           </ul>
-          <div className="flex justify-center items-center">
+          <div className="flex items-center justify-center">
             <button className="mt-4 h-12 w-full rounded border-2 bg-[#006241] text-white">
               회원가입
             </button>
