@@ -1,14 +1,10 @@
+import React from "react";
 import Order from "@/components/mypage/Order";
 import ServiceList from "@/components/mypage/ServiceList";
-import React from "react";
 
 function page() {
-  return (
-    <>
-      <Order />
-      <ServiceList />
-    </>
-  );
+  return <div><Order />
+      <ServiceList /></div>;
 }
 
 export default page;
