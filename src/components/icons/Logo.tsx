@@ -4,8 +4,8 @@ const Logo = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="80"
-      height="80"
+      width="160"
+      height="160"
       version="1.0"
       viewBox="0 0 512 512"
       fill="#006241"
