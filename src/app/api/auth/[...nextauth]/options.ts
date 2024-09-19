@@ -20,18 +20,15 @@ export const options: NextAuthOptions = {
 
         console.log(credentials);
         try {
-          const res = await fetch(
-            "https://api.team-hummingbird.shop/api/v1/auth/login",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                loginId: credentials.loginId,
-                password: credentials.password,
-              }),
-              cache: "no-cache",
-            },
-          );
+          const res = await fetch(`${process.env.BASE_API_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              loginId: credentials.loginId,
+              password: credentials.password,
+            }),
+            cache: "no-cache",
+          });
           const user = await res.json();
           console.log(user);
           return user.result;

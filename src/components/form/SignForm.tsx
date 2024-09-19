@@ -14,10 +14,9 @@ const SignInForm = () => {
     signIn("credentials", {
       loginId: values.id,
       password: values.password,
-      redirect: true,
-      callbackUrl: "/",
+      // redirect: true,
+      // callbackUrl: "/",
     });
-    // console.log(values);
   };
 
   return (
