@@ -1,11 +1,10 @@
 "use client";
-import { useRef, useState } from "react";
-import SwiperCore from "swiper";
-import { Autoplay, Keyboard, Navigation, Pagination } from "swiper/modules";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { exhibitions } from "@/datas/dummy/exhibitions";
-import Image from "next/image";
 import { ChevronRight, Pause, Play } from "lucide-react";
+import Image from "next/image";
+import { useRef, useState } from "react";
+import { Autoplay, Keyboard, Pagination } from "swiper/modules";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -57,6 +56,7 @@ const ExhibitionSlide = () => {
                 height={0}
                 sizes="100vh"
                 style={{ width: "100%", height: "auto" }}
+                priority 
               />
             </SwiperSlide>
           );
