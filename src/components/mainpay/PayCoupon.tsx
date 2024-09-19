@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import PayButton from "./PayButton";
 
 function PayCoupon() {
   return (
     <>
-      <div className="ml-9 py-5">
+      <div className="ml-8 py-5">
         <div className="flex justify-between">
           <div>
             <h4 className="text-xl font-bold ">쿠폰 및 할인</h4>
           </div>
-          <PayButton />
         </div>
-        <div className="my-2 py-5">
-          <div className="">
-            <img src="/public/cupon.svg" alt="쿠폰" className="my-5" />
-          </div>
-          <div>
-            <img src="/my-app/public/cupon.svg" alt="모바일 상품권" />
+        <div className="my-2 py-1">
+          <div className="flex gap-2 text-center">
+            <img
+              src="https://img.icons8.com/?size=100&id=24347&format=png&color=000000"
+              alt="쿠폰"
+              className="w-8 h-8"
+            />
+            쿠폰
           </div>
         </div>
       </div>
