@@ -12,7 +12,7 @@ const SignInForm = () => {
 
   const onSubmit = (values: User) => {
     signIn("credentials", {
-      loginId: values.id,
+      loginId: values.loginid,
       password: values.password,
       redirect: true,
       callbackUrl: "/",
@@ -30,11 +30,11 @@ const SignInForm = () => {
           <input
             type="text"
             placeholder="아이디"
-            {...register("id", {
+            {...register("loginid", {
               required: " 아이디를 입력해주세요",
             })}
           />
-          <p>{errors.id?.message}</p>
+          <p>{errors.loginid?.message}</p>
         </div>
         <div className="mb-4 w-full">
           <input
