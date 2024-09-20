@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-
+import Link from "next/link";
 interface Delivery {
   id: number;
   name: string;
@@ -54,7 +54,14 @@ function DeliveryTest() {
               )}
             </div>
             <div>
-              <button className="px-2 text-xs text-slate-300">수정</button>
+              <button>
+                <Link
+                  href="/delivery/newdelivery/newsubdelivery"
+                  className="px-2 text-xs text-slate-300"
+                >
+                  수정
+                </Link>
+              </button>
               <button
                 className="px-2 text-xs text-slate-300"
                 onClick={() => handleDelete(delivery.id)}

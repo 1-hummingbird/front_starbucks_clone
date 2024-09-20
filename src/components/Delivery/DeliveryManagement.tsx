@@ -1,5 +1,5 @@
 import DeliveryButton from "./DeliveryButton";
-import DeliveryTest from "./DeliveryTest";
+import DeliveryTest from "./DeliveryMain";
 
 function DeliveryManagement() {
   return (
