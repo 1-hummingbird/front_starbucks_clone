@@ -1,4 +1,5 @@
-import { Nav } from "../app/types/common";
+import Image from "next/image";
+import { Nav } from "../types/common";
 import Cart from "./icons/header/Cart";
 import HomeLogo from "./icons/header/HomeLogo";
 import Search from "./icons/header/Search";
@@ -13,10 +14,10 @@ const navs: Nav[] = [
 
 const Header = () => {
   return (
-    <header className="w-full flex justify-between bg-white h-14">
+    <header className="flex h-14 w-full justify-between bg-white">
       <HomeLogo />
       <nav>
-        <ul className="flex gap-1 w-full h-8 my-3 mr-3">
+        <ul className="my-3 mr-3 flex h-8 w-full gap-1">
           <NavList navs={navs} />
         </ul>
       </nav>

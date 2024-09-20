@@ -7,9 +7,9 @@ const HomeLogo = () => {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlSpace="preserve"
-        width="200"
-        height="150"
-        viewBox="0 0 850 650"
+        width={250}
+        height={150}
+        viewBox="0 0 1000 650"
       >
         <defs>
           <clipPath id="a" clipPathUnits="userSpaceOnUse">

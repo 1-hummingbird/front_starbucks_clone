@@ -18,9 +18,13 @@
     "lucide-react": "^0.441.0",
     "next": "14.2.10",
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     "next-auth": "^4.24.7",
 >>>>>>> 949e4c938991c29918ec96cfc330537827b930fc
+=======
+    "next-auth": "^4.24.7",
+>>>>>>> f0e5b50c4c2d1b451cdfb1cad276d439e6a5bf77
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.53.0",

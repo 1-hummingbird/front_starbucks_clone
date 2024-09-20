@@ -1,3 +1,4 @@
+import { CommonResType, UserDataType } from "@/types/responseType";
 import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -20,19 +21,16 @@ export const options: NextAuthOptions = {
 
         console.log(credentials);
         try {
-          const res = await fetch(
-            "https://api.team-hummingbird.shop/api/v1/auth/login",
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                loginID: credentials.loginID,
-                password: credentials.password,
-              }),
-              cache: "no-cache",
-            },
-          );
-          const user = await res.json();
+          const res = await fetch(`${process.env.BASE_API_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              loginID: credentials.loginID,
+              password: credentials.password,
+            }),
+            cache: "no-cache",
+          });
+          const user = (await res.json()) as CommonResType<User>;
           console.log(user);
           return user.result;
         } catch (error) {
