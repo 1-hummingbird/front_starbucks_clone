@@ -1,13 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import { Nav } from "@/app/types/common";
+import { Nav } from "@/types/common";
 
 const NavItem = ({ item }: { item: Nav }) => {
   return (
     <Link href={`/${item.url}`}>
       {item.component && <item.component />}
       {item.label && (
-        <p className="text-black my-3.5 mx-[5px] h-[17px]">{item.label}</p>
+        <p className="mx-[5px] my-3.5 h-[17px] text-black">{item.label}</p>
       )}
     </Link>
   );

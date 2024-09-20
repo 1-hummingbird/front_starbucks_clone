@@ -1,6 +1,6 @@
 import React from "react";
 import NavItem from "./NavItem";
-import { Nav } from "@/app/types/common";
+import { Nav } from "@/types/common";
 
 const NavList = ({ navs }: { navs: Nav[] }) => {
   return (

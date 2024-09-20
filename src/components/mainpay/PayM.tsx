@@ -1,53 +1,52 @@
+"use client";
 import React from "react";
-import PayButton from "./PayButton";
 
 const PayMethod = () => {
   return (
     <>
-      <div className="ml-9 py-5">
-        <div>
-          <div className="flex justify-between">
-            <div>
-              <h4 className="text-xl font-bold">결제 수단</h4>
-            </div>
-            <PayButton />
-          </div>
+      <div className="ml-8 py-5">
+        <div className="flex justify-between">
+          <h4 className="text-xl font-bold">결제 수단</h4>
+          {/* PayButton에 상태 변경 함수 전달 */}
         </div>
 
+        {/* 결제 옵션 표시 */}
+
         <div className="my-2 py-5">
-          <div className="flex items-center mb-4">
+          <div className="mb-2 flex items-center">
             <input
               id="country-option-1"
               type="radio"
-              name="countries"
-              value="USA"
-              className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-              checked
-            ></input>
+              name="payment"
+              value="CreditCard"
+              className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
+              defaultChecked
+            />
             <label
               htmlFor="country-option-1"
-              className="block ms-2  text-sm font-medium text-gray-900 dark:text-gray-300"
+              className="ms-2 text-sm font-medium text-gray-900"
             >
               신용카드 간편결제
             </label>
           </div>
-          <div className="flex items-center mb-4">
+          <div className="mb-2 flex items-center">
             <input
               id="country-option-2"
               type="radio"
-              className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
-              checked
-            ></input>
+              name="payment"
+              value="NormalPayment"
+              className="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300"
+            />
             <label
               htmlFor="country-option-2"
-              className="block ms-2  text-sm font-medium text-gray-900 dark:text-gray-300"
+              className="ms-2 text-sm font-medium text-gray-900"
             >
               신용카드 일반결제
             </label>
           </div>
         </div>
       </div>
-      <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-400" />
+      <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-400" />
     </>
   );
 };

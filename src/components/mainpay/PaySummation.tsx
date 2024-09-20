@@ -25,10 +25,6 @@ function PaySummation() {
             <hr />
 
             <div>
-              <div className="py-2 text-xl font-bold">
-                <p>기타결제 금액:{}</p>
-              </div>
-              <p className="pb-3">모바일 상품권:{}</p>
               <p className="py-2 text-2xl font-bold">최종 결제금액:{}</p>
             </div>
           </div>

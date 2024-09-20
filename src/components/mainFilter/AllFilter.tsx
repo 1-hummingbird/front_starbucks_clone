@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import FilterSection from "./CategoryFilter/FilterSection";
 import ChildrenCategoryList from "./CategoryFilter/ChildrenCategoryList";
 import { SelcetButton } from "./CategoryFilter/SelectButton";
-
+import Link from "next/link";
 const AllFilter = () => {
   const [visibleCategoryIndex, setVisibleCategoryIndex] = useState<
     number | null
@@ -12,7 +12,6 @@ const AllFilter = () => {
     string | null
   >(null);
   const [selectedChildCategories, setSelectedChildCategories] = useState<
-    // 다중 선택을 위한 배열로 변경
     string[]
   >([]);
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
@@ -146,7 +145,7 @@ const AllFilter = () => {
       (prev) =>
         prev.includes(child)
           ? prev.filter((c) => c !== child) // 이미 선택된 경우 제거
-          : [...prev, child] // 선택되지 않은 경우 추가
+          : [...prev, child], // 선택되지 않은 경우 추가
     );
   };
 
@@ -161,8 +160,8 @@ const AllFilter = () => {
             (!selectedPrice || product.price === selectedPrice) &&
             (selectedChildCategories.length === 0 ||
               selectedChildCategories.some((child) =>
-                product.category.includes(child)
-              ))
+                product.category.includes(child),
+              )),
         );
 
   return (
@@ -181,9 +180,6 @@ const AllFilter = () => {
         onReset={resetSelectedCategories}
         seasons={[]}
         selectedSeason={null}
-        onSeasonClick={function (season: string): void {
-          throw new Error("Function not implemented.");
-        }}
       />
 
       {/* 자식 카테고리 */}
@@ -194,7 +190,7 @@ const AllFilter = () => {
             selectedChildCategories={selectedChildCategories} // 배열로 전달
             onChildCategoryClick={handleChildCategoryClick} // 다중 선택 로직 적용
           />
-          <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-400" />
+          <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-400" />
         </div>
       )}
 
@@ -202,7 +198,7 @@ const AllFilter = () => {
       {(selectedParentCategory ||
         selectedChildCategories.length > 0 ||
         selectedPrice) && (
-        <div className="custom-scroll flex items-center gap-3 pl-4 my-3 overflow-auto">
+        <div className="custom-scroll my-3 flex items-center gap-3 overflow-auto pl-4">
           {/* 리셋 버튼 */}
           <div className="flex justify-center">
             <button className="text-gray" onClick={resetSelectedCategories}>
@@ -215,12 +211,12 @@ const AllFilter = () => {
                 <path d="M12,0C7.973,0,4.213,2.036,2,5.365V0H1V5.5c0,.827,.673,1.5,1.5,1.5h5.5v-1H2.779C4.801,2.9,8.275,1,12,1c6.065,0,11,4.935,11,11s-4.935,11-11,11S1,18.065,1,12H0c0,6.617,5.383,12,12,12s12-5.383,12-12S18.617,0,12,0Z" />
               </svg>
             </button>
-            <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-400" />
+            <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-400" />
           </div>
 
           {/* 선택된 항목들 */}
           {selectedParentCategory && (
-            <div className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap text-sm flex-nowrap min-w-max">
+            <div className="flex w-32 flex-nowrap items-center justify-between text-nowrap rounded-lg bg-green-600 p-2 text-sm text-white">
               <span>{selectedParentCategory}</span>
               <button
                 className="px-3"
@@ -234,14 +230,14 @@ const AllFilter = () => {
           {selectedChildCategories.map((child) => (
             <div
               key={child}
-              className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap flex-nowrap min-w-max"
+              className="flex w-32 flex-nowrap items-center justify-between text-nowrap rounded-lg bg-green-600 p-2 text-white"
             >
               <span>{child}</span>
               <button
                 className="px-3"
                 onClick={() =>
                   setSelectedChildCategories((prev) =>
-                    prev.filter((c) => c !== child)
+                    prev.filter((c) => c !== child),
                   )
                 }
               >
@@ -251,7 +247,7 @@ const AllFilter = () => {
           ))}
 
           {selectedPrice && (
-            <div className="bg-green-600 text-white p-2 rounded-lg flex items-center text-nowrap flex-nowrap min-w-max">
+            <div className="flex w-32 flex-nowrap items-center justify-between text-nowrap rounded-lg bg-green-600 p-2 text-white">
               <span>{selectedPrice}</span>
               <button className="px-3" onClick={() => setSelectedPrice(null)}>
                 X
@@ -261,35 +257,36 @@ const AllFilter = () => {
         </div>
       )}
 
+      <div className="">
+        <SelcetButton />
+      </div>
       {/* 상품 목록 */}
-      <div>
-        <div className="">
-          <SelcetButton />
-        </div>
-        <div className="grid grid-cols-2 gap-1">
-          {filteredProducts.map((product, index) => (
-            <div
-              key={index}
-              className="flex justify-center transform transition-transform hover:scale-105"
-            >
-              <div className="product-content p-6 box-border shadow-lg rounded-lg">
+
+      <div className="grid grid-cols-2 gap-1">
+        {filteredProducts.map((product) => (
+          <Link href={`/product/${product.id}`} key={product.id}>
+            <div className="flex transform justify-center transition-transform hover:scale-105">
+              <div className="product-content box-border rounded-lg p-6 shadow-lg">
                 <img
-                  className="w-28 h-28 rounded-lg "
+                  className="h-28 w-28 rounded-lg"
                   src={product.img}
                   alt={product.name}
+                  width={112}
+                  height={112}
                 />
-                s
                 <div className="mt-4 text-start">
-                  <p className="italic text-green-500	text-xs	">{product.type}</p>
-                  <h3 className=" text-base">{product.name}</h3>
-                  <p className="text-gray-700 font-semibold ">
-                    {product.price} 원
+                  <p className="text-xs italic text-green-500">
+                    {product.type}
+                  </p>
+                  <h3 className="text-base">{product.name}</h3>
+                  <p className="font-semibold text-gray-700">
+                    {product.price.toLocaleString()} 원
                   </p>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          </Link>
+        ))}
       </div>
     </>
   );
