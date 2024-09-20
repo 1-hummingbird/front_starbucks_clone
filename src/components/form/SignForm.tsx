@@ -21,7 +21,7 @@ const SignInForm = () => {
     signIn("credentials", {
       loginID: payload.loginID,
       password: payload.password,
-      redirect: false,
+      redirect: true,
     });
   };
 
