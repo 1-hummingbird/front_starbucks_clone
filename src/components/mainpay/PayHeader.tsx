@@ -14,7 +14,7 @@ function PayHeader() {
               alt="왼쪽 화살표"
             ></Image>
           </li>
-          <li className="font-bold">장바구니</li>
+          <li className="font-bold">온라인 스토어</li>
           <li>
             <Image
               width={25}
