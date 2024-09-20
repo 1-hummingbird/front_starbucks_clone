@@ -4,6 +4,8 @@ import FilterSection from "./CategoryFilter/FilterSection";
 import ChildrenCategoryList from "./CategoryFilter/ChildrenCategoryList";
 import { SelcetButton } from "./CategoryFilter/SelectButton";
 import Link from "next/link";
+import Image from "next/image";
+
 const AllFilter = () => {
   const [visibleCategoryIndex, setVisibleCategoryIndex] = useState<
     number | null
@@ -55,6 +57,7 @@ const AllFilter = () => {
       price: "33000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2024/02/[11150979]_20240216102103606.jpg",
       type: "new",
+      wish: 10,
     },
     {
       id: 2,
@@ -63,6 +66,7 @@ const AllFilter = () => {
       price: "13000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2024/07/[9300000005108]_20240718093750805.jpg",
       type: "new",
+      wish: 1,
     },
     {
       id: 3,
@@ -71,6 +75,7 @@ const AllFilter = () => {
       price: "56000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2024/08/[9300000005472]_20240820160552386.jpg",
       type: "best",
+      wish: 14,
     },
     {
       id: 4,
@@ -79,6 +84,7 @@ const AllFilter = () => {
       price: "21000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2024/03/[9300000004912]_20240305142647142.jpg",
       type: "new",
+      wish: 20,
     },
     {
       id: 5,
@@ -87,6 +93,7 @@ const AllFilter = () => {
       price: "31000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2024/09/[9300000005316]_20240906144154541.jpg",
       type: "best",
+      wish: 4,
     },
     {
       id: 6,
@@ -95,6 +102,7 @@ const AllFilter = () => {
       price: "41000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2023/06/[9300000004402]_20230609143302624.jpg",
       type: "new",
+      wish: 12,
     },
     {
       id: 7,
@@ -103,6 +111,7 @@ const AllFilter = () => {
       price: "21000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2024/03/[9300000004912]_20240305142647142.jpg",
       type: "best",
+      wish: 10,
     },
     {
       id: 8,
@@ -111,6 +120,7 @@ const AllFilter = () => {
       price: "51000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2021/05/[9300000003393]_20210520100142603.jpg",
       type: "best",
+      wish: 12,
     },
     {
       id: 9,
@@ -119,6 +129,7 @@ const AllFilter = () => {
       price: "21000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2021/04/[9300000001179]_20210421164934656.jpg",
       type: "new",
+      wish: 243,
     },
     {
       id: 10,
@@ -127,6 +138,7 @@ const AllFilter = () => {
       price: "25000",
       img: "https://image.istarbucks.co.kr/upload/store/skuimg/2023/09/[9300000004601]_20230906123344454.jpg",
       type: "best",
+      wish: 30,
     },
   ];
 
@@ -267,21 +279,34 @@ const AllFilter = () => {
           <Link href={`/product/${product.id}`} key={product.id}>
             <div className="flex transform justify-center transition-transform hover:scale-105">
               <div className="product-content box-border rounded-lg p-6 shadow-lg">
-                <img
-                  className="h-28 w-28 rounded-lg"
+                <Image
+                  className="rounded-lg"
                   src={product.img}
                   alt={product.name}
                   width={112}
                   height={112}
                 />
                 <div className="mt-4 text-start">
-                  <p className="text-xs italic text-green-500">
-                    {product.type}
-                  </p>
+                  <div className="flex justify-between">
+                    <p className="text-xs italic text-green-500">
+                      {product.type}
+                    </p>
+                  </div>
                   <h3 className="text-base">{product.name}</h3>
                   <p className="font-semibold text-gray-700">
                     {product.price.toLocaleString()} 원
                   </p>
+                  <div className="text-lm flex items-center">
+                    <p>
+                      <Image
+                        src="https://img.icons8.com/?size=100&id=581&format=png&color=000000"
+                        width={20}
+                        height={20}
+                        alt="하트"
+                      ></Image>
+                    </p>
+                    <p>{product.wish}개</p>
+                  </div>
                 </div>
               </div>
             </div>
