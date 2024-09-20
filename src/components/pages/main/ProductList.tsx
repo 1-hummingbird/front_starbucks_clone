@@ -11,8 +11,18 @@ import "../../swiperComponent/style.css";
 
 import { Grid, Pagination } from "swiper/modules";
 import Image from "next/image";
+import useBreakpointValue from "@/hooks/useBreakpointValue";
 
 const ProductList = ({ items }: { items: Product[] }) => {
+  const value = useBreakpointValue(
+    {
+      md: 3,
+      lg: 4,
+      xl: 5,
+    },
+    2,
+  );
+
   return (
     <Swiper
       className="mt-6"
@@ -22,15 +32,15 @@ const ProductList = ({ items }: { items: Product[] }) => {
         rows: 2,
         fill: "row",
       }}
-      slidesPerView={2}
-      slidesPerGroup={2}
+      slidesPerView={value}
+      slidesPerGroup={value}
       spaceBetween={10}
     >
       {items.map((item) => {
         return (
           <SwiperSlide key={item.id}>
             <Link
-              className="w-full flex flex-col items-center "
+              className="flex w-full flex-col items-center"
               href={item.link}
             >
               <Image
@@ -39,7 +49,7 @@ const ProductList = ({ items }: { items: Product[] }) => {
                 width={186}
                 height={186}
               />
-              <p className="w-32 mt-2 text-xs">{item.name}</p>
+              <p className="mt-2 w-32 text-xs">{item.name}</p>
             </Link>
           </SwiperSlide>
         );

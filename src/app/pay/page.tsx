@@ -8,9 +8,6 @@ import PaySummation from "../../components/mainpay/PaySummation";
 const Payment = () => {
   return (
     <>
-      <div className="">
-        <p>결제 하기</p>
-      </div>
       <PayDelivery />
       <PayPurchase />
       <PayCoupon />
