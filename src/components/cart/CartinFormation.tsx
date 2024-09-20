@@ -10,8 +10,10 @@ function CartinFormation() {
           <div>
             <input type="checkbox" /> 전체선택
           </div>
-          <div className="">
-            <button type="button">선택 삭제</button>|
+          <div className="text-xs">
+            <button className="px-3" type="button">
+              선택 삭제
+            </button>
             <button type="button">전체 삭제</button>
           </div>
         </div>
@@ -23,29 +25,29 @@ function CartinFormation() {
         <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-200" />
       </div>
 
-      <div>
-        <ul className="flex w-full items-start justify-between">
-          <div className="flex items-center">
-            <input type="checkbox" />
-            <Image
-              className="ml-2"
-              src="https://image.istarbucks.co.kr/upload/store/skuimg/2024/08/[9300000005363]_20240806161440187.jpg"
-              width={112}
-              height={112}
-              alt="머그"
-            />
+      {/* 상품 정보 */}
+      <div className="grid grid-cols-3 gap-4">
+        <div className="col-span-1 flex items-center space-x-2">
+          <input type="checkbox" className="form-checkbox" />
+          <Image
+            src="https://image.istarbucks.co.kr/upload/store/skuimg/2024/08/[9300000005363]_20240806161440187.jpg"
+            width={112}
+            height={112}
+            alt="머그"
+          />
+        </div>
+
+        <div className="col-span-2 flex flex-col items-center justify-center pr-20">
+          <div className="flex gap-5">
+            <span>코리아 단청 머그</span>
+            <span>X</span>
           </div>
 
-          <div className="flex flex-col">
-            <li className="mb-2">코리아 단청 머그</li>
-            <div className="flex w-full justify-between">
-              <li>1</li>
-              <li>29000원</li>
-            </div>
+          <div className="flex gap-5">
+            <span>개수 추가</span>
+            <span>29000원</span>
           </div>
-
-          <li>X</li>
-        </ul>
+        </div>
       </div>
 
       {/* 상품 금액 */}
