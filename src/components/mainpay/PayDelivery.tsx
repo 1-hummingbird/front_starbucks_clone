@@ -1,14 +1,15 @@
 import React from "react";
 
-const data = {
-  addressalias: "집",
-  name: "홍길동",
-  zipcode: 12345,
-  address: "~~~~~~~~",
-  deepaddress: "~~~~~~",
-  tel: "010-0000-0000",
-  note: "문 앞에 놔두세요",
-};
+const dummyDelivery = [
+  {
+    id: 1,
+    name: "홍길동",
+    star: "집",
+    address: "경남 김해시 장유로 000번지 000동 000호",
+    type: "기본",
+    number: "010-0000-0000",
+  },
+];
 
 const PayDelivery = () => {
   return (
