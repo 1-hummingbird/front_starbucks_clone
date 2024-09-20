@@ -1,4 +1,4 @@
-import { RegisterType } from "@/app/types/auth";
+import { RegisterType } from "@/types/auth";
 import { Control, Controller, FieldValues } from "react-hook-form";
 
 interface InputFieldProps {
@@ -27,7 +27,7 @@ const InputField = ({
   const onBlurHandler = duplicateCheck ? onDuplicateCheck : undefined;
 
   return (
-    <div className="flex flex-col space-y-1 h-12">
+    <div className="flex h-12 flex-col space-y-1">
       <Controller
         defaultValue=""
         name={name as keyof RegisterType}
@@ -35,7 +35,7 @@ const InputField = ({
         render={({ field }) => (
           <div className="flex items-center">
             <input
-              className="w-full px-3 py-1 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-[#006241]"
+              className="w-full rounded border border-gray-300 px-3 py-1 focus:outline-none focus:ring-2 focus:ring-[#006241]"
               {...field}
               type={type}
               placeholder={placeholder}
@@ -45,7 +45,7 @@ const InputField = ({
         )}
       />
       {errors[name] && (
-        <p className=" text-red-500 text-sm w-full">{errors[name].message}</p>
+        <p className="w-full text-sm text-red-500">{errors[name].message}</p>
       )}
     </div>
   );

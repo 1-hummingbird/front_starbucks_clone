@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/app/types/responseType";
+import { Product } from "@/types/responseType";
 import Link from "next/link";
 
 import { Swiper, SwiperSlide } from "swiper/react";
