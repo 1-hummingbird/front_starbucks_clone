@@ -23,10 +23,8 @@ function CartinFormation() {
         <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-200" />
       </div>
 
-      {/* 상품 정보 */}
       <div>
         <ul className="flex w-full items-start justify-between">
-          {/* Input과 이미지 수평 정렬 및 붙이기 */}
           <div className="flex items-center">
             <input type="checkbox" />
             <Image
@@ -38,7 +36,6 @@ function CartinFormation() {
             />
           </div>
 
-          {/* 상품명과 수량/가격 수직 정렬 */}
           <div className="flex flex-col">
             <li className="mb-2">코리아 단청 머그</li>
             <div className="flex w-full justify-between">
@@ -47,7 +44,6 @@ function CartinFormation() {
             </div>
           </div>
 
-          {/* X 표시 */}
           <li>X</li>
         </ul>
       </div>
