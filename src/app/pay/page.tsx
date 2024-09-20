@@ -4,10 +4,12 @@ import PayPurchase from "../../components/mainpay/PayPurchase";
 import PayCoupon from "../../components/mainpay/PayCoupon";
 import PayM from "../../components/mainpay/PayM";
 import PaySummation from "../../components/mainpay/PaySummation";
+import PayHeader from "@/components/mainpay/PayHeader";
 
 const Payment = () => {
   return (
     <>
+      <PayHeader />
       <PayDelivery />
       <PayPurchase />
       <PayCoupon />

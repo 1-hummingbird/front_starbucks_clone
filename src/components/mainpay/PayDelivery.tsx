@@ -12,7 +12,7 @@ const data = {
 const PayDelivery = () => {
   return (
     <>
-      <h1 className="ml-7 text-2xl font-bold">결제하기 </h1>
+      <h1 className="ml-7 pt-5 text-2xl font-bold">결제하기 </h1>
       <div key={data.id} className="ml-8 py-5">
         <ul className="flex justify-between">
           <div className="flex gap-2">
