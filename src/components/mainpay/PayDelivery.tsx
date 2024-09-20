@@ -13,21 +13,21 @@ const data = {
 const PayDelivery = () => {
   return (
     <>
-      <h1 className="ml-8 font-bold text-2xl	">결제하기 </h1>
-      <div className=" ml-8 flex flex-col justify-between pt-5">
-        <div className="flex justify-between  py-5">
-          <h4 className=" font-bold text-xl">배송 정보</h4>
+      <h1 className="ml-8 text-2xl font-bold">결제하기 </h1>
+      <div className="ml-8 flex flex-col justify-between pt-5">
+        <div className="flex justify-between py-5">
+          <h4 className="text-xl font-bold">배송 정보</h4>
           <div>
             <a
               href=""
-              className="mx-5 rounded-full border-2	p-1 items-center text-gray-500 "
+              className="mx-5 items-center rounded-full border-2 p-1 text-gray-500"
             >
               변경
             </a>
           </div>
         </div>
 
-        <div className=" mb-5">
+        <div className="mb-5">
           <div className="flex justify-between">
             <div>
               <p>
@@ -51,7 +51,7 @@ const PayDelivery = () => {
           </div>
         </div>
       </div>
-      <hr className=" border-border-solid border-t-[1px] z-20 border-t-slate-400" />
+      <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-400" />
     </>
   );
 };
