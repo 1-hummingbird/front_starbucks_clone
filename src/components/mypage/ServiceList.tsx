@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 function ServiceList() {
   return (
@@ -62,20 +63,24 @@ function ServiceList() {
         </li>
         <li className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
+            <Link href={"/delivery"}>
+              <Image
+                width={32}
+                height={32}
+                src="https://img.icons8.com/?size=100&id=14598&format=png&color=000000"
+                alt="배송지"
+              />
+            </Link>
+            <span>배송지 관리</span>
+          </div>
+          <Link href={"/delivery"}>
             <Image
               width={32}
               height={32}
-              src="https://img.icons8.com/?size=100&id=14598&format=png&color=000000"
-              alt="배송지"
+              src="https://img.icons8.com/?size=100&id=15812&format=png&color=000000"
+              alt="화살표"
             />
-            <span>배송지 관리</span>
-          </div>
-          <Image
-            width={32}
-            height={32}
-            src="https://img.icons8.com/?size=100&id=15812&format=png&color=000000"
-            alt="화살표"
-          />
+          </Link>
         </li>
         <li className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
