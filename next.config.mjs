@@ -10,6 +10,7 @@ const nextConfig = {
         protocol: "https",
         hostname: "sitem.ssgcdn.com",
       },
+      { protocol: "https", hostname: "image.istarbucks.co.kr" },
     ],
   },
 };

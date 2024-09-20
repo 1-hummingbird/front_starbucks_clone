@@ -4,6 +4,8 @@ import FilterSection from "./CategoryFilter/FilterSection";
 import ChildrenCategoryList from "./CategoryFilter/ChildrenCategoryList";
 import { SelcetButton } from "./CategoryFilter/SelectButton";
 import Link from "next/link";
+import Image from "next/image";
+
 const AllFilter = () => {
   const [visibleCategoryIndex, setVisibleCategoryIndex] = useState<
     number | null
@@ -267,8 +269,8 @@ const AllFilter = () => {
           <Link href={`/product/${product.id}`} key={product.id}>
             <div className="flex transform justify-center transition-transform hover:scale-105">
               <div className="product-content box-border rounded-lg p-6 shadow-lg">
-                <img
-                  className="h-28 w-28 rounded-lg"
+                <Image
+                  className="rounded-lg"
                   src={product.img}
                   alt={product.name}
                   width={112}
