@@ -39,11 +39,8 @@
 }
 
 .swiper-pagination-fraction {
-  position: relative;
-  bottom: 25px;
-  left: 70%;
-  width: 30%;
-  background-color: grey;
+  position: static;
+  width: auto;
 }
 
 .swiper-pagination-bullet-active {
@@ -51,7 +48,15 @@
 }
 
 .swiper-pagination-custom {
-  padding-top: 20px;
   display: flex;
   justify-content: center;
+  margin-top: 20px;
+}
+
+swiper-pagination {
+  text-align: center;
+}
+
+.swiper-footer {
+  bottom: 0;
 }

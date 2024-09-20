@@ -1,3 +1,11 @@
+export interface CommonResType<T> {
+  httpStatus: string;
+  isSuccess: boolean;
+  message: string;
+  code: number;
+  result: T;
+}
+
 export interface ExhibitionCardType {
   backgroundImg: string;
 }
@@ -18,4 +26,11 @@ export interface Product {
     media: string;
   };
   link: string;
+}
+
+export interface UserDataType {
+  accessToken: string;
+  name: string;
+  uuid: string;
+  email?: string;
 }

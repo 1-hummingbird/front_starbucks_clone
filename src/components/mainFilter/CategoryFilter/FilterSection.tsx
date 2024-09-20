@@ -11,7 +11,6 @@ interface FilterSectionProps {
   selectedSeason: string | null;
   onCategoryClick: (category: string, index: number) => void;
   onPriceClick: (price: string) => void;
-  onSeasonClick: (season: string) => void;
   onReset: () => void;
 }
 
@@ -30,14 +29,14 @@ const FilterSection: React.FC<FilterSectionProps> = ({
         selectedCategory={selectedParentCategory}
         onCategoryClick={onCategoryClick}
       />
-      <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-400" />
+      <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-400" />
 
       <PriceList
         prices={prices}
         selectedPrice={selectedPrice}
         onPriceClick={onPriceClick}
       />
-      <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-400" />
+      <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-400" />
     </div>
   );
 };
