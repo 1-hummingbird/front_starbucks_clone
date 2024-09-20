@@ -38,7 +38,8 @@ export const middleware = async (req: NextRequest) => {
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  const accessToken = token?.accesstoken;
+  const accessToken = token?.accessToken;
+  console.log(accessToken);
   const { searchParams } = req.nextUrl;
   const callbackUrl = searchParams.get("callbackUrl");
   const { pathname } = req.nextUrl;
