@@ -25,13 +25,13 @@ const PayPurchase = () => {
 
   return (
     <>
-      <div className="ml-8 text-nowrap py-5">
-        <div className="flex justify-between">
+      <div className="ml-8 py-5">
+        <div className="flex">
           <div>
             <h4 className="text-xl font-bold">주문내역</h4>
           </div>
-          <div className="font-xs px-3">
-            | 배송지 {order.shippingAddresses} 곳 / 상품 {totalItems}개
+          <div className="px-3 font-[2]">
+            배송지 {order.shippingAddresses} 곳 / 상품 {totalItems}개
           </div>
           {/* PayButton에 상태 변경 함수 전달 */}
         </div>
@@ -42,7 +42,7 @@ const PayPurchase = () => {
           {order.items.map((item) => (
             <div key={item.id} className="mt-5">
               <div className="flex">
-                <Image className="h-16 w-16" src={item.img} alt="사진" />
+                <Image width={64} height={64} src={item.img} alt="사진" />
                 <ul className="ml-4">
                   <li>
                     {item.name} {item.quantity}

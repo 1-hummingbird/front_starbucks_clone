@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-function DeliveryAddres() {
+function DeliverySubAdress() {
   return (
     <>
       <div className="container">
@@ -110,7 +110,7 @@ function DeliveryAddres() {
         <div>
           <div>
             <div className="bottom-0 left-0 my-4 ml-9 w-3/4 rounded-full bg-[#02A862] py-4 text-center text-white">
-              <Link href="/delivery">등록하기</Link>
+              <Link href="/delivery">수정하기</Link>
             </div>
           </div>
         </div>
@@ -118,4 +118,5 @@ function DeliveryAddres() {
     </>
   );
 }
-export default DeliveryAddres;
+
+export default DeliverySubAdress;
