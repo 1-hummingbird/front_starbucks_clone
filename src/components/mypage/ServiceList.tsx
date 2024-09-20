@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import SignOut from "../SignOut";
 
 function ServiceList() {
   return (
@@ -118,6 +119,15 @@ function ServiceList() {
           />
         </li>
       </ul>
+      <div className="mt-2 flex w-full justify-between p-3">
+        <SignOut />
+        <Image
+          width={32}
+          height={32}
+          src="https://img.icons8.com/?size=100&id=15812&format=png&color=000000"
+          alt="화살표"
+        />
+      </div>
     </div>
   );
 }

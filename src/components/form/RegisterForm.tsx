@@ -2,7 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import InputField from "./InputField";
-import { RegisterSchema, RegisterType } from "@/app/types/auth";
+import { RegisterSchema, RegisterType } from "@/types/auth";
 
 export interface registerInputField {
   id: number;

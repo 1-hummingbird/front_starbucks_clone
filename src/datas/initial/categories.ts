@@ -1,4 +1,4 @@
-import { Category } from "@/app/types/responseType";
+import { Category } from "@/types/responseType";
 import Bakery from "@/components/icons/productCategory/Bakery";
 import Beverage from "@/components/icons/productCategory/Beverage";
 import CoffeeSupplies from "@/components/icons/productCategory/CoffeeSupplies";

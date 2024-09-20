@@ -1,4 +1,4 @@
-import { Nav } from "@/app/types/common";
+import { Nav } from "@/types/common";
 import NavList from "./nav/NavList";
 
 const navs: Nav[] = [
@@ -10,8 +10,8 @@ const navs: Nav[] = [
 
 const TopNavigationBar = () => {
   return (
-    <nav className="w-full sticky top-0 z-10">
-      <ul className="flex justify-evenly bg-white h-[45px] w-full">
+    <nav className="sticky top-0 z-10 w-full">
+      <ul className="flex h-[45px] w-full justify-evenly bg-white">
         <NavList navs={navs} />
       </ul>
     </nav>

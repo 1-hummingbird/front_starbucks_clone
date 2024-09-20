@@ -5,14 +5,13 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main", "dev" ]
+    branches: ["main", "dev"]
   pull_request:
-    branches: [ "main", "dev" ]
+    branches: ["main", "dev"]
   workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -21,13 +20,14 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
 
+<<<<<<< HEAD
     - name: Cache node_modules
 <<<<<<< HEAD
       uses: actions/cache@v4
@@ -51,6 +51,23 @@ jobs:
         key: ${{ runner.os }}-next-build-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-next-build-
+=======
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node_modules-
 
-    - run: npm ci
-    - run: npm run build
+      - name: Cache .next build
+        uses: actions/cache@v3
+        with:
+          path: .next
+          key: ${{ runner.os }}-next-build-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-next-build-
+>>>>>>> 4368d2f6271663642adeede86071848316a5249f
+
+      - run: npm ci
+      - run: npm run build

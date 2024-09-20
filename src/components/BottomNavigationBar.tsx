@@ -1,4 +1,4 @@
-import { Nav } from "../app/types/common";
+import { Nav } from "../types/common";
 import Category from "./icons/bottomNavigationBar/Category";
 import Home from "./icons/bottomNavigationBar/Home";
 import MyPage from "./icons/bottomNavigationBar/MyPage";
@@ -15,17 +15,17 @@ const navs: Nav[] = [
 
 const BottomNavigationBar = () => {
   return (
-    <nav className="fixed bottom-0 bg-[#F5F5F5] w-full z-[999]">
-      <ul className="flex justify-evenly mt-1 mb-1.5 h-[45px]">
+    <nav className="fixed bottom-0 z-[999] w-full bg-[#F5F5F5]">
+      <ul className="mb-1.5 mt-1 flex h-[45px] justify-evenly">
         {navs.map((item) => {
           return (
             <li key={item.id}>
               <div
                 tabIndex={0}
-                className="flex flex-col justify-center items-center w-12 sm:w-[78px] focus:outline-none focus:ring-0 focus:border-b-2 focus:border-[#006241] pb-1 transition-colors"
+                className="flex w-12 flex-col items-center justify-center pb-1 transition-colors focus:border-b-2 focus:border-[#006241] focus:outline-none focus:ring-0 sm:w-[78px]"
               >
                 {item.component && <item.component />}
-                <p className="text-[11px] h-[13px] text-[#777777]">
+                <p className="h-[13px] text-[11px] text-[#777777]">
                   {item.label}
                 </p>
               </div>

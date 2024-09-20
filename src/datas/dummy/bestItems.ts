@@ -1,4 +1,4 @@
-import { Product } from "@/app/types/responseType";
+import { Product } from "@/types/responseType";
 
 export const bestItems: Product[] = [
   {

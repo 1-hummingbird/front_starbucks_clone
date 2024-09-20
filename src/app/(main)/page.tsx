@@ -3,7 +3,7 @@ import { Suspense } from "react";
 
 export default function Page() {
   return (
-    <main className="w-full min-h-screen">
+    <main className="min-h-screen w-full">
       <ul>
         {componentList.map((item) => {
           return (

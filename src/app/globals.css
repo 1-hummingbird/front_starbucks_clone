@@ -9,6 +9,28 @@ body {
   font-family: "Nanum Gothic", sans-serif;
 }
 
+.custom-button {
+  background-color: #006241;
+  color: white;
+  transition: background-color 0.3s;
+  padding: 2rem 1rem;
+}
+
+.custom-button-kakao {
+  background-color: #ead417;
+}
+
+.custom-input {
+  border-width: 2px;
+  border-color: #d1d5db;
+  transition: border-color 0.3s;
+  padding: 2rem 1rem;
+}
+
+.custom-input:focus {
+  border-color: #006241;
+  outline: none;
+}
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
