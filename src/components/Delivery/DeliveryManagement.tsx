@@ -6,10 +6,10 @@ function DeliveryManagement() {
     <>
       <h2 className="p-5 text-3xl font-bold">배송지 관리</h2>
 
-      <div className=" w-4/5 px-5 leading-8 ">
+      <div className="w-4/5 px-5 leading-8">
         <ul className="flex justify-between">
           <li>
-            <p className="font-bold">이름</p> 주소별칭 기본배송지{" "}
+            <p className="font-bold">이름</p> 주소별칭 기본배송지
           </li>
           <li>수정</li>
         </ul>
@@ -24,7 +24,7 @@ function DeliveryManagement() {
             <p>배송지 메모</p>
           </div>
         </div>
-        <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-400" />
+        <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-400" />
       </div>
 
       {/* Button */}
