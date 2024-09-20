@@ -108,12 +108,11 @@ function DeliveryAddres() {
           </form>
         </div>
         <div>
-          <button
-            type="button"
-            className="mx-auto block w-3/5 rounded-lg bg-green-600 text-center"
-          >
-            <Link href={"/src/app/delivery/page.tsx"}>등록하기</Link>
-          </button>
+          <div>
+            <div className="bottom-0 left-0 my-4 ml-9 w-3/4 rounded-full bg-[#02A862] py-4 text-center text-white">
+              <Link href="/delivery">등록하기</Link>
+            </div>
+          </div>
         </div>
       </div>
     </>
