@@ -6,7 +6,7 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        loginId: { label: "LoginId", type: "text", placeholder: "아이디" },
+        loginID: { label: "LoginID", type: "text", placeholder: "아이디" },
         password: {
           label: "Password",
           type: "password",
@@ -14,7 +14,7 @@ export const options: NextAuthOptions = {
         },
       },
       async authorize(credentials): Promise<User | null> {
-        if (!credentials?.loginId || !credentials?.password) {
+        if (!credentials?.loginID || !credentials?.password) {
           return null;
         }
 
@@ -26,7 +26,7 @@ export const options: NextAuthOptions = {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                loginId: credentials.loginId,
+                loginID: credentials.loginID,
                 password: credentials.password,
               }),
               cache: "no-cache",
