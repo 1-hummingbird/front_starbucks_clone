@@ -1,5 +1,5 @@
-import { RegisterType } from "@/types/auth";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { RegisterType } from '@/types/auth';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 
 interface InputFieldProps {
   name: string;
