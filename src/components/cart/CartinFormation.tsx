@@ -1,14 +1,36 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 
 function CartinFormation() {
+  // 상태 관리
+  const [allChecked, setAllChecked] = useState(false);
+  const [productChecked, setProductChecked] = useState(false);
+
+  // 전체 선택 클릭 핸들러
+  const handleAllChecked = () => {
+    const newChecked = !allChecked;
+    setAllChecked(newChecked);
+    setProductChecked(newChecked);
+  };
+
+  // 개별 상품 체크박스 핸들러
+  const handleProductChecked = () => {
+    setProductChecked(!productChecked);
+  };
+
   return (
     <>
       {/* 버튼 */}
       <div>
         <div className="flex justify-between p-3">
           <div>
-            <input type="checkbox" /> 전체선택
+            <input
+              type="checkbox"
+              checked={allChecked}
+              onChange={handleAllChecked}
+            />{" "}
+            전체선택
           </div>
           <div className="text-xs">
             <button className="px-3" type="button">
@@ -20,30 +42,45 @@ function CartinFormation() {
         <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-200" />
 
         <div className="p-3">
-          <input className="" type="checkbox" /> 일반 상품
+          <input
+            type="checkbox"
+            checked={productChecked}
+            onChange={handleProductChecked}
+          />{" "}
+          일반 상품
         </div>
         <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-200" />
       </div>
 
       {/* 상품 정보 */}
-      <div className="grid grid-cols-3 gap-4">
-        <div className="col-span-1 flex items-center space-x-2">
-          <input type="checkbox" className="form-checkbox" />
+      <div className="grid grid-cols-3 items-center gap-3">
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            className="form-checkbox"
+            checked={productChecked}
+            onChange={handleProductChecked}
+          />
           <Image
             src="https://image.istarbucks.co.kr/upload/store/skuimg/2024/08/[9300000005363]_20240806161440187.jpg"
             width={112}
             height={112}
             alt="머그"
+            className="ml-2"
           />
         </div>
 
-        <div className="col-span-2 flex flex-col items-center justify-center pr-20">
-          <div className="flex gap-5">
+        <div className="col-span-2 flex flex-col justify-center gap-4 pl-4">
+          <div className="flex items-center gap-4">
+            {" "}
+            {/* 텍스트 간격 조정 */}
             <span>코리아 단청 머그</span>
             <span>X</span>
           </div>
 
-          <div className="flex gap-5">
+          <div className="mt-2 flex items-center gap-4">
+            {" "}
+            {/* 텍스트 간격 조정 */}
             <span>개수 추가</span>
             <span>29000원</span>
           </div>
