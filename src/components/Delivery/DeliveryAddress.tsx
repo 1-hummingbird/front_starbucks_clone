@@ -10,7 +10,7 @@ function DeliveryAddres() {
         </div>
 
         <div className="m-1.5 p-4">
-          <form>
+          <form action={"/delivery"} method="post">
             <div className="form-group w-full">
               <label htmlFor="addressalias">주소 별칭</label>
               <br />
@@ -35,42 +35,13 @@ function DeliveryAddres() {
               />
             </div>
 
-            <div className="w-full">
-              <label htmlFor="zip code">우편번호</label>
-              <br />
-              <div className="flex justify-between">
-                <input
-                  type="text"
-                  id="zip code"
-                  name="zip code"
-                  className="border-2 border-solid"
-                  required
-                />
-                <button className="rounded-full border-2 border-solid border-green-700 p-1 text-emerald-400">
-                  주소검색
-                </button>
-              </div>
-            </div>
-
             <div className="form-group focus:border-bottom-25 w-full">
-              <label htmlFor="address">기본주소</label>
+              <label htmlFor="address">주소</label>
               <br />
               <input
                 type="text"
                 id="address"
                 name="address"
-                className="border-2 border-solid"
-                required
-              />
-            </div>
-
-            <div className="form-group w-full">
-              <label htmlFor="le address">상세주소</label>
-              <br />
-              <input
-                type="text"
-                id="le address"
-                name="le address"
                 className="border-2 border-solid"
                 required
               />
@@ -110,7 +81,9 @@ function DeliveryAddres() {
         <div>
           <div>
             <div className="bottom-0 left-0 my-4 ml-9 w-3/4 rounded-full bg-[#02A862] py-4 text-center text-white">
-              <Link href="/delivery">등록하기</Link>
+              <Link href="/delivery">
+                <button type="submit">등록하기</button>
+              </Link>
             </div>
           </div>
         </div>

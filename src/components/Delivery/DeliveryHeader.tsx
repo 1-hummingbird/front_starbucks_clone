@@ -14,7 +14,7 @@ function DeliveryHeader() {
               alt="왼쪽 화살표"
             ></Image>
           </li>
-          <li className="font-bold">장바구니</li>
+          <li className="font-bold">배송지 등록</li>
           <li>
             <Image
               width={25}
