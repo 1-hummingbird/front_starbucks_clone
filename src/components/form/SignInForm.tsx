@@ -1,11 +1,11 @@
-"use client";
-import { User } from "@/types/requestType";
-import { signIn, signOut } from "next-auth/react";
-import Image from "next/image";
-import { useTransition } from "react";
-import { useForm } from "react-hook-form";
-import { Button } from "../ui/button";
-import Input from "../ui/input";
+'use client';
+import { User } from '@/types/requestType';
+import { signIn, signOut } from 'next-auth/react';
+import Image from 'next/image';
+import { useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import { Button } from '../ui/button';
+import Input from '../ui/input';
 
 const SignInForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -17,11 +17,11 @@ const SignInForm = () => {
 
   const onSubmit = async (values: User) => {
     startTransition(async () => {
-      await signIn("credentials", {
+      await signIn('credentials', {
         loginID: values.loginID,
         password: values.password,
         redirect: true,
-        callbackUrl: "/",
+        callbackUrl: '/',
       });
     });
   };
@@ -29,7 +29,7 @@ const SignInForm = () => {
   return (
     <section className="flex h-[300px] w-5/6 flex-col justify-center">
       <Image
-        src={"https://drive.google.com/uc?id=1iHH_Xlvk6b3zAQn-nwaUiLWgsxXfzr8I"}
+        src={'https://drive.google.com/uc?id=1iHH_Xlvk6b3zAQn-nwaUiLWgsxXfzr8I'}
         alt="logo"
         width={250}
         height={250}
@@ -45,8 +45,8 @@ const SignInForm = () => {
             className="custom-input focus-visible:ring-transparent"
             type="text"
             placeholder="아이디"
-            {...register("loginID", {
-              required: " 아이디를 입력해주세요",
+            {...register('loginID', {
+              required: ' 아이디를 입력해주세요',
             })}
           />
           <p className="text-[#e71212]">{errors.loginID?.message}</p>
@@ -56,8 +56,8 @@ const SignInForm = () => {
             className="custom-input focus-visible:ring-transparent"
             type="password"
             placeholder="비밀번호"
-            {...register("password", {
-              required: " 비밀번호를 입력해주세요",
+            {...register('password', {
+              required: ' 비밀번호를 입력해주세요',
             })}
           />
           <p className="text-[#e71212]">{errors.password?.message}</p>

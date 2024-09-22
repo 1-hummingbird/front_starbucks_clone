@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const RegisterSchema = z
   .object({
-    loginId: z.string().min(1, { message: '아이디를 입력해주세요' }),
+    loginID: z.string().min(1, { message: '아이디를 입력해주세요' }),
     password: z
       .string()
       .min(8, { message: '비밀번호는 최소 8자 이상이어야 합니다.' }),
@@ -23,8 +23,8 @@ export const RegisterSchema = z
     path: ['passwordConfirm'],
   });
 
-export const defaultValues: RegisterType = {
-  loginId: '',
+export const defaultValues: RegisterValues = {
+  loginID: '',
   password: '',
   passwordConfirm: '',
   name: '',
@@ -34,4 +34,21 @@ export const defaultValues: RegisterType = {
   birthdate: '',
 };
 
-export type RegisterType = z.infer<typeof RegisterSchema>;
+export interface RegisterFormType {
+  id: number;
+  // name: (keyof RegisterType)[];
+  name: string;
+  type: string;
+  placeholder: string;
+  inputMode:
+    | 'none'
+    | 'text'
+    | 'tel'
+    | 'url'
+    | 'email'
+    | 'numeric'
+    | 'decimal'
+    | undefined;
+}
+
+export type RegisterValues = z.infer<typeof RegisterSchema>;

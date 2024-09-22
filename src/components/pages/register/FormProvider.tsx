@@ -1,21 +1,21 @@
 'use client';
 import { Form } from '@/components/ui/form';
-import { RegisterSchema, RegisterType, defaultValues } from '@/types/auth';
+import { RegisterSchema, RegisterValues, defaultValues } from '@/types/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
 const FormProvider = ({ children }: { children: React.ReactNode }) => {
-  const methods = useForm<RegisterType>({
+  const methods = useForm<RegisterValues>({
     resolver: zodResolver(RegisterSchema),
     defaultValues,
-    mode: 'all',
+    mode: 'onBlur',
   });
 
   const { handleSubmit } = methods;
 
-  const onSubmit = (formValues: RegisterType) => {
-    console.log(formValues);
+  const onSubmit = (formValues: RegisterValues) => {
+    console.log('data :', formValues);
   };
 
   return (

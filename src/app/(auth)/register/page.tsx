@@ -1,10 +1,10 @@
-import RegisterForm from "@/components/form/RegisterForm";
-import React from "react";
+import RegisterStep1Form from '@/components/pages/register/RegisterStep1Form';
+import React from 'react';
 
 const page = () => {
   return (
     <main>
-      <RegisterForm />
+      <RegisterStep1Form />
     </main>
   );
 };
