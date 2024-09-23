@@ -11,6 +11,7 @@ interface Product {
 }
 
 function CartinFormation() {
+  // 상태 관리
   const [products, setProducts] = useState<Product[]>([
     {
       id: 1,
