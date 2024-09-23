@@ -1,3 +1,5 @@
+
+
 import Link from "next/link";
 import React from "react";
 
@@ -35,25 +37,8 @@ function DeliveryAddress() {
               />
             </div>
 
-            <div className="w-full">
-              <label htmlFor="zip code">우편번호</label>
-              <br />
-              <div className="flex justify-between">
-                <input
-                  type="text"
-                  id="zip code"
-                  name="zip code"
-                  className="border-2 border-solid"
-                  required
-                />
-                <button className="rounded-full border-2 border-solid border-green-700 p-1 text-emerald-400">
-                  주소검색
-                </button>
-              </div>
-            </div>
-
-            <div className="form-group focus:border-bottom-25 w-full">
-              <label htmlFor="address">기본주소</label>
+            <div className="form-group w-full">
+              <label htmlFor="le address">주소</label>
               <br />
               <input
                 type="text"
@@ -65,24 +50,12 @@ function DeliveryAddress() {
             </div>
 
             <div className="form-group w-full">
-              <label htmlFor="le address">상세주소</label>
+              <label htmlFor="phone">연락처</label>
               <br />
               <input
                 type="text"
-                id="le address"
-                name="le address"
-                className="border-2 border-solid"
-                required
-              />
-            </div>
-
-            <div className="form-group w-full">
-              <label htmlFor="tel">연락처</label>
-              <br />
-              <input
-                type="text"
-                id="tel"
-                name="tel"
+                id="phone"
+                name="phone"
                 className="border-2 border-solid"
                 required
               />

@@ -1,17 +1,20 @@
+"use client";
+
 import React, { useState } from "react";
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'; // Import useRouter
 import { addDeliveryAddress } from "@/action/deliveryAction";
 import { DeliveryDto } from "@/types/deliveryDto";
 
 function DeliverySubAddress() {
-  const router = useRouter();
   const [formData, setFormData] = useState<DeliveryDto>({
-    addressNickname: '',
-    name: '',
-    address: '',
-    phone: '',
-    memo: '',
+    addressNickname: "",
+    name: "",
+    address: "",
+    phone: "",
+    memo: "",
   });
+
+  const router = useRouter(); // Initialize useRouter
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -25,7 +28,7 @@ function DeliverySubAddress() {
     e.preventDefault();
     try {
       const response = await addDeliveryAddress(formData as DeliveryDto);
-      router.push('/delivery');
+      router.push('/delivery'); // Use router.push instead of redirect
     } catch (error) {
       console.error('Error adding delivery address:', error);
     }
