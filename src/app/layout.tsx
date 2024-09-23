@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import ScrollUpButton from "@/components/util/ScrollUpButton";
-import AuthProvider from "@/providers/AuthProvider";
+import ScrollUpButton from '@/components/util/ScrollUpButton';
+import AuthProvider from '@/providers/AuthProvider';
+import type { Metadata } from 'next';
+import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Hummingbird",
-    default: "Loading...",
+    template: '%s | Hummingbird',
+    default: 'Loading...',
   },
-  description: "Spharos 5th Hummingbird",
+  description: 'Spharos 5th Hummingbird',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

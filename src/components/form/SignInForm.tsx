@@ -6,6 +6,7 @@ import { useTransition } from 'react';
 import { useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 import Input from '../ui/input';
+import Link from 'next/link';
 
 const SignInForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -72,7 +73,9 @@ const SignInForm = () => {
       <div className="mt-10 flex justify-center gap-6">
         <p>아이디 찾기</p>
         <p>비밀번호 찾기</p>
-        <p>회원가입</p>
+        <Link href="/register">
+          <p>회원가입</p>
+        </Link>
       </div>
     </section>
   );

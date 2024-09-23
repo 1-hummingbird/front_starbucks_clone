@@ -21,7 +21,6 @@ const page = () => {
         formType={formType}
         route={routes.signup_step2}
         hasNext={true}
-        isFirst={true}
       />
     </main>
   );

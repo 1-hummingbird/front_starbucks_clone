@@ -17,7 +17,12 @@ export const RegisterSchema = z
       .email({ message: '올바른 이메일을 입력하세요' }),
     phone: z.string().min(10, { message: '올바른 전화번호를 입력하세요' }),
     birthdate: z.string().min(8, '생년월일을 입력해주세요').max(8),
+    agree: z.boolean().refine((val) => val === true, {
+      message: '이용 약관에 동의해야 합니다.',
+    }),
+    verificationCode: z.string().optional(),
   })
+
   .refine((data) => data.password === data.passwordConfirm, {
     message: '비밀번호가 일치하지 않습니다.',
     path: ['passwordConfirm'],
@@ -32,15 +37,16 @@ export const defaultValues: RegisterValues = {
   email: '',
   phone: '',
   birthdate: '',
+  agree: false,
+  verificationCode: '',
 };
 
 export interface RegisterFormType {
   id: number;
-  // name: (keyof RegisterType)[];
   name: string;
   type: string;
-  placeholder: string;
-  inputMode:
+  placeholder?: string;
+  inputMode?:
     | 'none'
     | 'text'
     | 'tel'
@@ -49,6 +55,8 @@ export interface RegisterFormType {
     | 'numeric'
     | 'decimal'
     | undefined;
+  agree?: boolean;
+  verificationCode?: string;
 }
 
 export type RegisterValues = z.infer<typeof RegisterSchema>;
