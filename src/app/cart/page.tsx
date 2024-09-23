@@ -1,13 +1,15 @@
+import { getCartAddress } from "@/action/cartDataFetch";
 import CartAdress from "@/components/cart/CartAdress";
 import CartHeader from "@/components/cart/CartHeader";
 import CartinFormation from "@/components/cart/CartinFormation";
 import React from "react";
 
-function page() {
+async function page() {
+  const cartData = await getCartAddress();
   return (
     <>
       <CartHeader />
-      <CartAdress />
+      <CartAdress cartData={cartData} />
       <CartinFormation />
     </>
   );

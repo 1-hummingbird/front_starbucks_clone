@@ -1,42 +1,83 @@
-import React from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 
 function SearchInput() {
+  const [searchTerm, setSearchTerm] = useState(""); // 검색어 입력 상태
+  const [recentSearches, setRecentSearches] = useState<string[]>([]); // 최근 검색어 리스트
+
+  // 컴포넌트가 마운트될 때 로컬 스토리지에서 최근 검색어 로드
+  useEffect(() => {
+    const savedSearches = JSON.parse(
+      localStorage.getItem("recentSearches") || "[]",
+    );
+    setRecentSearches(savedSearches);
+  }, []);
+
+  // 최근 검색어 저장 함수 (최대 5개 저장)
+  const handleSearch = () => {
+    if (searchTerm && !recentSearches.includes(searchTerm)) {
+      const updatedSearches = [searchTerm, ...recentSearches].slice(0, 5); // 최대 5개 저장
+      setRecentSearches(updatedSearches);
+      localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
+    }
+    setSearchTerm(""); // 입력 필드 초기화
+  };
+
+  // 개별 검색어 삭제
+  const handleDeleteSearch = (term: string) => {
+    const updatedSearches = recentSearches.filter((search) => search !== term);
+    setRecentSearches(updatedSearches);
+    localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
+  };
+
+  // 전체 검색어 삭제
+  const handleClearAll = () => {
+    setRecentSearches([]);
+    localStorage.removeItem("recentSearches");
+  };
+
   return (
     <>
       <div>
         <input
-          className="w-[320px] bg-slate-100 m-2 p-2 rounded-lg	"
+          className="m-2 w-[320px] rounded-lg bg-slate-100 p-2"
           type="text"
           placeholder="검색어를 입력해주세요."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className=" text-lg">X</button>
+        <button className="text-lg" onClick={handleSearch}>
+          검색
+        </button>
       </div>
 
-      <h3 className="text-gray-500 p-5">최근 검색어</h3>
+      <h3 className="p-5 text-gray-500">최근 검색어</h3>
 
-      {/* 최근 검색어  */}
-      <div className="flex justify-between w-1/2 px-5 py-2">
-        <div className="font-bold">머그</div>
-        <div>X</div>
-      </div>
+      {/* 최근 검색어 리스트 */}
+      {recentSearches.length > 0 ? (
+        recentSearches.map((term, index) => (
+          <div key={index} className="flex w-1/2 justify-between px-5 py-2">
+            <div className="font-bold">{term}</div>
+            <div
+              className="cursor-pointer"
+              onClick={() => handleDeleteSearch(term)}
+            >
+              X
+            </div>
+          </div>
+        ))
+      ) : (
+        <p className="px-5 py-2 text-gray-500">최근 검색어가 없습니다.</p>
+      )}
 
-      <hr className="border-border-solid border-t-[1px] z-20 border-t-slate-200" />
+      <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-200" />
 
-      {/* 전체삭제 버튼 */}
-      <div className="font-bold text-end p-3">
-        <button>전체 삭제</button>
-      </div>
-
-      {/* 추천태그 */}
-      <div className="pt-16">
-        <h2 className="font-bold p-3 text-lg">추천 태그</h2>
-        <div className="flex border-solid gap-4">
-          <p className="bg-green-600 text-white rounded-full p-3">#더스트백</p>
-          <p className="bg-green-600 text-white rounded-full p-3">#케이크</p>
-          <p className="bg-green-600 text-white rounded-full p-3">#스탠리</p>
-          <p className="bg-green-600 text-white rounded-full p-3">#각인</p>
+      {/* 전체 삭제 버튼 */}
+      {recentSearches.length > 0 && (
+        <div className="p-3 text-end font-bold">
+          <button onClick={handleClearAll}>전체 삭제</button>
         </div>
-      </div>
+      )}
     </>
   );
 }
