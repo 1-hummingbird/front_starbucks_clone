@@ -81,6 +81,7 @@ export const options: NextAuthOptions = {
 
     async session({ session, token }) {
       session.user = token;
+      session.expires = new Date(Date.now() + 10 * 60 * 1000).toISOString();
       return session;
     },
 

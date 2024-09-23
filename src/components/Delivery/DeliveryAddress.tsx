@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-function DeliveryAddres() {
+function DeliveryAddress() {
   return (
     <>
       <div className="container">
@@ -118,4 +118,4 @@ function DeliveryAddres() {
     </>
   );
 }
-export default DeliveryAddres;
+export default DeliveryAddress;

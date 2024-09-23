@@ -1,14 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import fetchDeliveries from "@/action/deliveryAction";
 import { Delivery } from "@/types/delivery";
-
-
-interface ApiResponse {
-  result: {
-    shippingAddressList: Delivery[];
-  };
-}
+import fetchDeliveries from "@/action/deliveryAction";
+import { deleteDeliveryAddress} from "@/action/deliveryAction";
 
 interface DeliveryMainProps {
   deliveries: Delivery[];
@@ -43,7 +37,7 @@ async function DeliveryMain() {
               </button>
               <button
                 className="px-2 text-xs text-slate-300"
-                onClick={() => {/* Handle delete */}}
+                onClick={() => {deleteDeliveryAddress(delivery.id)}}
               >
                 삭제
               </button>

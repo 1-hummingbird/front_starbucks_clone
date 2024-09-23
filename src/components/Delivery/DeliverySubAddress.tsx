@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useRouter } from 'next/router';
+import { addDeliveryAddress } from "@/action/deliveryAction";
+import { DeliveryDto } from "@/types/deliveryDto";
 
-function DeliverySubAdress() {
+function DeliverySubAddress() {
   const router = useRouter();
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<DeliveryDto>({
     addressNickname: '',
     name: '',
     address: '',
@@ -22,16 +24,7 @@ function DeliverySubAdress() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${process.env.BASE_API_URL}/shipping/add`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      if (!response.ok) {
-        throw new Error('Failed to add delivery address');
-      }
+      const response = await addDeliveryAddress(formData as DeliveryDto);
       router.push('/delivery');
     } catch (error) {
       console.error('Error adding delivery address:', error);
@@ -57,7 +50,7 @@ function DeliverySubAdress() {
               required
               onChange={handleChange}
               value={formData.addressNickname}
-            />
+            />  
           </div>
 
           <div className="form-group w-full mt-4">
@@ -90,7 +83,7 @@ function DeliverySubAdress() {
 
           <div className="form-group w-full mt-4">
             <label htmlFor="phone">연락처</label>
-            <br />
+            <br />  
             <input
               type="tel"
               id="phone"
@@ -115,15 +108,11 @@ function DeliverySubAdress() {
             />
           </div>
 
-          <div className="mt-6">
-            <button type="submit" className="w-full rounded-full bg-[#02A862] py-4 text-center text-white">
-              추가하기
-            </button>
-          </div>
+          <button type="submit" className="mt-4 p-2 bg-blue-500 text-white">추가</button>
         </form>
       </div>
     </div>
   );
 }
 
-export default DeliverySubAdress;
+export default DeliverySubAddress;
