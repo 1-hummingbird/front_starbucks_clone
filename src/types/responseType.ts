@@ -34,3 +34,33 @@ export interface UserDataType {
   uuid: string;
   email?: string;
 }
+
+// cart
+export interface ShippingAddressType {
+  addressNickname: string;
+  name: string;
+  address: string;
+  memo: string;
+  phone: string;
+}
+
+export interface CartListType {
+  cartIds: number[];
+}
+
+export interface CartItemType {
+  cartId: number;
+  inputData: string;
+  productId: number;
+  productName: string;
+  optionId: number;
+  optionName: string;
+  cartQuantity: number;
+  price: number;
+  discountRate: number;
+}
+
+export interface ImageByCartIdType {
+  cartId: number;
+  productImg: string;
+}

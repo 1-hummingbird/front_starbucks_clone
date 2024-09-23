@@ -1,16 +1,23 @@
-import { getCartAddress } from "@/action/cartDataFetch";
-import CartAdress from "@/components/cart/CartAdress";
-import CartHeader from "@/components/cart/CartHeader";
-import CartinFormation from "@/components/cart/CartinFormation";
-import React from "react";
+import {
+  getCartDatas,
+  getShippingDefaultAddress,
+} from '@/action/cartDataFetch';
+import CartHeader from '@/components/cart/CartHeader';
+import CartListContainer from '@/components/cart/CartListContainer';
+import ShippingDefaultAddress from '@/components/cart/ShippingDefaultAddress';
+import React from 'react';
 
 async function page() {
-  const cartData = await getCartAddress();
+  const [cartDatas, shippingDefaultAddress] = await Promise.all([
+    getCartDatas(),
+    getShippingDefaultAddress(),
+  ]);
+
   return (
     <>
       <CartHeader />
-      <CartAdress cartData={cartData} />
-      <CartinFormation />
+      <ShippingDefaultAddress shippingDefaultAddress={shippingDefaultAddress} />
+      <CartListContainer cartDatas={cartDatas} />
     </>
   );
 }
