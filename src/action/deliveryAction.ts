@@ -24,14 +24,12 @@ async function fetchDeliveries(): Promise<Delivery[]> {
     try {
         // Get the session
         const session = await getServerSession(options);
-        console.log("session : ", session);
         if (!session || !session.user) {
             throw new Error('Authentication required');
         }
 
       // Get the token from the session
       const token = session.user.accessToken; // Adjust this based on your token storage method
-      console.log("token : ", token);
       if (!token) {
         throw new Error('Authentication token not found');
       }

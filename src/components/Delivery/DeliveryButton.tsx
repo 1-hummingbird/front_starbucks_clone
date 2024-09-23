@@ -1,3 +1,5 @@
+"use client"; // Add this line
+
 import React from "react";
 
 function DeliveryButton() {
