@@ -1,28 +1,23 @@
 'use client';
-import { User } from '@/types/requestType';
-import { signIn, signOut } from 'next-auth/react';
 import Image from 'next/image';
-import { useTransition } from 'react';
-import { useForm } from 'react-hook-form';
 import { Button } from '../ui/button';
 import Input from '../ui/input';
+import { signIn } from 'next-auth/react';
 
 const SignInForm = () => {
-  const [isPending, startTransition] = useTransition();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<User>();
-
-  const onSubmit = async (values: User) => {
-    startTransition(async () => {
-      await signIn('credentials', {
-        loginID: values.loginID,
-        password: values.password,
-        redirect: true,
-        callbackUrl: '/',
-      });
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const target = e.target as typeof e.target & {
+      username: { value: string };
+      password: { value: string };
+    };
+    const loginID = target.username.value;
+    const password = target.password.value;
+    console.log(loginID, password);
+    signIn('credentials', {
+      loginID,
+      password,
+      redirect: false,
     });
   };
 
@@ -37,35 +32,27 @@ const SignInForm = () => {
         priority
       />
       <form
-        onSubmit={handleSubmit(onSubmit)}
         className="mt-12 flex w-full flex-col justify-center gap-2"
+        onSubmit={handleSubmit}
       >
         <div className="mb-4 w-full">
           <Input
             className="custom-input focus-visible:ring-transparent"
             type="text"
             placeholder="아이디"
-            {...register('loginID', {
-              required: ' 아이디를 입력해주세요',
-            })}
           />
-          <p className="text-[#e71212]">{errors.loginID?.message}</p>
         </div>
         <div className="mb-4 w-full">
           <Input
             className="custom-input focus-visible:ring-transparent"
             type="password"
             placeholder="비밀번호"
-            {...register('password', {
-              required: ' 비밀번호를 입력해주세요',
-            })}
           />
-          <p className="text-[#e71212]">{errors.password?.message}</p>
         </div>
         <Button className="custom-button w-full" type="submit">
           <p className="text-lg">로그인</p>
         </Button>
-        <Button className="custom-button custom-button-kakao" type="button">
+        <Button className="custom-button custom-button-kakao" type="submit">
           <p className="text-lg">카카오 로그인</p>
         </Button>
       </form>
