@@ -54,7 +54,7 @@ const PayPurchase = () => {
           ))}
         </div>
       </div>
-      <hr className="border-border-solid z-20 border-t-[1px] border-t-slate-400" />
+      <hr className="border-border-solid z-20 mx-6 border-t-[1px] border-t-slate-400" />
     </>
   );
 };
