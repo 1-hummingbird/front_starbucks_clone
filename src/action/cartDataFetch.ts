@@ -1,14 +1,24 @@
+"use server";
 import { options } from "@/app/api/auth/[...nextauth]/options";
+import {
+  CartListType,
+  CommonResType,
+  ShippingAddressType,
+} from "@/types/responseType";
 import { getServerSession } from "next-auth";
 
-export const getCartAddress = async () => {
-  const session = await getServerSession(options);
-  ("use server");
-  console.log(session);
+export const getShippingDefaultAddress =
+  async (): Promise<ShippingAddressType> => {
+    const session = await getServerSession(options);
+    ("use server");
+    console.log(session);
 
-  if (session) {
+    if (!session) {
+      throw new Error("session is null");
+    }
+
     const res = await fetch(
-      `https://api.team-hummingbird.shop/api/v1/shipping/get-default`,
+      `${process.env.BASE_API_URL}/shipping/get-default`,
       {
         method: "POST",
         headers: {
@@ -18,12 +28,40 @@ export const getCartAddress = async () => {
       },
     );
 
-    if (res.ok) {
-      const data = await res.json();
-      console.log(data);
-      return data;
+    if (!res) {
+      throw new Error("error");
     }
+
+    const data = (await res.json()) as CommonResType<ShippingAddressType>;
+    console.log("배송지 :", data);
+    return data.result;
+  };
+
+//   cart
+
+export const getCartDatas = async (): Promise<CartListType> => {
+  const session = await getServerSession(options);
+  ("use server");
+  console.log(session);
+
+  if (!session) {
+    throw new Error("session is null");
   }
 
-  return getServerSession;
+  const res = await fetch(`${process.env.BASE_API_URL}/cart/items/member`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${session.user?.accessToken}`,
+    },
+    cache: "no-cache",
+  });
+
+  if (!res) {
+    throw new Error("error");
+  }
+
+  const data = (await res.json()) as CommonResType<CartListType>;
+  console.log("카트:", data);
+  return data.result;
 };

@@ -34,3 +34,15 @@ export interface UserDataType {
   uuid: string;
   email?: string;
 }
+// cart
+export interface ShippingAddressType {
+  addressNickname: string;
+  name: string;
+  address: string;
+  memo: string;
+  phone: string;
+}
+
+export interface CartListType {
+  cartIds: number[];
+}

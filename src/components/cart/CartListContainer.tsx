@@ -10,7 +10,7 @@ interface Product {
   checked: boolean;
 }
 
-function CartinFormation() {
+function CartListContainer() {
   // 상태 관리
   const [products, setProducts] = useState<Product[]>([
     {
@@ -164,4 +164,4 @@ function CartinFormation() {
   );
 }
 
-export default CartinFormation;
+export default CartListContainer;
