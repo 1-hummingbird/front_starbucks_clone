@@ -5,15 +5,26 @@ import React from "react";
 import Image from "next/image";
 
 function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
-  const data = [1, 2, 3, 4, 5];
-
   return (
     <>
       <div className="w-full px-4">
-        {data.length > 0 ? (
-          data.map((item, index) => <CartListItem key={index} cartId={item} />)
+        {cartDatas.length > 0 ? (
+          cartDatas.cartIds.map((item, index) => (
+            <CartListItem key={index} cartId={item} />
+          ))
         ) : (
-          <div>장바구니가 비었습니다.</div>
+          <div className="items-center justify-center p-20">
+            <div className="">
+              <Image
+                className="mx-10 my-2"
+                src="https://img.icons8.com/?size=100&id=2931&format=png&color=000000"
+                width={60}
+                height={60}
+                alt="장바구니"
+              ></Image>
+            </div>
+            <p>장바구니가 비었습니다.</p>
+          </div>
         )}
       </div>
 

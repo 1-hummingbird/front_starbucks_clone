@@ -68,6 +68,8 @@ export const getCartDatas = async (): Promise<CartListType> => {
   return data.result;
 };
 
+// 아이템
+
 export const getCartItemData = async (
   cartId: number,
 ): Promise<CartItemType> => {
@@ -93,9 +95,11 @@ export const getCartItemData = async (
   }
 
   const data = (await res.json()) as CommonResType<CartItemType>;
+  console.log("아이템", data);
   return data.result;
 };
 
+// 장바구니 이미지
 export const getCartProductImageData = async (
   cartId: number,
 ): Promise<ImageByCartIdType> => {
@@ -126,3 +130,34 @@ export const getCartProductImageData = async (
   const data = (await res.json()) as CommonResType<ImageByCartIdType>;
   return data.result;
 };
+
+// export const PayListType = async (
+//   cartId: number,
+// ): Promise<ImageByCartIdType> => {
+//   const session = await getServerSession(options);
+//   ("use server");
+//   console.log(session);
+
+//   if (!session) {
+//     throw new Error("session is null");
+//   }
+
+//   const res = await fetch(
+//     `${process.env.BASE_API_URL}/cart/item/image/{cartId}`,
+//     {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${session.user?.accessToken}`,
+//       },
+//       cache: "no-cache",
+//     },
+//   );
+
+//   if (!res) {
+//     throw new Error("error");
+//   }
+
+//   const data = (await res.json()) as CommonResType<ImageByCartIdType>;
+//   return data.result;
+// };

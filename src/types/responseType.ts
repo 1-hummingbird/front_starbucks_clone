@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export interface CommonResType<T> {
   httpStatus: string;
   isSuccess: boolean;
@@ -44,6 +46,7 @@ export interface ShippingAddressType {
 }
 
 export interface CartListType {
+  length: number;
   cartIds: number[];
 }
 
@@ -63,3 +66,12 @@ export interface ImageByCartIdType {
   cartId: number;
   productImg: string;
 }
+
+// export interface PayListType {
+//   name: string;
+//   isnew: true;
+//   isdiscounted: true;
+//   price: 0;
+//   discountRate: 0;
+//   wishCount: 0;
+// }

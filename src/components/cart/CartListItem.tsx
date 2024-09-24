@@ -1,6 +1,7 @@
 "use client";
 import { CartItemType, ImageByCartIdType } from "@/types/responseType";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 
 function CartListItem({ cartId }: { cartId: number }) {
   const [data, setData] = useState<CartItemType>();
@@ -19,8 +20,14 @@ function CartListItem({ cartId }: { cartId: number }) {
         />
         <label>{cartId}</label>
       </div>
-      {/* 
-      <Image src="{}" width={112} height={112} alt="" className="ml-2"></Image> */}
+
+      <Image
+        src="{cartId}"
+        width={112}
+        height={112}
+        alt=""
+        className="ml-2"
+      ></Image>
     </>
   );
 }
