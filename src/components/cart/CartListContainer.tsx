@@ -1,128 +1,21 @@
-"use client";
-import React, { useState } from "react";
-import Image from "next/image";
+import { CartListType } from "@/types/responseType";
+import CartListItem from "./CartListItem";
 import CartPay from "./CartPay";
+import React from "react";
+import Image from "next/image";
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  checked: boolean;
-}
-
-function CartListContainer() {
-  // 상태 관리
-  const [products, setProducts] = useState<Product[]>([
-    {
-      id: 1,
-      name: "코리아 단청 머그",
-      price: 29000,
-      checked: false,
-    },
-  ]);
-
-  const [allChecked, setAllChecked] = useState(false);
-
-  // 전체 선택 클릭 핸들러
-  const handleAllChecked = () => {
-    const newChecked = !allChecked;
-    setAllChecked(newChecked);
-    setProducts((prevProducts) =>
-      prevProducts.map((product) => ({
-        ...product,
-        checked: newChecked,
-      })),
-    );
-  };
-
-  // 개별 선택 핸들러
-  const handleProductChecked = (id: number) => {
-    setProducts((prevProducts) =>
-      prevProducts.map((product) =>
-        product.id === id ? { ...product, checked: !product.checked } : product,
-      ),
-    );
-  };
-
-  // 전체 삭제
-  const handleDeleteAll = () => {
-    setProducts([]);
-  };
-
-  // 선택된 상품 삭제
-  const handleDeleteSelected = () => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => !product.checked),
-    );
-  };
+function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
+  const data = [1, 2, 3, 4, 5];
 
   return (
     <>
-      {/* 버튼 */}
-      <div>
-        <div className="flex justify-between p-3">
-          <div>
-            <input
-              type="checkbox"
-              checked={allChecked}
-              onChange={handleAllChecked}
-            />{" "}
-            전체선택
-          </div>
-          <div className="text-sm">
-            <button
-              className="px-3"
-              type="button"
-              onClick={handleDeleteSelected}
-            >
-              선택 삭제
-            </button>
-            <button type="button" onClick={handleDeleteAll}>
-              전체 삭제
-            </button>
-          </div>
-        </div>
-        <hr className="border-border-solid z-20 mx-3 border-t-[1px] border-t-slate-200 shadow-inner" />
+      <div className="w-full px-4">
+        {data.length > 0 ? (
+          data.map((item, index) => <CartListItem key={index} cartId={item} />)
+        ) : (
+          <div>장바구니가 비었습니다.</div>
+        )}
       </div>
-
-      {/* 상품 정보 */}
-      {products.length > 0 ? (
-        products.map((product) => (
-          <div
-            key={product.id}
-            className="grid grid-cols-3 items-center gap-3 shadow-md"
-          >
-            <div className="flex items-center px-3">
-              <input
-                type="checkbox"
-                checked={product.checked}
-                onChange={() => handleProductChecked(product.id)}
-              />
-              <Image
-                src="https://image.istarbucks.co.kr/upload/store/skuimg/2024/08/[9300000005363]_20240806161440187.jpg"
-                width={112}
-                height={112}
-                alt="머그"
-                className="ml-2"
-              />
-            </div>
-
-            <div className="col-span-2 flex flex-col justify-center gap-4">
-              <div className="flex items-center gap-4">
-                <span>{product.name}</span>
-                <span>X</span>
-              </div>
-
-              <div className="flex items-center gap-4">
-                <span>개수 추가</span>
-                <span>{product.price.toLocaleString()}원</span>
-              </div>
-            </div>
-          </div>
-        ))
-      ) : (
-        <div className="py-10 text-center">장바구니가 비어 있습니다.</div>
-      )}
 
       <CartPay />
 
@@ -141,13 +34,8 @@ function CartListContainer() {
       <div className="py-2">
         <div>
           <ul className="flex justify-between px-12 py-2">
-            <li className="text-base">총 {products.length}건</li>
-            <li className="text-lg font-bold">
-              {products
-                .reduce((acc, product) => acc + product.price, 0)
-                .toLocaleString()}
-              원
-            </li>
+            <li className="text-base">총 건</li>
+            <li className="text-lg font-bold">원</li>
           </ul>
         </div>
 

@@ -46,3 +46,20 @@ export interface ShippingAddressType {
 export interface CartListType {
   cartIds: number[];
 }
+
+export interface CartItemType {
+  cartId: number;
+  inputData: string;
+  productId: number;
+  productName: string;
+  optionId: number;
+  optionName: string;
+  cartQuantity: number;
+  price: number;
+  discountRate: number;
+}
+
+export interface ImageByCartIdType {
+  cartId: number;
+  productImg: string;
+}

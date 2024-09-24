@@ -16,7 +16,7 @@ async function page() {
     <>
       <CartHeader />
       <ShippingDefaultAddress shippingDefaultAddress={shippingDefaultAddress} />
-      <CartListContainer />
+      <CartListContainer cartDatas={cartDatas} />
     </>
   );
 }
