@@ -1,38 +1,23 @@
 'use client';
 
-import { FormControl, FormField, FormItem, FormMessage } from '../../ui/form';
-import { RegisterFormType, RegisterValues } from '@/types/auth';
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from '@/components/ui/form';
+import React, { useState } from 'react';
+import { RegisterFormProps, variants } from './RegisterForm';
 
-import { Button } from '../../ui/button';
-import Input from '../../ui/input';
+import { Button } from '@/components/ui/button';
+import Input from '@/components/ui/input';
 import MotionDiv from '@/components/ui/MotionDiv';
+import { RegisterValues } from '@/types/auth';
+import { isValueAvailable } from '@/action/Auth';
 import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
-export interface RegisterFormProps {
-  formType: RegisterFormType[];
-  route?: string;
-  hasNext: boolean;
-  isFirst?: boolean;
-}
-
-export const variants = {
-  initial: {
-    opacity: 0,
-    x: 100,
-  },
-  animate: {
-    opacity: 1,
-    x: 0,
-  },
-  exit: {
-    opacity: 0,
-    x: -100,
-  },
-};
-
-const RegisterForm = ({
+const StepTwoForm = ({
   formType,
   route,
   hasNext,
@@ -42,6 +27,7 @@ const RegisterForm = ({
   const fieldNames = formType.map(
     (field) => field.name as keyof RegisterValues,
   );
+
   const {
     control,
     trigger,
@@ -52,6 +38,21 @@ const RegisterForm = ({
   } = useFormContext<RegisterValues>();
 
   const [isExiting, setIsExiting] = useState<boolean>(false);
+
+  const isLoginIDAvailable = async (value: string) => {
+    const response = await isValueAvailable('checkLoginID', value);
+    const isValid = response.result.available;
+
+    if (!isValid) {
+      setError('loginID', {
+        type: 'manual',
+        message: '이 아이디는 이미 사용 중입니다',
+      });
+    } else {
+      clearErrors('loginID');
+    }
+  };
+
   const onClickNext = async () => {
     const isValid = await trigger(fieldNames);
     if (isValid) {
@@ -62,7 +63,7 @@ const RegisterForm = ({
 
   return (
     <MotionDiv
-      initial={isFirst ? undefined : 'initial'}
+      initial={'initial'}
       animate={isExiting ? 'exit' : 'animate'}
       variants={variants}
       transition={{ duration: 0.5 }}
@@ -84,7 +85,15 @@ const RegisterForm = ({
                         inputMode={item.inputMode}
                         type={item.type}
                         value={field.value as string | number | undefined}
-                        onChange={field.onChange}
+                        onChange={(e) => {
+                          field.onChange(e);
+                          trigger(item.name as keyof RegisterValues);
+                        }}
+                        onBlur={() => {
+                          if (item.name === 'loginID') {
+                            isLoginIDAvailable(field.value as string);
+                          }
+                        }}
                       />
                     </FormControl>
                   </div>
@@ -94,26 +103,16 @@ const RegisterForm = ({
             />
           );
         })}
-        {hasNext ? (
-          <Button
-            className="custom-button mt-6"
-            type="button"
-            onClick={onClickNext}
-          >
-            다음
-          </Button>
-        ) : (
-          <Button
-            className="custom-button my-6"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            회원가입
-          </Button>
-        )}
+        <Button
+          className="custom-button mt-6"
+          type="button"
+          onClick={onClickNext}
+        >
+          다음
+        </Button>
       </section>
     </MotionDiv>
   );
 };
 
-export default RegisterForm;
+export default StepTwoForm;

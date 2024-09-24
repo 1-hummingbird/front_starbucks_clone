@@ -1,16 +1,18 @@
 'use client';
-import { Button } from '@/components/ui/button';
+
 import { Card, CardContent } from '@/components/ui/card';
 import { FormControl, FormField } from '@/components/ui/form';
+
+import AgreementContent from '@/datas/dummy/AgreementContent';
+import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 import Input from '@/components/ui/input';
 import MotionDiv from '@/components/ui/MotionDiv';
-import { routes } from '@/config/routes';
-import AgreementContent from '@/datas/dummy/AgreementContent';
 import { RegisterValues } from '@/types/auth';
-import Image from 'next/image';
+import { routes } from '@/config/routes';
+import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
 
 const variants = {
   initial: {
@@ -41,7 +43,7 @@ const TermsAgreement = () => {
     const isValid = await trigger('agree');
     if (isValid) {
       setIsExiting(true);
-      router.push(`/register/${routes.signup_step1}`);
+      router.push(`${routes.signup_step1}`);
     }
   };
   return (
@@ -67,26 +69,28 @@ const TermsAgreement = () => {
 
         <section className="mx-auto mt-12 flex w-full max-w-md flex-col">
           <Card className="mb-4 flex flex-col">
-            <div className="mt-2 flex w-full items-center justify-between">
-              <p className="overflow-hidden text-ellipsis whitespace-nowrap pl-6 text-xl font-bold">
+            <div className="mt-2 flex w-full items-center justify-between gap-2 px-6">
+              <p className="overflow-hidden text-ellipsis whitespace-nowrap text-xl font-bold">
                 홈페이지 이용약관 동의 (필수)
               </p>
-              <FormField
-                control={control}
-                name="agree"
-                render={({ field }) => (
-                  <FormControl>
-                    <Input
-                      type="checkbox"
-                      className="mr-6 h-6 w-6 rounded border-gray-300 accent-[#006241] checked:accent-[#006241] focus:accent-[#006241]"
-                      checked={!!field.value || false}
-                      onChange={(e) => field.onChange(e.target.checked)}
-                    />
-                  </FormControl>
-                )}
-              />
+              <div className="flex items-center justify-end">
+                <FormField
+                  control={control}
+                  name="agree"
+                  render={({ field }) => (
+                    <FormControl className="mt-1 flex-1">
+                      <Input
+                        type="checkbox"
+                        className="ml-auto h-[22x] w-[22px] rounded border-gray-300 accent-[#006241] checked:accent-[#006241] focus:accent-[#006241]"
+                        checked={!!field.value || false}
+                        onChange={(e) => field.onChange(e.target.checked)}
+                      />
+                    </FormControl>
+                  )}
+                />
+              </div>
             </div>
-            <CardContent className="mt-4 p-4">
+            <CardContent className="mt-4 max-h-60 overflow-y-auto p-4">
               <AgreementContent />
             </CardContent>
           </Card>

@@ -1,7 +1,8 @@
-import StepIndicator from '@/components/pages/register/StepIndicator';
+import EmailInput from '@/components/pages/register/EmailInput';
 import RegisterForm from '@/components/pages/register/RegisterForm';
-import { routes } from '@/config/routes';
 import { RegisterFormType } from '@/types/auth';
+import StepIndicator from '@/components/pages/register/StepIndicator';
+import { routes } from '@/config/routes';
 
 const formType: RegisterFormType[] = [
   {
@@ -17,11 +18,12 @@ const page = () => {
   return (
     <main>
       <StepIndicator currentStep={1} totalSteps={3} />
-      <RegisterForm
+      <EmailInput />
+      {/* <RegisterForm
         formType={formType}
         route={routes.signup_step2}
         hasNext={true}
-      />
+      /> */}
     </main>
   );
 };

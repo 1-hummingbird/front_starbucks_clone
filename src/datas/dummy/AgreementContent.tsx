@@ -2,7 +2,7 @@ import React from 'react';
 
 const AgreementContent = () => {
   return (
-    <div className="max-h-60 overflow-y-auto bg-[#F7F7F7] p-2">
+    <div className="p-2">
       <p className="text-lg font-bold">
         스타벅스 코리아는 고객님을 보호합니다.
       </p>

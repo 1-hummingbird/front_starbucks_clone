@@ -1,6 +1,4 @@
-import RegisterForm from '@/components/pages/register/RegisterForm';
 import TermsAgreement from '@/components/pages/register/TermsAgreement';
-import { routes } from '@/config/routes';
 import { RegisterFormType } from '@/types/auth';
 
 const formType: RegisterFormType[] = [
@@ -13,7 +11,7 @@ const formType: RegisterFormType[] = [
 
 const page = () => {
   return (
-    <main className="mt-16 flex justify-center">
+    <main className="mt-12 flex justify-center">
       <TermsAgreement />
     </main>
   );

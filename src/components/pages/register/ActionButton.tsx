@@ -1,16 +1,16 @@
 import { Button } from '../../ui/button';
 
-interface ActionButtonProps {
+interface NextStepButtonProps {
   label: string;
   onClick: () => void;
   isDisabled?: boolean;
 }
 
-const ActionButton = ({
+const NextStepButton = ({
   label,
   onClick,
   isDisabled = false,
-}: ActionButtonProps) => (
+}: NextStepButtonProps) => (
   <Button
     className="custom-button mt-6"
     type="button"
@@ -21,4 +21,4 @@ const ActionButton = ({
   </Button>
 );
 
-export default ActionButton;
+export default NextStepButton;
