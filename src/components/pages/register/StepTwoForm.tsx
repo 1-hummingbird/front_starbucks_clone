@@ -18,7 +18,7 @@ import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
 const StepTwoForm = ({
-  formType,
+  formTypes: formType,
   route,
   hasNext,
   isFirst,

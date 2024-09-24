@@ -11,10 +11,11 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 export interface RegisterFormProps {
-  formType: RegisterFormType[];
+  formTypes: RegisterFormType<RegisterValues>[];
   route?: string;
   hasNext: boolean;
   isFirst?: boolean;
+  availableType?: string;
 }
 
 export const variants = {
@@ -33,7 +34,7 @@ export const variants = {
 };
 
 const RegisterForm = ({
-  formType,
+  formTypes: formType,
   route,
   hasNext,
   isFirst,

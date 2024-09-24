@@ -81,7 +81,7 @@ const TermsAgreement = () => {
                     <FormControl className="mt-1 flex-1">
                       <Input
                         type="checkbox"
-                        className="ml-auto h-[22x] w-[22px] rounded border-gray-300 accent-[#006241] checked:accent-[#006241] focus:accent-[#006241]"
+                        className="ml-auto h-[20px] !w-[20px] rounded border-gray-300 accent-[#006241] checked:accent-[#006241] focus:accent-[#006241]"
                         checked={!!field.value || false}
                         onChange={(e) => field.onChange(e.target.checked)}
                       />

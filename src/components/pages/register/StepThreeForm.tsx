@@ -18,16 +18,14 @@ import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 
 const StepThreeForm = ({
-  formType,
+  formTypes: formType,
   route,
   hasNext,
   isFirst,
   availableType,
 }: RegisterFormProps) => {
   const router = useRouter();
-  const fieldNames = formType.map(
-    (field) => field.name as keyof RegisterValues,
-  );
+  const fieldNames = formType.map((field) => field.name);
 
   const {
     control,
@@ -36,52 +34,50 @@ const StepThreeForm = ({
     getValues,
     setError,
     clearErrors,
+    getFieldState,
   } = useFormContext<RegisterValues>();
 
   const [isExiting, setIsExiting] = useState<boolean>(false);
 
-  const isLoginIDAvailable = async (value: string) => {
+  const checkFieldDuplicate = async (value: string) => {
     const response = await isValueAvailable(availableType!, value);
     const isValid = response.result.available;
 
-    if (!isValid) {
-      if (availableType === 'checkPhone') {
-        setError('phone', {
-          type: 'manual',
-          message: '이 전화번호는 이미 사용중입니다.',
-        });
-      } else if (availableType === 'checkLoginID') {
+    // switch
+    if (isValid) {
+      return;
+    }
+    switch (availableType) {
+      case 'checkLoginID':
         setError('loginID', {
           type: 'manual',
           message: '이 아이디는 이미 사용 중입니다',
         });
-        console.log(errors.loginID?.message);
-      }
+        break;
+      case 'checkPhone':
+        setError('phone', {
+          type: 'manual',
+          message: '이 전화번호는 이미 사용중입니다.',
+        });
+        break;
+      default:
+        throw Error('잘못된 availableType 입니다');
     }
   };
+  console.log(errors);
 
-  const onClickNext = async (value?: string) => {
-    const isValid = await trigger(fieldNames);
-
-    if (value) {
-      const response = await isValueAvailable(availableType!, value);
-      const isAvailable = response.result.available;
-
-      if (!isAvailable) {
-      }
-      setError('loginID', {
-        type: 'manual',
-        message: '이 아이디는 이미 사용 중입니다',
-      });
+  const handleClickNext = async () => {
+    // 폼 전체에 유효성 검사 실시!!
+    // 아이디 중복검사 실시!!
+    // 검사가 다 끝났으면 에러가 한개도 없다면 다음 스텝으로!!
+    await trigger(fieldNames);
+    await checkFieldDuplicate(getValues('loginID'));
+    // 에러들을 돌면서 하나도 없으면 넘어가라!!
+    if (Object.values(errors).every((error) => !error)) {
+      setIsExiting(true);
+      router.push(`${route}`);
     }
   };
-
-  // console.log('isValid :', isValid);
-  // if (errors.loginID?.message) {
-  //   console.log(errors.loginID.message);
-  // } else {
-  //   console.log('clear');
-  // }
 
   return (
     <MotionDiv
@@ -92,11 +88,14 @@ const StepThreeForm = ({
     >
       <section className="mt-20 flex flex-col gap-2 px-8">
         {formType.map((item) => {
+          if (item.name === 'agree') {
+            return null;
+          }
           return (
             <FormField
               key={item.id}
               control={control}
-              name={item.name as keyof RegisterValues}
+              name={item.name}
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center gap-4">
@@ -106,23 +105,24 @@ const StepThreeForm = ({
                         placeholder={item.placeholder}
                         inputMode={item.inputMode}
                         type={item.type}
-                        value={field.value as string | number | undefined}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          trigger(item.name as keyof RegisterValues);
-                        }}
+                        {...field}
+                        // value={field.value}
+                        // onChange={(e) => {
+                        //   field.onChange(e);
+                        //   trigger(item.name);
+                        // }}
                         onBlur={() => {
                           if (item.name === 'loginID') {
-                            isLoginIDAvailable(field.value as string);
+                            checkFieldDuplicate(field.value as string);
                           }
                           if (item.name === 'phone') {
-                            isLoginIDAvailable(field.value as string);
+                            checkFieldDuplicate(field.value as string);
                           }
                         }}
                       />
                     </FormControl>
                   </div>
-                  {errors[item.name as keyof RegisterValues] && <FormMessage />}
+                  {errors[item.name] && <FormMessage />}
                 </FormItem>
               )}
             />
@@ -131,7 +131,7 @@ const StepThreeForm = ({
         <Button
           className="custom-button mt-6"
           type="button"
-          onClick={onClickNext}
+          onClick={handleClickNext}
         >
           다음
         </Button>

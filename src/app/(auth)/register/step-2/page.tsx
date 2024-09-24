@@ -1,11 +1,11 @@
 import RegisterForm from '@/components/pages/register/RegisterForm';
-import { RegisterFormType } from '@/types/auth';
+import { RegisterFormType, RegisterValues } from '@/types/auth';
 import StepIndicator from '@/components/pages/register/StepIndicator';
 import StepThreeForm from '@/components/pages/register/StepThreeForm';
 import StepTwoForm from '@/components/pages/register/StepTwoForm';
 import { routes } from '@/config/routes';
 
-const formType: RegisterFormType[] = [
+const formType: RegisterFormType<RegisterValues>[] = [
   {
     id: 1,
     name: 'loginID',
@@ -44,10 +44,10 @@ const page = () => {
         hasNext={true}
       /> */}
       <StepThreeForm
-        formType={formType}
+        formTypes={formType}
         route={routes.signup_step3}
         hasNext={true}
-        availableType={'checkLoginID'}
+        availableType={'checkLoginIDs'}
       />
     </main>
   );

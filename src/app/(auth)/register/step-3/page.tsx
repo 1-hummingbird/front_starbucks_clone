@@ -1,8 +1,8 @@
 import StepIndicator from '@/components/pages/register/StepIndicator';
 import RegisterForm from '@/components/pages/register/RegisterForm';
-import { RegisterFormType } from '@/types/auth';
+import { RegisterFormType, RegisterValues } from '@/types/auth';
 
-const formType: RegisterFormType[] = [
+const formType: RegisterFormType<RegisterValues>[] = [
   {
     id: 1,
     name: 'name',
@@ -37,7 +37,7 @@ const page = () => {
   return (
     <main>
       <StepIndicator currentStep={3} totalSteps={3} />
-      <RegisterForm formType={formType} hasNext={false} />
+      <RegisterForm formTypes={formType} hasNext={false} />
     </main>
   );
 };

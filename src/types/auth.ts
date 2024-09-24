@@ -49,9 +49,9 @@ export const defaultValues: RegisterValues = {
   verificationCode: '',
 };
 
-export interface RegisterFormType {
+export interface RegisterFormType<T> {
   id: number;
-  name: string;
+  name: keyof T;
   type: string;
   placeholder?: string;
   inputMode?:
@@ -64,7 +64,7 @@ export interface RegisterFormType {
     | 'decimal'
     | undefined;
   agree?: boolean;
-  verificationCode?: string;
+  // verificationCode?: string;
 }
 
 export type RegisterValues = z.infer<typeof RegisterSchema>;
