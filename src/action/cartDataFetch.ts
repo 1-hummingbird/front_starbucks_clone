@@ -8,6 +8,7 @@ import {
   ShippingAddressType,
 } from '@/types/responseType';
 import { getServerSession } from 'next-auth';
+import { revalidateTag } from 'next/cache';
 
 export const getShippingDefaultAddress =
   async (): Promise<ShippingAddressType> => {
@@ -42,7 +43,6 @@ export const getShippingDefaultAddress =
 export const getCartDatas = async (): Promise<CartListType> => {
   const session = await getServerSession(options);
   ('use server');
-  console.log(session);
 
   if (!session) {
     throw new Error('session is null');
@@ -51,7 +51,7 @@ export const getCartDatas = async (): Promise<CartListType> => {
   const res = await fetch(
     `${process.env.BASE_API_URL}/api/v1/cart/items/member`,
     {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${session.user?.accessToken}`,
@@ -79,17 +79,15 @@ export const getCartItemData = async (
     throw new Error('session is null');
   }
 
-  const res = await fetch(
-    `${process.env.BASE_API_URL}/api/v1/cart/item/info/${cartId}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.user?.accessToken}`,
-      },
-      cache: 'no-cache',
+  const res = await fetch(`${process.env.BASE_API_URL}/api/v1/cart/item/info`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${session.user?.accessToken}`,
     },
-  );
+    body: JSON.stringify({ cartId }),
+    next: { tags: ['getCart'] },
+  });
 
   if (!res) {
     throw new Error('error');
