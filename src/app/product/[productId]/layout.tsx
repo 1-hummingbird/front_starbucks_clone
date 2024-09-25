@@ -1,16 +1,18 @@
-import React from "react";
-
-import { Metadata } from "next";
+import { Metadata } from 'next';
+import ProductHeader from '@/components/pages/product/ProductHeader';
+import React from 'react';
+import ScrollUpButton from '@/components/util/ScrollUpButton';
 
 export const metadata: Metadata = {
-  title: "Main",
+  title: 'Main',
 };
 
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
+      <ProductHeader />
       {children}
-      {/* <ScrollUpButton /> */}
+      <ScrollUpButton />
     </>
   );
 };
