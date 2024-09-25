@@ -27,13 +27,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
 
-<<<<<<< HEAD
+
     - name: Cache node_modules
-<<<<<<< HEAD
       uses: actions/cache@v4
-=======
-      uses: actions/cache@v3
->>>>>>> c7d0e4c1772f9d8200882dfa935dbb389ef74b44
       with:
         path: node_modules
         key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
@@ -41,19 +37,14 @@ jobs:
           ${{ runner.os }}-node_modules-
 
     - name: Cache .next build
-<<<<<<< HEAD
       uses: actions/cache@v4
-=======
-      uses: actions/cache@v3
->>>>>>> c7d0e4c1772f9d8200882dfa935dbb389ef74b44
       with:
         path: .next
         key: ${{ runner.os }}-next-build-${{ hashFiles('**/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-next-build-
-=======
       - name: Cache node_modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}
@@ -61,13 +52,11 @@ jobs:
             ${{ runner.os }}-node_modules-
 
       - name: Cache .next build
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .next
           key: ${{ runner.os }}-next-build-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-next-build-
->>>>>>> 4368d2f6271663642adeede86071848316a5249f
-
       - run: npm ci
       - run: npm run build
