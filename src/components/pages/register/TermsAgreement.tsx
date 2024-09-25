@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent } from '@/components/ui/card';
-import { FormControl, FormField } from '@/components/ui/form';
+import { FormControl, FormField, FormMessage } from '@/components/ui/form';
 
 import AgreementContent from '@/datas/dummy/AgreementContent';
 import { Button } from '@/components/ui/button';

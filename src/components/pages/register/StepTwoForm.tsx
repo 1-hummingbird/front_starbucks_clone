@@ -6,56 +6,53 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import React, { useState } from 'react';
-import { RegisterFormProps, variants } from './RegisterForm';
+import { RegisterFormProps, variants } from './StepOneForm';
 
 import { Button } from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import MotionDiv from '@/components/ui/MotionDiv';
 import { RegisterValues } from '@/types/auth';
-import { isValueAvailable } from '@/action/Auth';
+import { isValueAvailable } from '@/action/authActions';
 import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 const StepTwoForm = ({
   formTypes: formType,
   route,
-  hasNext,
-  isFirst,
+  availableType,
 }: RegisterFormProps) => {
   const router = useRouter();
-  const fieldNames = formType.map(
-    (field) => field.name as keyof RegisterValues,
-  );
+  const fieldNames = formType.map((field) => field.name);
 
   const {
     control,
     trigger,
-    formState: { isSubmitting, errors },
+    formState: { errors },
     getValues,
     setError,
-    clearErrors,
   } = useFormContext<RegisterValues>();
 
   const [isExiting, setIsExiting] = useState<boolean>(false);
 
-  const isLoginIDAvailable = async (value: string) => {
-    const response = await isValueAvailable('checkLoginID', value);
+  const checkFieldDuplicate = async (value: string) => {
+    const response = await isValueAvailable(availableType!, value);
     const isValid = response.result.available;
 
-    if (!isValid) {
-      setError('loginID', {
-        type: 'manual',
-        message: '이 아이디는 이미 사용 중입니다',
-      });
-    } else {
-      clearErrors('loginID');
+    if (isValid) {
+      return;
     }
+
+    setError('loginID', {
+      type: 'manual',
+      message: '이 아이디는 이미 사용 중입니다',
+    });
   };
 
-  const onClickNext = async () => {
-    const isValid = await trigger(fieldNames);
-    if (isValid) {
+  const handleClickNext = async () => {
+    await trigger(fieldNames);
+    await checkFieldDuplicate(getValues('loginID'));
+    if (Object.values(errors).every((error) => !error)) {
       setIsExiting(true);
       router.push(`${route}`);
     }
@@ -70,11 +67,14 @@ const StepTwoForm = ({
     >
       <section className="mt-20 flex flex-col gap-2 px-8">
         {formType.map((item) => {
+          if (item.name === 'agree') {
+            return null;
+          }
           return (
             <FormField
               key={item.id}
               control={control}
-              name={item.name as keyof RegisterValues}
+              name={item.name}
               render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center gap-4">
@@ -84,20 +84,11 @@ const StepTwoForm = ({
                         placeholder={item.placeholder}
                         inputMode={item.inputMode}
                         type={item.type}
-                        value={field.value as string | number | undefined}
-                        onChange={(e) => {
-                          field.onChange(e);
-                          trigger(item.name as keyof RegisterValues);
-                        }}
-                        onBlur={() => {
-                          if (item.name === 'loginID') {
-                            isLoginIDAvailable(field.value as string);
-                          }
-                        }}
+                        {...field}
                       />
                     </FormControl>
                   </div>
-                  {errors[item.name as keyof RegisterValues] && <FormMessage />}
+                  {errors[item.name] && <FormMessage />}
                 </FormItem>
               )}
             />
@@ -106,7 +97,7 @@ const StepTwoForm = ({
         <Button
           className="custom-button mt-6"
           type="button"
-          onClick={onClickNext}
+          onClick={handleClickNext}
         >
           다음
         </Button>

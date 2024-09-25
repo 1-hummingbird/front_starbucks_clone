@@ -1,17 +1,19 @@
-import { CommonResType, UserDataType } from "@/types/responseType";
-import { NextAuthOptions, User } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
+import { CommonResType, UserDataType } from '@/types/responseType';
+import { NextAuthOptions, User } from 'next-auth';
+
+import CredentialsProvider from 'next-auth/providers/credentials';
+import KakaoProvider from 'next-auth/providers/kakao';
 
 export const options: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: "credentials",
+      name: 'credentials',
       credentials: {
-        loginID: { label: "LoginID", type: "text", placeholder: "아이디" },
+        loginID: { label: 'LoginID', type: 'text', placeholder: '아이디' },
         password: {
-          label: "Password",
-          type: "password",
-          placeholder: "비밀번호",
+          label: 'Password',
+          type: 'password',
+          placeholder: '비밀번호',
         },
       },
       async authorize(credentials): Promise<User | null> {
@@ -19,26 +21,30 @@ export const options: NextAuthOptions = {
           return null;
         }
 
-        console.log(credentials);
         try {
           const res = await fetch(`${process.env.BASE_API_URL}/auth/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               loginID: credentials.loginID,
               password: credentials.password,
             }),
-            cache: "no-cache",
+            cache: 'no-cache',
           });
           const user = (await res.json()) as CommonResType<User>;
           console.log(user);
           return user.result;
         } catch (error) {
-          console.error("error", error);
+          console.error('error', error);
         }
 
         return null;
       },
+    }),
+    // kakao
+    KakaoProvider({
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
     }),
   ],
   callbacks: {
@@ -48,19 +54,20 @@ export const options: NextAuthOptions = {
           const res = await fetch(
             `${process.env.BASE_API_URL}/auth/oauth/login`,
             {
-              method: "POST",
+              method: 'POST',
               headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
               },
               body: JSON.stringify({
                 provider: account.provider,
                 providerId: account.providerAccountId,
+                // providerEmail: account.email
               }),
-              cache: "no-cache",
+              cache: 'no-cache',
             },
           );
           const data = await res.json();
-          console.log(data);
+          console.log('kakao :', data);
 
           user.name = data.result.name;
           user.uuid = data.result.uuid;
@@ -68,8 +75,8 @@ export const options: NextAuthOptions = {
 
           return true;
         } catch (error) {
-          console.error("error", error);
-          return "/register";
+          console.error('error', error);
+          return '/register';
         }
       }
       return true;
@@ -88,6 +95,6 @@ export const options: NextAuthOptions = {
       return url.startsWith(baseUrl) ? url : baseUrl;
     },
   },
-  pages: { signIn: "/sign-in", error: "/error" },
+  pages: { signIn: '/sign-in', error: '/error' },
   secret: process.env.NEXTAUTH_SECRET,
 };

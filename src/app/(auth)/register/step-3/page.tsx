@@ -1,8 +1,9 @@
-import StepIndicator from '@/components/pages/register/StepIndicator';
-import RegisterForm from '@/components/pages/register/RegisterForm';
 import { RegisterFormType, RegisterValues } from '@/types/auth';
 
-const formType: RegisterFormType<RegisterValues>[] = [
+import StepIndicator from '@/components/pages/register/StepIndicator';
+import StepThreeForm from '@/components/pages/register/StepThreeForm';
+
+const formTypes: RegisterFormType<RegisterValues>[] = [
   {
     id: 1,
     name: 'name',
@@ -21,7 +22,7 @@ const formType: RegisterFormType<RegisterValues>[] = [
     id: 3,
     name: 'phone',
     type: 'text',
-    placeholder: '전화번호',
+    placeholder: '전화번호 (-) 제외',
     inputMode: 'tel',
   },
   {
@@ -37,7 +38,7 @@ const page = () => {
   return (
     <main>
       <StepIndicator currentStep={3} totalSteps={3} />
-      <RegisterForm formTypes={formType} hasNext={false} />
+      <StepThreeForm formTypes={formTypes} availableType={'checkPhone'} />
     </main>
   );
 };

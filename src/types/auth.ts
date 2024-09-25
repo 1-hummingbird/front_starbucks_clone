@@ -17,8 +17,8 @@ export const RegisterSchema = z
       .email({ message: '올바른 이메일을 입력해주세요' }),
     phone: z
       .string()
-      .min(10, { message: '올바른 전화번호를 입력해주세요' })
-      .max(10, { message: '올바른 전화번호를 입력해주세요' }),
+      .min(11, { message: '올바른 전화번호를 입력해주세요' })
+      .max(11, { message: '올바른 전화번호를 입력해주세요' }),
     birthdate: z
       .string()
       .min(8, { message: '생년월일을 8자리를 입력해주세요' })

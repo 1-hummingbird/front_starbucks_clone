@@ -1,7 +1,9 @@
-import ScrollUpButton from '@/components/util/ScrollUpButton';
+import './globals.css';
+
 import AuthProvider from '@/providers/AuthProvider';
 import type { Metadata } from 'next';
-import './globals.css';
+import ScrollUpButton from '@/components/util/ScrollUpButton';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: {
@@ -21,6 +23,7 @@ export default async function RootLayout({
       <body>
         <AuthProvider>
           {children}
+          <Toaster />
           <ScrollUpButton />
         </AuthProvider>
       </body>

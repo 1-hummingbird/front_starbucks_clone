@@ -6,83 +6,35 @@ import {
   FormItem,
   FormMessage,
 } from '@/components/ui/form';
-import React, { useEffect, useState } from 'react';
-import { RegisterFormProps, variants } from './RegisterForm';
+import { RegisterFormProps, variants } from './StepOneForm';
 
 import { Button } from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import MotionDiv from '@/components/ui/MotionDiv';
 import { RegisterValues } from '@/types/auth';
-import { isValueAvailable } from '@/action/Auth';
 import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
-const StepThreeForm = ({
+const StepTwoForm = ({
   formTypes: formType,
   route,
-  hasNext,
-  isFirst,
   availableType,
 }: RegisterFormProps) => {
+  const { toast } = useToast();
   const router = useRouter();
   const fieldNames = formType.map((field) => field.name);
 
   const {
     control,
-    trigger,
     formState: { isSubmitting, errors },
-    getValues,
-    setError,
-    clearErrors,
-    getFieldState,
   } = useFormContext<RegisterValues>();
-
-  const [isExiting, setIsExiting] = useState<boolean>(false);
-
-  const checkFieldDuplicate = async (value: string) => {
-    const response = await isValueAvailable(availableType!, value);
-    const isValid = response.result.available;
-
-    // switch
-    if (isValid) {
-      return;
-    }
-    switch (availableType) {
-      case 'checkLoginID':
-        setError('loginID', {
-          type: 'manual',
-          message: '이 아이디는 이미 사용 중입니다',
-        });
-        break;
-      case 'checkPhone':
-        setError('phone', {
-          type: 'manual',
-          message: '이 전화번호는 이미 사용중입니다.',
-        });
-        break;
-      default:
-        throw Error('잘못된 availableType 입니다');
-    }
-  };
-  console.log(errors);
-
-  const handleClickNext = async () => {
-    // 폼 전체에 유효성 검사 실시!!
-    // 아이디 중복검사 실시!!
-    // 검사가 다 끝났으면 에러가 한개도 없다면 다음 스텝으로!!
-    await trigger(fieldNames);
-    await checkFieldDuplicate(getValues('loginID'));
-    // 에러들을 돌면서 하나도 없으면 넘어가라!!
-    if (Object.values(errors).every((error) => !error)) {
-      setIsExiting(true);
-      router.push(`${route}`);
-    }
-  };
 
   return (
     <MotionDiv
       initial={'initial'}
-      animate={isExiting ? 'exit' : 'animate'}
+      animate={'animate'}
       variants={variants}
       transition={{ duration: 0.5 }}
     >
@@ -106,19 +58,6 @@ const StepThreeForm = ({
                         inputMode={item.inputMode}
                         type={item.type}
                         {...field}
-                        // value={field.value}
-                        // onChange={(e) => {
-                        //   field.onChange(e);
-                        //   trigger(item.name);
-                        // }}
-                        onBlur={() => {
-                          if (item.name === 'loginID') {
-                            checkFieldDuplicate(field.value as string);
-                          }
-                          if (item.name === 'phone') {
-                            checkFieldDuplicate(field.value as string);
-                          }
-                        }}
                       />
                     </FormControl>
                   </div>
@@ -129,15 +68,15 @@ const StepThreeForm = ({
           );
         })}
         <Button
-          className="custom-button mt-6"
-          type="button"
-          onClick={handleClickNext}
+          className="custom-button my-6"
+          type="submit"
+          disabled={isSubmitting}
         >
-          다음
+          회원가입
         </Button>
       </section>
     </MotionDiv>
   );
 };
 
-export default StepThreeForm;
+export default StepTwoForm;

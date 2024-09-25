@@ -1,7 +1,8 @@
-import TermsAgreement from '@/components/pages/register/TermsAgreement';
-import { RegisterFormType } from '@/types/auth';
+import { RegisterFormType, RegisterValues } from '@/types/auth';
 
-const formType: RegisterFormType[] = [
+import TermsAgreement from '@/components/pages/register/TermsAgreement';
+
+const formType: RegisterFormType<RegisterValues>[] = [
   {
     id: 1,
     name: 'agree',

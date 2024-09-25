@@ -1,6 +1,6 @@
+import { Suspense } from 'react';
 import { componentList } from '@/datas/initial/mainComponentList';
 import { getServerSession } from 'next-auth/next';
-import { Suspense } from 'react';
 import { options } from '../api/auth/[...nextauth]/options';
 
 export default async function Page() {

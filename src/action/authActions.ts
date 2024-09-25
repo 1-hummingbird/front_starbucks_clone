@@ -3,7 +3,6 @@
 import { CommonResType, IsValueAvaiable } from '@/types/responseType';
 
 import { RegisterRequest } from '@/types/requestType';
-import { RegisterValues } from '@/types/auth';
 
 export const sendVerificationCode = async (email: string) => {
   const response = await fetch(
@@ -64,16 +63,11 @@ export const registerUser = async (
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      values,
-    }),
+    body: JSON.stringify(values),
   });
 
   const result = await response.json();
-  const body = JSON.stringify({
-    values,
-  });
-  console.log('body :', body);
+  console.log(JSON.stringify(values));
   console.log('result :', result);
   return result;
 };

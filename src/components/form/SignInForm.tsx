@@ -7,9 +7,11 @@ import Link from 'next/link';
 import { User } from '@/types/requestType';
 import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
+import { useToast } from '@/hooks/use-toast';
 import { useTransition } from 'react';
 
 const SignInForm = () => {
+  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
   const {
     register,
@@ -67,7 +69,13 @@ const SignInForm = () => {
         <Button className="custom-button w-full" type="submit">
           <p className="text-lg">로그인</p>
         </Button>
-        <Button className="custom-button custom-button-kakao" type="button">
+        <Button
+          className="custom-button custom-button-kakao"
+          type="button"
+          onClick={() => {
+            signIn('kakao');
+          }}
+        >
           <p className="text-lg">카카오 로그인</p>
         </Button>
       </form>

@@ -1,18 +1,26 @@
 'use client';
 
 import { FormControl, FormField, FormItem, FormMessage } from '../../ui/form';
-import { isEmailValid, sendVerificationCode } from '@/action/Auth';
+import { RegisterFormType, RegisterValues } from '@/types/auth';
+import { isEmailValid, sendVerificationCode } from '@/action/authActions';
 
 import { Button } from '@/components/ui/button';
 import Input from '../../ui/input';
 import MotionDiv from '@/components/ui/MotionDiv';
-import { RegisterValues } from '@/types/auth';
 import { routes } from '@/config/routes';
 import { useFormContext } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const variants = {
+export interface RegisterFormProps {
+  formTypes: RegisterFormType<RegisterValues>[];
+  route?: string;
+  hasNext?: boolean;
+  isFirst?: boolean;
+  availableType?: string;
+}
+
+export const variants = {
   initial: {
     opacity: 0,
     x: 100,
@@ -27,7 +35,7 @@ const variants = {
   },
 };
 
-const EmailInput = () => {
+const StepOneForm = () => {
   const {
     control,
     trigger,
@@ -41,9 +49,8 @@ const EmailInput = () => {
     useState<boolean>(false);
 
   const onSendVerificationCode = async () => {
-    const email = getValues().email;
+    const email = getValues('email');
     const isValid = await trigger('email');
-    console.log(isValid);
     if (isValid) {
       setVerificationSentEmail(true);
       sendVerificationCode(email);
@@ -55,14 +62,12 @@ const EmailInput = () => {
     if (isValid) {
       setIsExiting(true);
       const response = await isEmailValid(
-        getValues().email,
-        getValues().verificationCode,
+        getValues('email'),
+        getValues('verificationCode'),
       );
 
       if (response.isSuccess) {
         router.push(`${routes.signup_step2}`);
-      } else {
-        console.log(response);
       }
     }
   };
@@ -135,4 +140,4 @@ const EmailInput = () => {
   );
 };
 
-export default EmailInput;
+export default StepOneForm;
