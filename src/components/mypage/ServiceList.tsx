@@ -33,6 +33,23 @@ function ServiceList() {
             <Image
               width={32}
               height={32}
+              src="https://img.icons8.com/?size=100&id=12597&format=png&color=000000"
+              alt="리뷰관리"
+            />
+            <span>리뷰 관리</span>
+          </div>
+          <Image
+            width={32}
+            height={32}
+            src="https://img.icons8.com/?size=100&id=15812&format=png&color=000000"
+            alt="화살표"
+          />
+        </li>
+        <li className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <Image
+              width={32}
+              height={32}
               src="https://img.icons8.com/?size=100&id=15895&format=png&color=000000"
               alt="선물함"
             />

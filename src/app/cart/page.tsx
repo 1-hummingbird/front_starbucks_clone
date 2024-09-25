@@ -2,7 +2,6 @@ import {
   getCartDatas,
   getShippingDefaultAddress,
 } from "@/action/cartDataFetch";
-import CartHeader from "@/components/cart/CartHeader";
 import CartListContainer from "@/components/cart/CartListContainer";
 import ShippingDefaultAddress from "@/components/cart/ShippingDefaultAddress";
 import React from "react";
@@ -12,12 +11,15 @@ async function page() {
     getCartDatas(),
     getShippingDefaultAddress(),
   ]);
+
+  console.log(cartDatas, shippingDefaultAddress);
+
   return (
-    <>
-      <CartHeader />
+    <main className="pt-[50px]">
       <ShippingDefaultAddress shippingDefaultAddress={shippingDefaultAddress} />
+      {/* <TabMenus /> */}
       <CartListContainer cartDatas={cartDatas} />
-    </>
+    </main>
   );
 }
 
