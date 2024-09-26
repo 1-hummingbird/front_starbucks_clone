@@ -29,14 +29,15 @@ const dummyData = [
 function AllReview() {
   return (
     <>
-      <div className="p-3">
+      <div className="py-24">
         {dummyData.map((product) => (
           <div key={product.id}>
             <div className="mb-4 flex flex-row items-center gap-4">
               <Image
                 src={product.imageUrl}
                 alt={product.name}
-                className="h-16 w-16"
+                width={60}
+                height={60}
               />
               <div className="flex flex-col">
                 <h2 className="text-xl font-semibold">{product.name}</h2>

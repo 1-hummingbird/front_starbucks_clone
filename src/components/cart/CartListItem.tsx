@@ -9,6 +9,7 @@ import Image from "next/image";
 import { MinusCircleIcon, PlusCircleIcon } from "lucide-react";
 import { Checkbox } from "../ui/checkbox";
 import { useToast } from "@/hooks/use-toast";
+import CartPay from "./CartPay";
 
 function CartListItem({ cartItem }: { cartItem: number }) {
   const { toast } = useToast();
@@ -60,51 +61,55 @@ function CartListItem({ cartItem }: { cartItem: number }) {
   }, [isAction]);
 
   return (
-    <li className="flex w-full items-start gap-3 px-5 py-5">
-      {cartItemImg && cartItemData && (
-        <>
-          <Checkbox
-            id={`cartItem${cartItem}`}
-            className="data-[state=checked]:bg-starbucks border-starbucks h-[20px] w-[20px]"
-          />
-          <div className="grid w-full grid-cols-6 gap-3">
-            <div className="col-span-2 h-[90px] w-[90px] overflow-hidden rounded-sm">
-              <Image
-                src={cartItemImg.productImg}
-                alt={cartItemImg.productImg}
-                width={100}
-                height={100}
-                priority
-                className="object-cover"
-              />
-            </div>
-            <div className="col-span-4">
-              <p className="text-sm font-bold">{cartItemData?.productName}</p>
-              <div className="flex items-center justify-between gap-3 pt-3">
-                <div className="flex w-1/2 items-center justify-between gap-2">
-                  <MinusCircleIcon
-                    size={20}
-                    strokeWidth={1.5}
-                    color={count < 2 ? "lightGray" : "green"}
-                    onClick={() => handleCount("minus")}
-                  />
-                  <p className="font-extrabold">{count}</p>
-                  <PlusCircleIcon
-                    size={20}
-                    strokeWidth={1.5}
-                    color="green"
-                    onClick={() => handleCount("plus")}
-                  />
+    <>
+      {" "}
+      <li className="flex w-full items-start gap-3 px-5 py-5">
+        {cartItemImg && cartItemData && (
+          <>
+            <Checkbox
+              id={`cartItem${cartItem}`}
+              className="data-[state=checked]:bg-starbucks border-starbucks h-[20px] w-[20px]"
+            />
+            <div className="grid w-full grid-cols-6 gap-3">
+              <div className="col-span-2 h-[90px] w-[90px] overflow-hidden rounded-sm">
+                <Image
+                  src={cartItemImg.productImg}
+                  alt={cartItemImg.productImg}
+                  width={100}
+                  height={100}
+                  priority
+                  className="object-cover"
+                />
+              </div>
+              <div className="col-span-4">
+                <p className="text-sm font-bold">{cartItemData?.productName}</p>
+                <div className="flex items-center justify-between gap-3 pt-3">
+                  <div className="flex w-1/2 items-center justify-between gap-2">
+                    <MinusCircleIcon
+                      size={20}
+                      strokeWidth={1.5}
+                      color={count < 2 ? "lightGray" : "green"}
+                      onClick={() => handleCount("minus")}
+                    />
+                    <p className="font-extrabold">{count}</p>
+                    <PlusCircleIcon
+                      size={20}
+                      strokeWidth={1.5}
+                      color="green"
+                      onClick={() => handleCount("plus")}
+                    />
+                  </div>
+                  <p className="text-sm font-extrabold">
+                    {cartItemData.price.toLocaleString()}원
+                  </p>
                 </div>
-                <p className="text-sm font-extrabold">
-                  {cartItemData.price.toLocaleString()}원
-                </p>
               </div>
             </div>
-          </div>
-        </>
-      )}
-    </li>
+          </>
+        )}
+      </li>
+      {/* <CartPay /> */}
+    </>
   );
 }
 
