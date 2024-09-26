@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ProductHeader from '@/components/pages/product/ProductHeader';
+import ProductHeader from '@/components/icons/header/ProductHeader';
 import React from 'react';
 import ScrollUpButton from '@/components/util/ScrollUpButton';
 
