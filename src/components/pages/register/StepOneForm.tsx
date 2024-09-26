@@ -2,7 +2,11 @@
 
 import { FormControl, FormField, FormItem, FormMessage } from '../../ui/form';
 import { RegisterFormType, RegisterValues } from '@/types/auth';
-import { isEmailValid, sendVerificationCode } from '@/action/authActions';
+import {
+  isEmailValid,
+  isValueAvailable,
+  sendVerificationCode,
+} from '@/action/authActions';
 
 import { Button } from '@/components/ui/button';
 import Input from '../../ui/input';
@@ -40,6 +44,7 @@ const StepOneForm = () => {
     control,
     trigger,
     getValues,
+    setError,
     formState: { errors },
   } = useFormContext<RegisterValues>();
 
@@ -51,7 +56,16 @@ const StepOneForm = () => {
   const onSendVerificationCode = async () => {
     const email = getValues('email');
     const isValid = await trigger('email');
-    if (isValid) {
+
+    const response = await isValueAvailable('checkEmail', email);
+    const checkEmailDuplicate = response.result.available;
+    if (!checkEmailDuplicate) {
+      setError('email', {
+        type: 'manual',
+        message: '이 이메일은 이미 사용 중입니다',
+      });
+    }
+    if (isValid && checkEmailDuplicate) {
       setVerificationSentEmail(true);
       sendVerificationCode(email);
     }

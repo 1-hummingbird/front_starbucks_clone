@@ -1,4 +1,3 @@
-import Logo from '@/components/icons/Logo';
 import SignInForm from '@/components/form/SignInForm';
 
 const Page = () => {
