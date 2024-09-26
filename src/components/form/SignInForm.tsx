@@ -1,9 +1,11 @@
 'use client';
 
 import { Button } from '../ui/button';
+import HomeLogo from '../icons/header/HomeLogo';
 import Image from 'next/image';
 import Input from '../ui/input';
 import Link from 'next/link';
+import Logo from '../icons/Logo';
 import { User } from '@/types/requestType';
 import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';
@@ -31,12 +33,12 @@ const SignInForm = () => {
   };
 
   return (
-    <section className="flex h-[300px] w-5/6 flex-col justify-center">
+    <section className="flex h-full w-5/6 flex-col justify-center">
       <Image
-        src={'https://drive.google.com/uc?id=1iHH_Xlvk6b3zAQn-nwaUiLWgsxXfzr8I'}
+        src={'https://drive.google.com/uc?id=1PVPlrCLtSsnBdBG8mb0vKhBQj7L04llO'}
         alt="logo"
-        width={250}
-        height={250}
+        width={300}
+        height={300}
         className="mx-auto mt-20"
         priority
       />
