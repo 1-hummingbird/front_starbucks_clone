@@ -1,4 +1,4 @@
-import AuthHeader from '@/components/icons/header/AuthHeader';
+import AuthHeader from '@/components/header/AuthHeader';
 import FormProvider from '@/components/pages/register/FormProvider';
 import { Metadata } from 'next';
 import React from 'react';

@@ -1,6 +1,6 @@
 'use client';
 
-import LeftArrow from '../LeftArrow';
+import LeftArrow from '../icons/LeftArrow';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 

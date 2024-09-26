@@ -64,3 +64,8 @@ export interface UserDataType {
 //   type: 'basic',
 //   url: 'https://api.team-hummingbird.shop/api/v1/auth/email/check'
 // }
+
+export interface productThumnailType {
+  productId: number;
+  src: string;
+}

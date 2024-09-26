@@ -1,4 +1,4 @@
-import MainHeader from '@/components/icons/header/MainHeader';
+import MainHeader from '@/components/header/MainHeader';
 import React from 'react';
 
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {

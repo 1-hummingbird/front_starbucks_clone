@@ -1,11 +1,9 @@
 'use client';
 
 import { Button } from '../ui/button';
-import HomeLogo from '../icons/header/HomeLogo';
 import Image from 'next/image';
 import Input from '../ui/input';
 import Link from 'next/link';
-import Logo from '../icons/Logo';
 import { User } from '@/types/requestType';
 import { signIn } from 'next-auth/react';
 import { useForm } from 'react-hook-form';

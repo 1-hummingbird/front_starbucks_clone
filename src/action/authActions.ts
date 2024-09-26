@@ -67,7 +67,5 @@ export const registerUser = async (
   });
 
   const result = await response.json();
-  console.log(JSON.stringify(values));
-  console.log('result :', result);
   return result;
 };

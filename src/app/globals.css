@@ -32,6 +32,25 @@ body {
   outline: none;
 }
 
+.search-input {
+  border-radius: 0.375rem;
+  border: 1px solid #d1d5db; /* border and border-input */
+  background-color: #ffffff; /* bg-background */
+  padding-left: 0.75rem; /* px-3 */
+  padding-right: 0.75rem; /* px-3 */
+  padding-top: 0.5rem; /* py-2 */
+  padding-bottom: 0.5rem; /* py-2 */
+  font-size: 0.875rem; /* text-sm */
+  outline: none;
+  box-shadow: none;
+  color: #111827;
+}
+
+.search-input:focus {
+  border-color: #006241;
+  outline: none;
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;

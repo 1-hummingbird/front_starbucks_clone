@@ -1,9 +1,11 @@
+import ProductThumnail from '@/components/pages/productDetail/ProductThumnail';
 import React from 'react';
 
-const page = () => {
+const page = ({ params }: { params: { productId: number } }) => {
   return (
     <main>
       {/* 대표 이미지 이미지*/}
+      <ProductThumnail productId={params.productId} />
       {/* 이름, 가격 */}
       {/* 별점, 리뷰 개수 */}
       {/* 상품 디테일 설명 */}

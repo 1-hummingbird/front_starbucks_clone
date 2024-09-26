@@ -1,6 +1,6 @@
 import '../../globals.css';
 
-import AuthHeader from '@/components/icons/header/AuthHeader';
+import AuthHeader from '@/components/header/AuthHeader';
 import { Metadata } from 'next';
 import React from 'react';
 

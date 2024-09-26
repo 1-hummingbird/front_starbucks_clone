@@ -1,5 +1,5 @@
 import BottomNavigationBar from '@/components/BottomNavigationBar';
-import MainHeader from '@/components/icons/header/MainHeader';
+import MainHeader from '@/components/header/MainHeader';
 import { Metadata } from 'next';
 import React from 'react';
 import TopNavigationBar from '@/components/TopNavigationBar';

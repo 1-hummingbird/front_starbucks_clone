@@ -1,10 +1,9 @@
-import Cart from './Cart';
-import HomeLogo from './HomeLogo';
-import Image from 'next/image';
+import Cart from '../icons/header/Cart';
+import HomeLogo from '../icons/header/HomeLogo';
 import { Nav } from '@/types/common';
 import NavList from '@/components/nav/NavList';
-import Search from './Search';
-import WishList from './WishList';
+import Search from '../icons/header/Search';
+import WishList from '../icons/header/WishList';
 
 const navs: Nav[] = [
   { id: 2, url: 'search', component: Search },
