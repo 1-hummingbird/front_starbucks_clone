@@ -53,7 +53,7 @@ async function fetchDeliveries(): Promise<DeliveryDto[]> {
         return [];
       }
       const defaultDeliveryAddressId = await getDefaultDeliveryAddressId();
-      let result = data.map(deliveryDto => {
+      const result = data.map(deliveryDto => {
         const isDefault = deliveryDto.id === defaultDeliveryAddressId;
         return {
             ...deliveryDto,
