@@ -1,12 +1,12 @@
-import { RegisterType } from "@/types/auth";
-import { Control, Controller, FieldValues } from "react-hook-form";
+import { RegisterValues } from '@/types/auth';
+import { Control, Controller, FieldValues } from 'react-hook-form';
 
 interface InputFieldProps {
   name: string;
   type: string;
   placeholder: string;
   duplicateCheck?: boolean;
-  control: Control<RegisterType>;
+  control: Control<RegisterValues>;
   errors: FieldValues;
 }
 
@@ -30,7 +30,7 @@ const InputField = ({
     <div className="flex h-12 flex-col space-y-1">
       <Controller
         defaultValue=""
-        name={name as keyof RegisterType}
+        name={name as keyof RegisterValues}
         control={control}
         render={({ field }) => (
           <div className="flex items-center">
