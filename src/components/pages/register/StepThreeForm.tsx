@@ -11,11 +11,10 @@ import { RegisterFormProps, variants } from './StepOneForm';
 import { Button } from '@/components/ui/button';
 import Input from '@/components/ui/input';
 import MotionDiv from '@/components/ui/MotionDiv';
-import { RegisterValues } from '@/types/auth';
-import { useFormContext } from 'react-hook-form';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
+import { RegisterValues } from '@/types/auth';
+import { useRouter } from 'next/navigation';
+import { useFormContext } from 'react-hook-form';
 
 const StepTwoForm = ({
   formTypes,
