@@ -4,11 +4,11 @@ import { DeliveryDto } from "@/types/deliveryDto";
 import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options"; // Adjust this import path as needed
 
-interface ApiResponse {
-  result: {
-    shippingAddressList: Delivery[];
-  };
+interface Deliveries {
+  result: DeliveryDto[];
 }
+
+
 
 // Define the interface for the update delivery address request payload
 interface UpdateDeliveryAddressRequest {
@@ -20,7 +20,7 @@ interface UpdateDeliveryAddressRequest {
     memo?: string;
 }
 
-async function fetchDeliveries(): Promise<Delivery[]> {
+async function fetchDeliveries(): Promise<DeliveryDto[]> {
     try {
         // Get the session
         const session = await getServerSession(options);
@@ -37,32 +37,49 @@ async function fetchDeliveries(): Promise<Delivery[]> {
       const response = await fetch(`${process.env.BASE_API_URL}/shipping/list`, {
         method: 'POST',
         headers: {
+          'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Add the Authentication header
         },
-        cache: 'no-store', // This ensures the request is not cached
       });
-  
+
       if (!response.ok) {
         throw new Error('Failed to fetch deliveries');
       }
-  
-      const data: ApiResponse = await response.json();
-      if (data.result.shippingAddressList.length === 0) {
+      
+      let data: Deliveries;
+      try {
+        const apiresponse = await response.json();
+        data = apiresponse.result;
+      } catch (parseError) {
+        console.error('Error parsing JSON:', parseError);
         return [];
       }
-      else {
-        return data.result.shippingAddressList.map(delivery => ({
-          ...delivery,
-          type: delivery.addressNickname === "Home" || delivery.addressNickname === "집" ? "a" : undefined
-        }));
+      if (!data || !Array.isArray(data)) {
+        console.error('Unexpected data structure:', data);
+        return [];
       }
+
+      if (data.length === 0) {
+        return [];
+      }
+      const defaultDeliveryAddressId = await getDefaultDeliveryAddressId();
+      let result = data.map(deliveryDto => {
+        const isDefault = deliveryDto.id === defaultDeliveryAddressId;
+        console.log(`Comparing: ${deliveryDto.id} === ${defaultDeliveryAddressId}, result: ${isDefault}`);
+        return {
+            ...deliveryDto,
+            type: isDefault ? "default" : undefined
+        };
+    });
+      console.log("result ", result);
+      return result;
     } catch (error) {
       console.error('Error fetching deliveries:', error);
       return [];
     }
   }
 
-async function deleteDeliveryAddress(addressId: number): Promise<ApiResponse> {
+async function deleteDeliveryAddress(addressId: number): Promise<Response> {
     const session = await getServerSession(options);
     if (!session || !session.user) {
         throw new Error("User is not authenticated");
@@ -70,7 +87,7 @@ async function deleteDeliveryAddress(addressId: number): Promise<ApiResponse> {
 
     const token = session.user.accessToken;
     const response = await fetch(`${process.env.BASE_API_URL}/shipping/delete/`, {
-        method: 'DELETE',
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -85,7 +102,7 @@ async function deleteDeliveryAddress(addressId: number): Promise<ApiResponse> {
     return response.json();
 }
 
-async function addDeliveryAddress(delivery: DeliveryDto): Promise<ApiResponse> {
+async function addDeliveryAddress(delivery: DeliveryDto): Promise<Response> {
     const session = await getServerSession(options);
     if (!session || !session.user) {
         throw new Error("User is not authenticated");
@@ -109,7 +126,7 @@ async function addDeliveryAddress(delivery: DeliveryDto): Promise<ApiResponse> {
 }
 
 // update delivery address
-async function updateDeliveryAddress(delivery: UpdateDeliveryAddressRequest): Promise<ApiResponse> {
+async function updateDeliveryAddress(delivery: UpdateDeliveryAddressRequest): Promise<Response> {
     const session = await getServerSession(options);
     if (!session || !session.user) {
         throw new Error("User is not authenticated");
@@ -134,7 +151,7 @@ async function updateDeliveryAddress(delivery: UpdateDeliveryAddressRequest): Pr
 
 // set default delivery address
 
-async function setDefaultDeliveryAddress(addressId: number): Promise<ApiResponse> {
+async function setDefaultDeliveryAddress(addressId: number): Promise<Response> {
     const session = await getServerSession(options);
     if (!session || !session.user) {
         throw new Error("User is not authenticated");
@@ -158,16 +175,42 @@ async function setDefaultDeliveryAddress(addressId: number): Promise<ApiResponse
 }
 
 // get default delivery address
-async function getDefaultDeliveryAddress(): Promise<Delivery> {
+async function getDetailDeliveryAddress(deliveryId: number): Promise<DeliveryDto> {
     const session = await getServerSession(options);
     if (!session || !session.user) {
         throw new Error("User is not authenticated");
     }
 
     const token = session.user.accessToken;
-    const response = await fetch(`${process.env.BASE_API_URL}/shipping/get-default`, {  
+    const response = await fetch(`${process.env.BASE_API_URL}/shipping/get-detail`, {  
         method: 'POST',
         headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ shippingAddressID: deliveryId })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to get detail delivery address: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.result; 
+}
+
+// get Default Delivery Address's Id
+async function getDefaultDeliveryAddressId(): Promise<number> {
+    const session = await getServerSession(options);
+    if (!session || !session.user) {
+        throw new Error("User is not authenticated");
+    }
+
+    const token = session.user.accessToken;
+    const response = await fetch(`${process.env.BASE_API_URL}/shipping/default-id`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
     });
@@ -177,10 +220,10 @@ async function getDefaultDeliveryAddress(): Promise<Delivery> {
     }
 
     const data = await response.json();
-    return data.result; 
-}
+    return data.result.shippingDefaultID;
+}   
 
 
 export default fetchDeliveries;
-export { deleteDeliveryAddress, addDeliveryAddress, updateDeliveryAddress, setDefaultDeliveryAddress, getDefaultDeliveryAddress };
+export { deleteDeliveryAddress, addDeliveryAddress, updateDeliveryAddress, setDefaultDeliveryAddress, getDetailDeliveryAddress };
 
