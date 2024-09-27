@@ -6,7 +6,10 @@ import { updateDeliveryAddress } from "@/action/deliveryAction";
 import { UpdateDeliveryAddressRequest } from "@/types/updateDeliveryAddressRequest";
 import { DeliveryDto } from "@/types/deliveryDto";
 
-export default function DeliveryAddressUpdate() {
+interface DeliveryAddressUpdateProps {
+	dto: DeliveryDto;
+  }
+export default function DeliveryAddressUpdate({ dto }: DeliveryAddressUpdateProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const [formData, setFormData] = useState<UpdateDeliveryAddressRequest | null>(null);
