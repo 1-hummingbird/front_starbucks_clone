@@ -95,10 +95,6 @@ export interface OrderListType {
       isReviewable: true;
     },
   ];
-
-export interface productThumnailType {
-  productId: number;
-  src: string;
 }
 
 export interface ProductImagesType {
@@ -114,5 +110,4 @@ export interface ProductDetailType {
   isDiscounted: boolean;
   discountRate: number;
   wishCount: number | null;
-
 }

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 
 interface ValuesByBreakpoints<T> {
   xs?: T;
@@ -25,9 +25,9 @@ const useBreakpointValue = <T,>(
     const cb = () => {
       setWidth(window.innerWidth);
     };
-    window.addEventListener("resize", cb);
+    window.addEventListener('resize', cb);
     return () => {
-      window.removeEventListener("resize", cb);
+      window.removeEventListener('resize', cb);
     };
   }, []);
 
@@ -38,7 +38,7 @@ const useBreakpointValue = <T,>(
     else if (width < breakpoints.lg) return values.md;
     else if (width < breakpoints.xl) return values.lg;
     else return values.xl;
-  }, [width, fallback, values.xs, values.xl, values.sm, values.md, values.lg]);
+  }, [width]);
 
   return value ?? fallback;
 };

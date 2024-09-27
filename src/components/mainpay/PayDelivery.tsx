@@ -1,12 +1,8 @@
-import { ShippingAddressType } from "@/types/responseType";
-import { Link } from "lucide-react";
-import React from "react";
+import { ShippingAddressType } from '@/types/responseType';
+import { Link } from 'lucide-react';
+import React from 'react';
 
-const PayDelivery = ({
-  shippingDefaultAddress,
-}: {
-  shippingDefaultAddress: ShippingAddressType;
-}) => {
+const PayDelivery = () => {
   return (
     <>
       <section>

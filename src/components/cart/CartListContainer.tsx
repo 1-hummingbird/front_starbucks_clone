@@ -1,51 +1,48 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { CartListType } from "@/types/responseType";
-import CartListItem from "./CartListItem";
-import { Checkbox } from "../ui/checkbox";
-import { Button } from "../ui/button";
-import CartPay from "./CartPay";
-import { CreditCard, Gift } from "lucide-react";
-import Link from "next/link";
+import React, { useState } from 'react';
+import { CartListType } from '@/types/responseType';
+import CartListItem from './CartListItem';
+import { Checkbox } from '../ui/checkbox';
+import { Button } from '../ui/button';
+import CartPay from './CartPay';
+import { CreditCard, Gift } from 'lucide-react';
+import Link from 'next/link';
 
 function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
-  const [selectedItems, setSelectedItems] = useState<number[]>([]); // Selected cart item ids
-  const [cartItems, setCartItems] = useState<number[]>(cartDatas.cartIds); // Cart item ids
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [cartItems, setCartItems] = useState<number[]>(cartDatas.cartIds);
 
-  const [selectAll, setSelectAll] = useState(false); // Track "전체선택" checkbox state
+  const [selectAll, setSelectAll] = useState(false);
 
-  // Toggle individual item selection
+  //
   const handleSelectItem = (id: number) => {
-    setSelectedItems(
-      (prevSelected) =>
-        prevSelected.includes(id)
-          ? prevSelected.filter((item) => item !== id) // Deselect if already selected
-          : [...prevSelected, id], // Add to selected items
+    setSelectedItems((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((item) => item !== id)
+        : [...prevSelected, id],
     );
   };
 
-  // Toggle "전체선택" checkbox
+  // Toggle "전체선택"
   const handleSelectAll = () => {
     if (selectAll) {
-      // Deselect all items
       setSelectedItems([]);
     } else {
-      // Select all items
       setSelectedItems(cartItems);
     }
     setSelectAll(!selectAll);
   };
 
-  // Handle 전체삭제 (delete all items)
+  // 전체삭제
   const handleDeleteAll = () => {
     setCartItems([]);
     setSelectedItems([]);
     setSelectAll(false);
-    console.log("All items deleted");
+    console.log('All items deleted');
   };
 
-  // Handle 선택삭제 (delete selected items)
+  // 선택삭제
   const handleDeleteSelected = () => {
     const remainingItems = cartItems.filter(
       (item) => !selectedItems.includes(item),
@@ -53,14 +50,13 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
     setCartItems(remainingItems);
     setSelectedItems([]);
     setSelectAll(false);
-    console.log("Selected items deleted:", selectedItems);
+    console.log('Selected items deleted:', selectedItems);
   };
 
-  // Update "전체선택" based on individual selections
+  // "전체선택"
   const allItemsSelected =
     cartItems.length > 0 && selectedItems.length === cartItems.length;
 
-  // If all individual items are selected, check "전체선택", otherwise uncheck it
   if (selectAll !== allItemsSelected) {
     setSelectAll(allItemsSelected);
   }
@@ -82,7 +78,7 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
           </li>
           <li>
             <Button
-              variant={"ghost"}
+              variant={'ghost'}
               className="text-xs font-semibold text-starbucks"
               onClick={handleDeleteSelected}
               disabled={selectedItems.length === 0}
@@ -91,7 +87,7 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
             </Button>
             <span className="px-1 text-[0.7rem] opacity-20">|</span>
             <Button
-              variant={"ghost"}
+              variant={'ghost'}
               className="text-xs"
               onClick={handleDeleteAll}
               disabled={cartItems.length === 0}
@@ -146,7 +142,7 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
             </p>
           </button>
 
-          <Link href={"/pay"}>
+          <Link href={'/pay'}>
             <button className="h-10 w-36 rounded-3xl border-2 border-solid bg-[#00A862] px-6 text-white">
               <p className="flex items-center gap-1">
                 <CreditCard size={16} />
