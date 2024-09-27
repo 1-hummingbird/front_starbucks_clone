@@ -6,7 +6,8 @@ import { Button } from "../ui/button";
 import CartPay from "./CartPay";
 import { getCartItemData } from "@/action/cartDataFetch";
 import Cart from "../icons/header/Cart";
-import { Gift } from "lucide-react";
+import { CreditCard, Gift } from "lucide-react";
+import Link from "next/link";
 
 function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
   console.log("container", cartDatas);
@@ -18,7 +19,7 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
           <li className="flex items-center justify-start gap-2">
             <Checkbox
               id="cartAll"
-              className="data-[state=checked]:bg-starbucks border-starbucks h-[20px] w-[20px]"
+              className="h-[20px] w-[20px] border-starbucks data-[state=checked]:bg-starbucks"
             />
             <label htmlFor="cartAll" className="text-[0.8rem]">
               전체선택
@@ -27,7 +28,7 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
           <li>
             <Button
               variant={"ghost"}
-              className="text-starbucks text-xs font-semibold"
+              className="text-xs font-semibold text-starbucks"
             >
               선택삭제
             </Button>
@@ -58,12 +59,12 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
         </span>
       </div>
 
-      <div className="fixed bottom-0 left-0 z-20 w-full bg-white shadow-[0_-5px_10px_-5px_rgba(0,0,0,0.1)]">
+      <div className="fixed bottom-0 left-0 z-20 w-full bg-white shadow-[0_-5px_15px_-5px_rgba(0,0,0,0.1)]">
         <div>
           <ul className="flex items-center justify-between px-16 py-2">
             <li className="text-sm font-bold">
               <span className="flex">
-                총<p className="text-[#04A663]">1</p>건
+                총<p className="text-[#04A663]"></p>건
               </span>
             </li>
             <li className="text-base font-bold">원</li>
@@ -72,13 +73,19 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
 
         <div className="flex justify-center gap-4 pb-6">
           <button className="text-[#1DA16C ] w-34 h-8 rounded-3xl border-2 border-solid border-green-400 px-6">
-            <p className="flex items-center">
+            <p className="flex items-center gap-1">
               <Gift size={16} color="#179961" /> 선물하기
             </p>
           </button>
-          <button className="rounded-3xl border-2 border-solid border-green-800 bg-[#00A862] px-6 text-white">
-            <p className="">구매하기</p>
-          </button>
+
+          <Link href={"/pay"}>
+            <button className="w-34 h-8 rounded-3xl border-2 border-solid bg-[#00A862] px-6 text-white">
+              <p className="flex items-center gap-1">
+                <CreditCard size={16} />
+                구매하기
+              </p>
+            </button>
+          </Link>
         </div>
       </div>
     </section>

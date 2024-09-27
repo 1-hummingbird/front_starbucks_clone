@@ -1,34 +1,39 @@
+import { ShippingAddressType } from "@/types/responseType";
+import { Link } from "lucide-react";
 import React from "react";
 
-const data = {
-  id: 1,
-  name: "홍길동",
-  star: "집",
-  address: "경남 김해시 장유로 000번지 000동 000호",
-  type: "기본",
-  number: "010-0000-0000",
-};
-
-const PayDelivery = () => {
+const PayDelivery = ({
+  shippingDefaultAddress,
+}: {
+  shippingDefaultAddress: ShippingAddressType;
+}) => {
   return (
     <>
-      <h1 className="ml-7 pt-5 text-2xl font-bold">결제하기 </h1>
-      <div key={data.id} className="ml-8 py-5">
-        <ul className="flex justify-between">
-          <div className="flex gap-2">
-            <li className="font-bold">{data.name}</li>
-            <li className="font-bold">({data.star})</li>
-            {data.type && (
-              <li className="text-xs italic text-green-500">{data.type}</li>
-            )}
-          </div>
-          <button className="mr-10 rounded-xl border-2 px-1 text-slate-400">
-            변경
-          </button>
-        </ul>
-        <p className="pt-1">{data.address}</p>
-        <p className="py-3">{data.number}</p>
-      </div>
+      <section>
+        <div className="ml-8 pb-5 pt-16">
+          <ul className="flex items-center justify-between">
+            <div className="flex items-center justify-center gap-2">
+              <li className="font-bold">{shippingDefaultAddress.name}</li>
+              <li className="text-sm font-bold">
+                {`(${shippingDefaultAddress.addressNickname})`}
+              </li>
+              <li className="flex items-center justify-center bg-[#deefe9] px-[4px] py-[2px] text-[0.6rem] text-[#33b881]">
+                기본
+              </li>
+            </div>
+            <div>
+              <button className="mr-10 rounded-xl border-2 px-1 text-slate-400">
+                변경
+              </button>
+            </div>
+          </ul>
+          <p className="py-2 text-sm">{shippingDefaultAddress.address}</p>
+          <ul>
+            <li>{shippingDefaultAddress.phone}</li>
+            <li>{shippingDefaultAddress.memo}</li>
+          </ul>
+        </div>
+      </section>
       <hr className="border-border-solid z-20 mx-6 border-t-[1px] border-t-slate-400" />
     </>
   );

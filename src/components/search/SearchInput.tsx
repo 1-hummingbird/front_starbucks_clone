@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import LeftArrow from "../icons/LeftArrow";
 
 function SearchInput() {
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 입력 상태
@@ -38,15 +39,16 @@ function SearchInput() {
 
   return (
     <>
-      <div>
+      <div className="mx-2 flex items-center py-1">
+        <LeftArrow />
         <input
-          className="m-2 w-[320px] rounded-lg bg-slate-100 p-2"
+          className="m-2 w-[250px] rounded-lg bg-slate-100 p-2"
           type="text"
           placeholder="검색어를 입력해주세요."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <button className="text-lg" onClick={handleSearch}>
+        <button className="text-base" onClick={handleSearch}>
           검색
         </button>
       </div>
@@ -55,17 +57,22 @@ function SearchInput() {
 
       {/* 최근 검색어 리스트 */}
       {recentSearches.length > 0 ? (
-        recentSearches.map((term, index) => (
-          <div key={index} className="flex w-1/2 justify-between px-5 py-2">
-            <div className="font-bold">{term}</div>
+        <div className="grid grid-cols-2 gap-4 px-5">
+          {recentSearches.map((term, index) => (
             <div
-              className="cursor-pointer"
-              onClick={() => handleDeleteSearch(term)}
+              key={index}
+              className="flex justify-between rounded-lg border border-slate-200 p-2"
             >
-              X
+              <div className="font-bold">{term}</div>
+              <div
+                className="cursor-pointer"
+                onClick={() => handleDeleteSearch(term)}
+              >
+                X
+              </div>
             </div>
-          </div>
-        ))
+          ))}
+        </div>
       ) : (
         <p className="px-5 py-2 text-gray-500">최근 검색어가 없습니다.</p>
       )}

@@ -2,6 +2,8 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import SignOut from "../SignOut";
+import { KeyRound } from "lucide-react";
+import { Button } from "../ui/button";
 
 function ServiceList() {
   return (
@@ -131,6 +133,18 @@ function ServiceList() {
               alt="이용동의"
             />
             <span>배송지 정보 수집 및 이용 동의</span>
+          </div>
+          <Image
+            width={32}
+            height={32}
+            src="https://img.icons8.com/?size=100&id=15812&format=png&color=000000"
+            alt="화살표"
+          />
+        </li>
+        <li className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <KeyRound size={28} />
+            <p className="">카카오 로그인</p>
           </div>
           <Image
             width={32}

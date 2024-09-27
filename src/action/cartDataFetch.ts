@@ -21,7 +21,7 @@ export const getShippingDefaultAddress =
     }
 
     const res = await fetch(
-      `${process.env.BASE_API_URL}/shipping/get-default`,
+      `${process.env.BASE_API_URL}/shipping/set-default`,
       {
         method: "POST",
         headers: {
@@ -128,32 +128,3 @@ export const getCartProductImageData = async (
   const data = (await res.json()) as CommonResType<ImageByCartIdType>;
   return data.result;
 };
-
-// 예시: action/cartDataFetch.ts
-// export const updateCartQuantityApi = async (
-//   cartItemId: number,
-//   quantity: number,
-// ) => {
-//   try {
-//     const response = await fetch(
-//       `${process.env.BASE_API_URL}/cart/update-quantity`,
-//       {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//           body: JSON.stringify({}),
-//         },
-//         body: JSON.stringify({ quantity }),
-//       },
-//     );
-
-//     if (!response.ok) {
-//       throw new Error("Failed to update cart quantity");
-//     }
-
-//     return await response.json();
-//   } catch (error) {
-//     console.error("Error updating cart quantity:", error);
-//     throw error;
-//   }
-// };

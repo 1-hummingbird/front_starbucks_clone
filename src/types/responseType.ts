@@ -64,3 +64,11 @@ export interface ImageByCartIdType {
   cartId: number;
   productImg: string;
 }
+
+export interface PayItemType {
+  id: 0;
+  name: "string";
+  price: 0;
+  discountRate: 0;
+  isInputOption: true;
+}
