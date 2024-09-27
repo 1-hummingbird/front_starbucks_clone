@@ -17,7 +17,7 @@ const breakpoints = {
 
 const useBreakpointValue = <T,>(
   values: ValuesByBreakpoints<T>,
-  fallback?: T
+  fallback?: T,
 ) => {
   const [width, setWidth] = useState(-1);
 
@@ -38,7 +38,7 @@ const useBreakpointValue = <T,>(
     else if (width < breakpoints.lg) return values.md;
     else if (width < breakpoints.xl) return values.lg;
     else return values.xl;
-  }, [width]);
+  }, [width, fallback, values.xs, values.xl, values.sm, values.md, values.lg]);
 
   return value ?? fallback;
 };
