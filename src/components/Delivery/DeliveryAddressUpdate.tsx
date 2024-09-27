@@ -1,46 +1,44 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter } from 'next/router'; // Import useRouter
-import { addDeliveryAddress } from "@/action/deliveryAction";
-import { DeliveryDto } from "@/types/deliveryDto";
-import { AddDeliveryRequest } from "@/types/addDeliveryRequest";
+import { useRouter } from 'next/navigation';  // Change this import
+import { updateDeliveryAddress } from "@/action/deliveryAction";
+import { UpdateDeliveryAddressRequest } from "@/types/updateDeliveryAddressRequest";
 
-function DeliverySubAddress() {
-  const [formData, setFormData] = useState<DeliveryDto>({
+export default function DeliveryAddressUpdate({ shippingAddressID }: { shippingAddressID: number }) {
+  const router = useRouter();
+  const [formData, setFormData] = useState<UpdateDeliveryAddressRequest>({
+    shippingAddressID: shippingAddressID,
     addressNickname: "",
     name: "",
     address: "",
     phone: "",
     memo: "",
-    type: undefined,
-    id: 0
-});
-
-  const router = useRouter(); // Initialize useRouter
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: value,
+    const { name, value, type } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value,
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await addDeliveryAddress(formData as DeliveryDto);
-      router.push('/delivery'); // Use router.push instead of redirect
+      await updateDeliveryAddress(formData);
+      router.push('/delivery');
     } catch (error) {
-      console.error('Error adding delivery address:', error);
+      console.error('Failed to update delivery address:', error);
+      alert('Failed to update delivery address. Please try again.');
     }
   };
 
   return (
     <div className="container">
       <div>
-        <p className="m-1.5 p-3.5 text-5xl">배송지 정보</p>
+        <p className="m-1.5 p-3.5 text-5xl">배송지 정보 수정</p>
       </div>
 
       <div className="m-1.5 p-4">
@@ -114,16 +112,9 @@ function DeliverySubAddress() {
             />
           </div>
 
-          <div className="py-3">
-              <input type="checkbox" />
-              기본 배송지로 저장합니다.
-            </div>
-
-          <button type="submit" className="mt-4 p-2 bg-blue-500 text-white">추가</button>
+          <button type="submit" className="mt-4 p-2 bg-blue-500 text-white">수정</button>
         </form>
       </div>
     </div>
   );
 }
-
-export default DeliverySubAddress;

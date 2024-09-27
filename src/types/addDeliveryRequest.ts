@@ -4,5 +4,5 @@ export interface AddDeliveryRequest {
     address: string;
     memo: string;
     phone: string;
-    isDefault: boolean;
+    willDefault: boolean;
   }

@@ -60,12 +60,12 @@ const DeliveryClientComponent: React.FC<DeliveryClientComponentProps> = ({ deliv
             </div>
             <div>
               <button>
-                <Link
-                  href="/delivery/updateDelivery"
-                  className="px-2 text-xs text-slate-300"
-                >
-                  수정
-                </Link>
+              <Link
+                href={`/delivery/updateDelivery?id=${deliveryDto.id}`}
+                className="px-2 text-xs text-slate-300"
+              >
+                수정
+              </Link>
               </button>
               <button
                 className="px-2 text-xs text-slate-300"

@@ -1,12 +1,13 @@
 import DeliveryHeader from "@/components/Delivery/DeliveryHeader";
-import DeliverySubAddress from "@/components/Delivery/DeliverySubAddress";
+import DeliveryAddressUpdate from "@/components/Delivery/DeliveryAddressUpdate";
 import React from "react";
 
-function page() {
+function page({ searchParams }: { searchParams: { id: number } }) {
+  const shippingAddressID = searchParams.id;
   return (
     <>
       <DeliveryHeader />
-      <DeliverySubAddress />
+      <DeliveryAddressUpdate shippingAddressID={shippingAddressID} />
     </>
   );
 }

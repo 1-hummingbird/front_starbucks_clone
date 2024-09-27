@@ -1,6 +1,7 @@
 "use server";
 import { AddDeliveryRequest } from "@/types/addDeliveryRequest";
 import { DeliveryDto } from "@/types/deliveryDto";
+import { UpdateDeliveryAddressRequest } from "@/types/updateDeliveryAddressRequest";
 import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options"; // Adjust this import path as needed
 
@@ -8,17 +9,6 @@ interface Deliveries {
   result: DeliveryDto[];
 }
 
-
-
-// Define the interface for the update delivery address request payload
-interface UpdateDeliveryAddressRequest {
-    shippingAddressID: number;
-    addressNickname?: string;
-    name?: string;
-    address?: string;
-    phone?: string;
-    memo?: string;
-}
 
 async function fetchDeliveries(): Promise<DeliveryDto[]> {
     try {
@@ -65,14 +55,12 @@ async function fetchDeliveries(): Promise<DeliveryDto[]> {
       const defaultDeliveryAddressId = await getDefaultDeliveryAddressId();
       let result = data.map(deliveryDto => {
         const isDefault = deliveryDto.id === defaultDeliveryAddressId;
-        console.log(`Comparing: ${deliveryDto.id} === ${defaultDeliveryAddressId}, result: ${isDefault}`);
         return {
             ...deliveryDto,
             type: isDefault ? "default" : undefined
         };
-    });
-      console.log("result ", result);
-      return result;
+        });
+        return result;
     } catch (error) {
       console.error('Error fetching deliveries:', error);
       return [];
@@ -102,7 +90,7 @@ async function deleteDeliveryAddress(addressId: number): Promise<Response> {
     return response.json();
 }
 
-async function addDeliveryAddress(delivery: DeliveryDto): Promise<Response> {
+async function addDeliveryAddress(delivery: AddDeliveryRequest): Promise<Response> {
     const session = await getServerSession(options);
     if (!session || !session.user) {
         throw new Error("User is not authenticated");
