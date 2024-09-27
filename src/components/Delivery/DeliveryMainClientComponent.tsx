@@ -13,8 +13,6 @@ const DeliveryClientComponent: React.FC<DeliveryClientComponentProps> = ({ deliv
   const handleDelete = async (deliveryId: number) => {
     try {
       await deleteDeliveryAddress(deliveryId);
-      // You might want to refresh the data here or update the local state
-      // For now, we'll just reload the page
       window.location.reload();
     } catch (error) {
       console.error('Failed to delete delivery address:', error);
@@ -29,7 +27,7 @@ const DeliveryClientComponent: React.FC<DeliveryClientComponentProps> = ({ deliv
       console.error('Failed to set default delivery address:', error);
     }
   };
-  // Sort deliveries with the default address first
+
   const sortedDeliveries = useMemo(() => {
     return [...deliveries].sort((a, b) => {
       if (a.type === "default") return -1;
@@ -46,11 +44,19 @@ const DeliveryClientComponent: React.FC<DeliveryClientComponentProps> = ({ deliv
             <div className="flex gap-2">
               <li className="font-bold">{deliveryDto.name}</li>
               <li className="font-bold">({deliveryDto.addressNickname})</li>
-              {deliveryDto.type === "default" && (
+              {(deliveryDto.type === "default" && (
                 <li className="text-xs italic text-green-500">
                   "기본"
                 </li>
-              )}
+              ))}
+              {(deliveryDto.type != "default" && (
+                <button
+                  className="px-2 text-xs text-slate-300"
+                  onClick={() => handleSetDefault(deliveryDto.id)}
+                >
+                  기본배송지로
+                </button>
+              ))}
             </div>
             <div>
               <button>

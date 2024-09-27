@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from 'next/router'; // Import useRouter
 import { addDeliveryAddress } from "@/action/deliveryAction";
 import { DeliveryDto } from "@/types/deliveryDto";
+import { AddDeliveryRequest } from "@/types/addDeliveryRequest";
 
 function DeliverySubAddress() {
   const [formData, setFormData] = useState<DeliveryDto>({
@@ -12,7 +13,9 @@ function DeliverySubAddress() {
     address: "",
     phone: "",
     memo: "",
-  });
+    type: undefined,
+    id: 0
+});
 
   const router = useRouter(); // Initialize useRouter
 
@@ -110,6 +113,11 @@ function DeliverySubAddress() {
               value={formData.memo}
             />
           </div>
+
+          <div className="py-3">
+              <input type="checkbox" />
+              기본 배송지로 저장합니다.
+            </div>
 
           <button type="submit" className="mt-4 p-2 bg-blue-500 text-white">추가</button>
         </form>

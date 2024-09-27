@@ -1,5 +1,5 @@
 "use server";
-import { Delivery } from "@/types/delivery";
+import { AddDeliveryRequest } from "@/types/addDeliveryRequest";
 import { DeliveryDto } from "@/types/deliveryDto";
 import { getServerSession } from "next-auth/next";
 import { options } from "@/app/api/auth/[...nextauth]/options"; // Adjust this import path as needed

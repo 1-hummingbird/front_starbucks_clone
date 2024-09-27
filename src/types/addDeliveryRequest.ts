@@ -1,10 +1,8 @@
-export interface Delivery {
-    id: number;
+export interface AddDeliveryRequest {
     addressNickname: string;
     name: string;
     address: string;
-    memberUID: string;
     memo: string;
     phone: string;
-    type?: string;
+    isDefault: boolean;
   }
