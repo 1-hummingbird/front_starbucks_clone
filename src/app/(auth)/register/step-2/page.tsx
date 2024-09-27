@@ -1,9 +1,10 @@
-import StepIndicator from '@/components/pages/register/StepIndicator';
-import RegisterForm from '@/components/pages/register/RegisterForm';
-import { routes } from '@/config/routes';
-import { RegisterFormType } from '@/types/auth';
+import { RegisterFormType, RegisterValues } from '@/types/auth';
 
-const formType: RegisterFormType[] = [
+import StepIndicator from '@/components/pages/register/StepIndicator';
+import StepTwoForm from '@/components/pages/register/StepTwoForm';
+import { routes } from '@/config/routes';
+
+const formType: RegisterFormType<RegisterValues>[] = [
   {
     id: 1,
     name: 'loginID',
@@ -31,10 +32,11 @@ const page = () => {
   return (
     <main>
       <StepIndicator currentStep={2} totalSteps={3} />
-      <RegisterForm
-        formType={formType}
+      <StepTwoForm
+        formTypes={formType}
         route={routes.signup_step3}
         hasNext={true}
+        availableType={'checkLoginID'}
       />
     </main>
   );

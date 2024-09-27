@@ -1,7 +1,12 @@
-import { componentList } from "@/datas/initial/mainComponentList";
-import { Suspense } from "react";
+import { Suspense } from 'react';
+import { componentList } from '@/datas/initial/mainComponentList';
+import { getServerSession } from 'next-auth/next';
+import { options } from '../api/auth/[...nextauth]/options';
 
-export default function Page() {
+export default async function Page() {
+  const session = await getServerSession(options);
+  console.log(session);
+
   return (
     <main className="min-h-screen w-full">
       <ul>

@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState, useEffect } from "react";
 import LeftArrow from "../icons/LeftArrow";
@@ -39,6 +40,7 @@ function SearchInput() {
 
   return (
     <>
+
       <div className="mx-2 flex items-center py-1">
         <LeftArrow />
         <input
@@ -48,12 +50,14 @@ function SearchInput() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+
         <button className="text-base" onClick={handleSearch}>
           검색
         </button>
       </div>
 
       <h3 className="p-5 text-gray-500">최근 검색어</h3>
+
 
       {/* 최근 검색어 리스트 */}
       {recentSearches.length > 0 ? (

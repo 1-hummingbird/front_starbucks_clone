@@ -1,13 +1,17 @@
 'use client';
-import { User } from '@/types/requestType';
-import { signIn, signOut } from 'next-auth/react';
-import Image from 'next/image';
-import { useTransition } from 'react';
-import { useForm } from 'react-hook-form';
+
 import { Button } from '../ui/button';
+import Image from 'next/image';
 import Input from '../ui/input';
+import Link from 'next/link';
+import { User } from '@/types/requestType';
+import { signIn } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import { useToast } from '@/hooks/use-toast';
+import { useTransition } from 'react';
 
 const SignInForm = () => {
+  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
   const {
     register,
@@ -27,12 +31,12 @@ const SignInForm = () => {
   };
 
   return (
-    <section className="flex h-[300px] w-5/6 flex-col justify-center">
+    <section className="flex h-full w-5/6 flex-col justify-center">
       <Image
-        src={'https://drive.google.com/uc?id=1iHH_Xlvk6b3zAQn-nwaUiLWgsxXfzr8I'}
+        src={'https://drive.google.com/uc?id=1PVPlrCLtSsnBdBG8mb0vKhBQj7L04llO'}
         alt="logo"
-        width={250}
-        height={250}
+        width={300}
+        height={300}
         className="mx-auto mt-20"
         priority
       />
@@ -65,14 +69,22 @@ const SignInForm = () => {
         <Button className="custom-button w-full" type="submit">
           <p className="text-lg">로그인</p>
         </Button>
-        <Button className="custom-button custom-button-kakao" type="button">
+        <Button
+          className="custom-button custom-button-kakao"
+          type="button"
+          onClick={() => {
+            signIn('kakao');
+          }}
+        >
           <p className="text-lg">카카오 로그인</p>
         </Button>
       </form>
       <div className="mt-10 flex justify-center gap-6">
         <p>아이디 찾기</p>
         <p>비밀번호 찾기</p>
-        <p>회원가입</p>
+        <Link href="/register">
+          <p>회원가입</p>
+        </Link>
       </div>
     </section>
   );
