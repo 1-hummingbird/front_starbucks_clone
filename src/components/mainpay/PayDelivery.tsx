@@ -13,9 +13,9 @@ const PayDelivery = ({
         <div className="ml-8 pb-5 pt-16">
           <ul className="flex items-center justify-between">
             <div className="flex items-center justify-center gap-2">
-              <li className="font-bold">{shippingDefaultAddress.name}</li>
+              {/* <li className="font-bold">{shippingDefaultAddress.name}</li> */}
               <li className="text-sm font-bold">
-                {`(${shippingDefaultAddress.addressNickname})`}
+                {/* {`(${shippingDefaultAddress.addressNickname})`} */}
               </li>
               <li className="flex items-center justify-center bg-[#deefe9] px-[4px] py-[2px] text-[0.6rem] text-[#33b881]">
                 기본
@@ -27,10 +27,10 @@ const PayDelivery = ({
               </button>
             </div>
           </ul>
-          <p className="py-2 text-sm">{shippingDefaultAddress.address}</p>
+          {/* <p className="py-2 text-sm">{shippingDefaultAddress.address}</p> */}
           <ul>
-            <li>{shippingDefaultAddress.phone}</li>
-            <li>{shippingDefaultAddress.memo}</li>
+            {/* <li>{shippingDefaultAddress.phone}</li> */}
+            {/* <li>{shippingDefaultAddress.memo}</li> */}
           </ul>
         </div>
       </section>

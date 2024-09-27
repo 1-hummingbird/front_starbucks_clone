@@ -72,3 +72,7 @@ export interface PayItemType {
   discountRate: 0;
   isInputOption: true;
 }
+
+export interface ShippingDefaultIDType {
+  shippingDefaultID: number;
+}

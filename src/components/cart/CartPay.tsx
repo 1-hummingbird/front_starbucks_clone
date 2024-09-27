@@ -1,5 +1,6 @@
-import { CartListType } from "@/types/responseType";
-import React from "react";
+"use client";
+import { CartItemType, CartListType } from "@/types/responseType";
+import React, { useState } from "react";
 
 function CartPay() {
   return (

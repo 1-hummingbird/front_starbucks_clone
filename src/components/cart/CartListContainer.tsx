@@ -1,16 +1,69 @@
-import { CartItemType, CartListType } from "@/types/responseType";
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
+import { CartListType } from "@/types/responseType";
 import CartListItem from "./CartListItem";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
 import CartPay from "./CartPay";
-import { getCartItemData } from "@/action/cartDataFetch";
-import Cart from "../icons/header/Cart";
 import { CreditCard, Gift } from "lucide-react";
 import Link from "next/link";
 
 function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
-  console.log("container", cartDatas);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]); // Selected cart item ids
+  const [cartItems, setCartItems] = useState<number[]>(cartDatas.cartIds); // Cart item ids
+
+  const [selectAll, setSelectAll] = useState(false); // Track "전체선택" checkbox state
+
+  // Toggle individual item selection
+  const handleSelectItem = (id: number) => {
+    setSelectedItems(
+      (prevSelected) =>
+        prevSelected.includes(id)
+          ? prevSelected.filter((item) => item !== id) // Deselect if already selected
+          : [...prevSelected, id], // Add to selected items
+    );
+  };
+
+  // Toggle "전체선택" checkbox
+  const handleSelectAll = () => {
+    if (selectAll) {
+      // Deselect all items
+      setSelectedItems([]);
+    } else {
+      // Select all items
+      setSelectedItems(cartItems);
+    }
+    setSelectAll(!selectAll);
+  };
+
+  // Handle 전체삭제 (delete all items)
+  const handleDeleteAll = () => {
+    setCartItems([]);
+    setSelectedItems([]);
+    setSelectAll(false);
+    console.log("All items deleted");
+  };
+
+  // Handle 선택삭제 (delete selected items)
+  const handleDeleteSelected = () => {
+    const remainingItems = cartItems.filter(
+      (item) => !selectedItems.includes(item),
+    );
+    setCartItems(remainingItems);
+    setSelectedItems([]);
+    setSelectAll(false);
+    console.log("Selected items deleted:", selectedItems);
+  };
+
+  // Update "전체선택" based on individual selections
+  const allItemsSelected =
+    cartItems.length > 0 && selectedItems.length === cartItems.length;
+
+  // If all individual items are selected, check "전체선택", otherwise uncheck it
+  if (selectAll !== allItemsSelected) {
+    setSelectAll(allItemsSelected);
+  }
 
   return (
     <section className="w-full">
@@ -19,6 +72,8 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
           <li className="flex items-center justify-start gap-2">
             <Checkbox
               id="cartAll"
+              checked={selectAll}
+              onCheckedChange={handleSelectAll}
               className="h-[20px] w-[20px] border-starbucks data-[state=checked]:bg-starbucks"
             />
             <label htmlFor="cartAll" className="text-[0.8rem]">
@@ -29,20 +84,33 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
             <Button
               variant={"ghost"}
               className="text-xs font-semibold text-starbucks"
+              onClick={handleDeleteSelected}
+              disabled={selectedItems.length === 0}
             >
               선택삭제
             </Button>
             <span className="px-1 text-[0.7rem] opacity-20">|</span>
-            <Button variant={"ghost"} className="text-xs">
+            <Button
+              variant={"ghost"}
+              className="text-xs"
+              onClick={handleDeleteAll}
+              disabled={cartItems.length === 0}
+            >
               전체삭제
             </Button>
           </li>
         </ul>
       </nav>
-      {cartDatas.cartIds.length > 0 ? (
+
+      {cartItems.length > 0 ? (
         <ul className="py-[2rem]">
-          {cartDatas.cartIds.map((cartItem) => (
-            <CartListItem key={cartItem} cartItem={cartItem} />
+          {cartItems.map((cartItem) => (
+            <CartListItem
+              key={cartItem}
+              cartItem={cartItem}
+              isSelected={selectedItems.includes(cartItem)}
+              onSelect={() => handleSelectItem(cartItem)}
+            />
           ))}
         </ul>
       ) : (
@@ -62,24 +130,24 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
       <div className="fixed bottom-0 left-0 z-20 w-full bg-white shadow-[0_-5px_15px_-5px_rgba(0,0,0,0.1)]">
         <div>
           <ul className="flex items-center justify-between px-16 py-2">
-            <li className="text-sm font-bold">
+            <li className="text-base font-bold">
               <span className="flex">
-                총<p className="text-[#04A663]"></p>건
+                총<p className="text-[#04A663]">{selectedItems.length}</p>건
               </span>
             </li>
-            <li className="text-base font-bold">원</li>
+            <li className="text-2xl font-bold">원</li>
           </ul>
         </div>
 
         <div className="flex justify-center gap-4 pb-6">
-          <button className="text-[#1DA16C ] w-34 h-8 rounded-3xl border-2 border-solid border-green-400 px-6">
+          <button className="w-34 h-10 rounded-3xl border-2 border-solid border-green-400 px-6 text-[#0DA366]">
             <p className="flex items-center gap-1">
               <Gift size={16} color="#179961" /> 선물하기
             </p>
           </button>
 
           <Link href={"/pay"}>
-            <button className="w-34 h-8 rounded-3xl border-2 border-solid bg-[#00A862] px-6 text-white">
+            <button className="h-10 w-36 rounded-3xl border-2 border-solid bg-[#00A862] px-6 text-white">
               <p className="flex items-center gap-1">
                 <CreditCard size={16} />
                 구매하기

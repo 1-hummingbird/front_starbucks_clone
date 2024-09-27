@@ -1,20 +1,21 @@
-import { ShippingAddressType } from "@/types/responseType";
+import {
+  getDefaultShippingID,
+  getShippingDetailByID,
+} from "@/action/cartDataFetch";
 import Link from "next/link";
 
-const ShippingDefaultAddress = ({
-  shippingDefaultAddress,
-}: {
-  shippingDefaultAddress: ShippingAddressType;
-}) => {
+async function ShippingDefaultAddress() {
+  const shippingDefaultID = await getDefaultShippingID();
+
+  // 가져온 ID로 세부 정보를 요청
+  const shippingDetail = await getShippingDetailByID(shippingDefaultID);
   return (
     <section>
       <div className="bg-[#f7f7f8] px-5 py-5">
         <ul className="flex items-center justify-between">
           <div className="flex items-center justify-center gap-2">
-            <li className="font-bold">{shippingDefaultAddress.name}</li>
-            <li className="text-sm font-bold">
-              {`(${shippingDefaultAddress.addressNickname})`}
-            </li>
+            <li className="font-bold">이름</li>
+            <li className="text-sm font-bold">별칭</li>
             <li className="flex items-center justify-center bg-[#deefe9] px-[4px] py-[2px] text-[0.6rem] text-[#33b881]">
               기본
             </li>
@@ -25,10 +26,10 @@ const ShippingDefaultAddress = ({
             </button>
           </div>
         </ul>
-        <p className="py-2 text-sm">{shippingDefaultAddress.address} </p>
+        <p className="py-2 text-sm">주소 </p>
       </div>
     </section>
   );
-};
+}
 
 export default ShippingDefaultAddress;
