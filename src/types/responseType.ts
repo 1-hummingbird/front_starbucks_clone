@@ -39,9 +39,62 @@ export interface UserDataType {
   email?: string;
 }
 
-export interface productThumnailType {
+// cart
+export interface ShippingAddressType {
+  addressNickname: string;
+  name: string;
+  address: string;
+  memo: string;
+  phone: string;
+}
+
+export interface CartListType {
+  cartIds: number[];
+}
+
+export interface CartItemType {
+  cartId: number;
+  inputData: string;
   productId: number;
-  src: string;
+  productName: string;
+  optionId: number;
+  optionName: string;
+  cartQuantity: number;
+  price: number;
+  discountRate: number;
+}
+
+export interface ImageByCartIdType {
+  cartId: number;
+  productImg: string;
+}
+
+export interface PayItemType {
+  id: 0;
+  name: "string";
+  price: 0;
+  discountRate: 0;
+  isInputOption: true;
+}
+
+export interface ShippingDefaultIDType {
+  shippingDefaultID: number;
+}
+
+export interface OrderListType {
+  purchaseCode: "string";
+  purchaseDate: "2024-09-27T06:26:45.430Z";
+  totalPrice: 0;
+  purchaseItems: [
+    {
+      optionId: 0;
+      productImage: "string";
+      optionName: "string";
+      price: 0;
+      qty: 0;
+      isReviewable: true;
+    },
+  ];
 }
 
 export interface ProductImagesType {

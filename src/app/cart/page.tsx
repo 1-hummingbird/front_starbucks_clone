@@ -1,15 +1,18 @@
-import CartAdress from "@/components/cart/CartAdress";
-import CartHeader from "@/components/cart/CartHeader";
-import CartinFormation from "@/components/cart/CartinFormation";
+import { getCartDatas, getDefaultShippingID } from "@/action/cartDataFetch";
+import CartListContainer from "@/components/cart/CartListContainer";
+import ShippingDefaultAddress from "@/components/cart/ShippingDefaultAddress";
 import React from "react";
 
-function page() {
+async function page() {
+  const [cartDatas] = await Promise.all([getCartDatas()]);
+  console.log(cartDatas);
+
   return (
-    <>
-      <CartHeader />
-      <CartAdress />
-      <CartinFormation />
-    </>
+    <main className="pt-[50px]">
+      <ShippingDefaultAddress />
+      {/* <TabMenus /> */}
+      <CartListContainer cartDatas={cartDatas} />
+    </main>
   );
 }
 

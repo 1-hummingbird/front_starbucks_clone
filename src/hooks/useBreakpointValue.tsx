@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from 'react';
 
 interface ValuesByBreakpoints<T> {
   xs?: T;
@@ -17,7 +17,7 @@ const breakpoints = {
 
 const useBreakpointValue = <T,>(
   values: ValuesByBreakpoints<T>,
-  fallback?: T
+  fallback?: T,
 ) => {
   const [width, setWidth] = useState(-1);
 
@@ -25,9 +25,9 @@ const useBreakpointValue = <T,>(
     const cb = () => {
       setWidth(window.innerWidth);
     };
-    window.addEventListener("resize", cb);
+    window.addEventListener('resize', cb);
     return () => {
-      window.removeEventListener("resize", cb);
+      window.removeEventListener('resize', cb);
     };
   }, []);
 

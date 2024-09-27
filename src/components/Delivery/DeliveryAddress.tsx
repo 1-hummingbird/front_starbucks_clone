@@ -24,6 +24,7 @@ export default function DeliveryAddress() {
     }));
   };
 
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -85,6 +86,7 @@ export default function DeliveryAddress() {
             />
           </div>
 
+
           <div className="form-group w-full mt-4">
             <label htmlFor="phone">연락처</label>
             <br />  
@@ -122,6 +124,7 @@ export default function DeliveryAddress() {
               />
               <label htmlFor="isDefault">기본 배송지로 저장합니다.</label>
             </div>
+
 
           <button type="submit" className="mt-4 p-2 bg-blue-500 text-white">추가</button>
         </form>

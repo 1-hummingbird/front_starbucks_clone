@@ -1,9 +1,9 @@
 import React from "react";
 import Image from "next/image";
 
-function DeliveryHeader() {
+function WishHeader() {
   return (
-    <div>
+    <>
       <div className="border-b-2 border-solid py-3 shadow-md">
         <ul className="flex justify-between px-3">
           <li>
@@ -14,7 +14,7 @@ function DeliveryHeader() {
               alt="왼쪽 화살표"
             ></Image>
           </li>
-          <li className="font-bold">배송지 등록</li>
+          <li className="font-bold">위시 리스트</li>
           <li>
             <Image
               width={25}
@@ -25,8 +25,8 @@ function DeliveryHeader() {
           </li>
         </ul>
       </div>
-    </div>
+    </>
   );
 }
 
-export default DeliveryHeader;
+export default WishHeader;
