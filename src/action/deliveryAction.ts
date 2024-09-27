@@ -74,7 +74,7 @@ async function deleteDeliveryAddress(addressId: number): Promise<Response> {
     }
 
     const token = session.user.accessToken;
-    const response = await fetch(`${process.env.BASE_API_URL}/shipping/delete/`, {
+    const response = await fetch(`${process.env.BASE_API_URL}/shipping/delete`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
