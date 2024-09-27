@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const Logo = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="160"
-      height="160"
+      width="40"
+      height="40"
       version="1.0"
       viewBox="0 0 512 512"
       fill="#006241"

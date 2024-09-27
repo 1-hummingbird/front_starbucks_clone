@@ -6,6 +6,10 @@ export interface CommonResType<T> {
   result: T;
 }
 
+export interface IsValueAvaiable {
+  available: boolean;
+}
+
 export interface ExhibitionCardType {
   backgroundImg: string;
 }
@@ -91,4 +95,24 @@ export interface OrderListType {
       isReviewable: true;
     },
   ];
+
+export interface productThumnailType {
+  productId: number;
+  src: string;
+}
+
+export interface ProductImagesType {
+  url: string;
+  isMainImage?: boolean;
+}
+
+export interface ProductDetailType {
+  name: string;
+  price: number;
+  isNew: boolean;
+  shortDescription: string | null;
+  isDiscounted: boolean;
+  discountRate: number;
+  wishCount: number | null;
+
 }

@@ -1,10 +1,11 @@
-import { NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-import { routes } from "./config/routes";
+import { NextRequest, NextResponse } from 'next/server';
+
+import { getToken } from 'next-auth/jwt';
+import { routes } from './config/routes';
 
 const withAuthList = [routes.cart, routes.mypage];
 const withOutAuthList = [routes.signIn];
-const FALLBACK_URL = "/";
+const FALLBACK_URL = '/';
 
 const withAuth = async (req: NextRequest, token: boolean) => {
   const url = req.nextUrl.clone();
@@ -26,7 +27,7 @@ const withOutAuth = async (
 
   if (token) {
     url.pathname = to ?? FALLBACK_URL;
-    url.search = "";
+    url.search = '';
 
     return NextResponse.redirect(url);
   }
@@ -39,9 +40,8 @@ export const middleware = async (req: NextRequest) => {
   });
 
   const accessToken = token?.accessToken;
-  console.log(accessToken);
   const { searchParams } = req.nextUrl;
-  const callbackUrl = searchParams.get("callbackUrl");
+  const callbackUrl = searchParams.get('callbackUrl');
   const { pathname } = req.nextUrl;
   const isWithAuth = withAuthList.includes(pathname);
   const isWithOutAuth = withOutAuthList.includes(pathname);
@@ -54,5 +54,5 @@ export const middleware = async (req: NextRequest) => {
 };
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|fonts|images).*)"],
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|fonts|images).*)'],
 };
