@@ -18,13 +18,13 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 const StepTwoForm = ({
-  formTypes: formType,
+  formTypes,
   route,
   availableType,
 }: RegisterFormProps) => {
   const { toast } = useToast();
   const router = useRouter();
-  const fieldNames = formType.map((field) => field.name);
+  const fieldNames = formTypes.map((field) => field.name);
 
   const {
     control,
@@ -39,7 +39,7 @@ const StepTwoForm = ({
       transition={{ duration: 0.5 }}
     >
       <section className="mt-20 flex flex-col gap-2 px-8">
-        {formType.map((item) => {
+        {formTypes.map((item) => {
           if (item.name === 'agree') {
             return null;
           }

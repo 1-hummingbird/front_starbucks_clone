@@ -1,15 +1,17 @@
-"use client";
-import { exhibitions } from "@/datas/dummy/exhibitions";
-import { ChevronRight, Pause, Play } from "lucide-react";
-import Image from "next/image";
-import { useRef, useState } from "react";
-import { Autoplay, Keyboard, Pagination } from "swiper/modules";
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+'use client';
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "../../swiperComponent/style.css";
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import '../../swiperComponent/style.css';
+
+import { Autoplay, Keyboard, Pagination } from 'swiper/modules';
+import { ChevronRight, Pause, Play } from 'lucide-react';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { useRef, useState } from 'react';
+
+import Image from 'next/image';
+import { exhibitions } from '@/datas/dummy/exhibitions';
 
 const ExhibitionSlide = () => {
   const swiperRef = useRef<SwiperRef>(null);
@@ -32,9 +34,9 @@ const ExhibitionSlide = () => {
       <Swiper
         ref={swiperRef}
         pagination={{
-          el: ".swiper-pagination",
+          el: '.swiper-pagination',
           clickable: true,
-          type: "fraction",
+          type: 'fraction',
         }}
         autoplay={{
           delay: 4000,
@@ -55,8 +57,8 @@ const ExhibitionSlide = () => {
                 width={0}
                 height={0}
                 sizes="100vh"
-                style={{ width: "100%", height: "auto" }}
-                priority 
+                style={{ width: '100%', height: 'auto' }}
+                priority
               />
             </SwiperSlide>
           );

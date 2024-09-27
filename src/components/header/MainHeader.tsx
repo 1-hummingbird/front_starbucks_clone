@@ -14,7 +14,11 @@ const navs: Nav[] = [
 const Header = () => {
   return (
     <header className="flex h-14 w-full justify-between bg-white">
-      <HomeLogo />
+      {/* h1 태그에 text-size를 0으로 해야함 */}
+      <h1 className="text-[0px]">
+        Starbucks
+        <HomeLogo />
+      </h1>
       <nav>
         <ul className="my-3 mr-3 flex h-8 w-full gap-1">
           <NavList navs={navs} />

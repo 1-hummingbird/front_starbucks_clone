@@ -9,6 +9,7 @@ const NoutFound = () => {
         alt="not-found"
         width={500}
         height={500}
+        priority
       />
     </section>
   );

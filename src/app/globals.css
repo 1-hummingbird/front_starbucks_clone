@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 나눔 고딕 */
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
+
+/* Noto Sans KR */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
 
 body {
   width: 100%;
-  font-family: 'Nanum Gothic', sans-serif;
+  font-family: 'Noto Sans KR', 'Nanum Gothic', sans-serif;
 }
 
 .custom-button {
@@ -49,36 +53,6 @@ body {
 .search-input:focus {
   border-color: #006241;
   outline: none;
-}
-
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-} */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@400;700;800&display=swap');
-
-body {
-  width: 100%;
-  font-family: 'Nanum Gothic', sans-serif;
 }
 
 /* 스크롤바 숨기기 */

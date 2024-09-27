@@ -1,12 +1,24 @@
-import ProductThumnail from '@/components/pages/productDetail/ProductThumnail';
-import React from 'react';
+import { ProductDetailType, ProductImagesType } from '@/types/responseType';
 
-const page = ({ params }: { params: { productId: number } }) => {
+import ProductImages from '@/components/pages/productDetail/ProductImages';
+import ProductTitle from '@/components/pages/productDetail/ProductTitle';
+import { getProductInfo } from '@/action/productActions';
+import { getReviewSummary } from '@/action/reviewActions';
+
+const page = async ({ params }: { params: { productId: number } }) => {
+  const [productImages, productDetail, reviewSummary] = await Promise.all([
+    getProductInfo<ProductImagesType[]>('images', params.productId),
+    getProductInfo<ProductDetailType>('info', params.productId),
+    getReviewSummary(params.productId),
+  ]);
+  console.log('🚀 ~ page ~ productDetail:', productDetail);
+
   return (
     <main>
-      {/* 대표 이미지 이미지*/}
-      <ProductThumnail productId={params.productId} />
+      {/* 상품 이미지 스와이퍼*/}
+      <ProductImages images={productImages} />
       {/* 이름, 가격 */}
+      <ProductTitle {...productDetail} />
       {/* 별점, 리뷰 개수 */}
       {/* 상품 디테일 설명 */}
       {/* 리뷰 */}
