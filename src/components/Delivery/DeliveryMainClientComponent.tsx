@@ -61,7 +61,7 @@ const DeliveryClientComponent: React.FC<DeliveryClientComponentProps> = ({ deliv
             <div>
               <button>
               <Link
-                href={`/delivery/updateDelivery?id=${deliveryDto.id}`}
+                href={`/delivery/updateDelivery?dto=${JSON.stringify(deliveryDto)}`}
                 className="px-2 text-xs text-slate-300"
               >
                 수정
