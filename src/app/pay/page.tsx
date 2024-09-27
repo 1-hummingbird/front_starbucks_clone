@@ -5,24 +5,16 @@ import PayCoupon from "../../components/mainpay/PayCoupon";
 import PayM from "../../components/mainpay/PayM";
 import PaySummation from "../../components/mainpay/PaySummation";
 import PayHeader from "@/components/mainpay/PayHeader";
-import {
-  getCartDatas,
-  getShippingDefaultAddress,
-} from "@/action/cartDataFetch";
+import { getCartDatas } from "@/action/cartDataFetch";
 import { getPayItemDatas } from "@/action/payDataFetch";
 
 async function page() {
-  const [shippingDefaultAddress] = await Promise.all([
-    // getPayItemDatas(),
-    getShippingDefaultAddress(),
-  ]);
-
   console.log(getPayItemDatas);
 
   return (
     <>
       <PayHeader />
-      <PayDelivery shippingDefaultAddress={shippingDefaultAddress} />
+      <PayDelivery />
       <PayPurchase />
       <PayCoupon />
       <PayM />

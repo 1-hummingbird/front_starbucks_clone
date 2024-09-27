@@ -10,6 +10,7 @@ import {
   getCartItemData,
   getCartProductImageData,
 } from "@/action/cartDataFetch";
+import CartPay from "./CartPay";
 
 function CartListItem({
   cartItem,
@@ -27,13 +28,14 @@ function CartListItem({
   );
   const [count, setCount] = useState(0);
   const [isAction, setIsAction] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleCount = (calCulType: string) => {
     if (calCulType === "plus") {
-      setCount(count + 1);
+      setCount((prevCount) => prevCount + 1);
       setIsAction(true);
     } else if (calCulType === "minus" && count > 1) {
-      setCount(count - 1);
+      setCount((prevCount) => prevCount - 1);
       setIsAction(true);
     } else if (calCulType === "minus" && count === 1) {
       toast({
@@ -55,6 +57,12 @@ function CartListItem({
       setCartItemImg(data);
     });
   }, [cartItem]);
+
+  useEffect(() => {
+    if (cartItemData) {
+      setTotalPrice(cartItemData.price * count);
+    }
+  }, [cartItemData, count]);
 
   useEffect(() => {
     if (isAction) {
@@ -104,7 +112,7 @@ function CartListItem({
                   />
                 </div>
                 <p className="text-sm font-extrabold">
-                  {cartItemData.price.toLocaleString()}원
+                  {totalPrice.toLocaleString()}원
                 </p>
               </div>
             </div>

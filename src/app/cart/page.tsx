@@ -1,8 +1,4 @@
-import {
-  getCartDatas,
-  getDefaultShippingID,
-  getShippingDefaultAddress,
-} from "@/action/cartDataFetch";
+import { getCartDatas, getDefaultShippingID } from "@/action/cartDataFetch";
 import CartListContainer from "@/components/cart/CartListContainer";
 import ShippingDefaultAddress from "@/components/cart/ShippingDefaultAddress";
 import React from "react";

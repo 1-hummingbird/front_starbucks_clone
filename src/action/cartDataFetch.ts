@@ -10,7 +10,6 @@ import {
 } from "@/types/responseType";
 import { getServerSession } from "next-auth";
 import { revalidateTag } from "next/cache";
-import { string } from "zod";
 
 // test
 
@@ -42,7 +41,7 @@ export const getDefaultShippingID =
 
 //  배송지 정보 불러오기
 export const getShippingDetailByID = async (
-  shippingDefaultID: string,
+  shippingDefaultID: number,
 ): Promise<ShippingAddressType> => {
   const session = await getServerSession(options);
   ("use server");

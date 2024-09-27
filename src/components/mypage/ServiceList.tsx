@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 
 function ServiceList() {
   return (
-    <div className="min-h-dvh bg-gray-200">
+    <div className="bg-gray-200">
       <h2 className="p-5 text-lg font-bold">서비스</h2>
       <ul className="space-y-4 px-3">
         {" "}

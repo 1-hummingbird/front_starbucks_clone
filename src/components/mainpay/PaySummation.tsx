@@ -45,7 +45,7 @@ function PaySummation() {
 
       <div className="m-5 items-center rounded-s border-solid border-black p-3">
         <p>위 주문 내용을 확인하였으며, 결제에 동의합니다.</p>
-        <p>(정자상거래법 8조 2항11)</p>
+        <p>(전자상거래법 8조 2항11)</p>
       </div>
 
       <div className="m-3">
