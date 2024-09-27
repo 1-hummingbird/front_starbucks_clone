@@ -1,16 +1,13 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { MinusCircleIcon, PlusCircleIcon } from "lucide-react";
-import { Checkbox } from "../ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
-import { CartItemType, ImageByCartIdType } from "@/types/responseType";
-import {
-  getCartItemData,
-  getCartProductImageData,
-} from "@/action/cartDataFetch";
-import CartPay from "./CartPay";
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import { MinusCircleIcon, PlusCircleIcon } from 'lucide-react';
+import { Checkbox } from '../ui/checkbox';
+import { useToast } from '@/hooks/use-toast';
+import { CartItemType, ImageByCartIdType } from '@/types/responseType';
+import { getCartItemData, getCartProductImageData } from '@/action/cartAction';
+import CartPay from './CartPay';
 
 function CartListItem({
   cartItem,
@@ -31,17 +28,17 @@ function CartListItem({
   const [totalPrice, setTotalPrice] = useState(0);
 
   const handleCount = (calCulType: string) => {
-    if (calCulType === "plus") {
+    if (calCulType === 'plus') {
       setCount((prevCount) => prevCount + 1);
       setIsAction(true);
-    } else if (calCulType === "minus" && count > 1) {
+    } else if (calCulType === 'minus' && count > 1) {
       setCount((prevCount) => prevCount - 1);
       setIsAction(true);
-    } else if (calCulType === "minus" && count === 1) {
+    } else if (calCulType === 'minus' && count === 1) {
       toast({
-        color: "white",
-        title: "최소 수량은 1개입니다.",
-        className: "bg-starbucks text-white",
+        color: 'white',
+        title: '최소 수량은 1개입니다.',
+        className: 'bg-starbucks text-white',
         duration: 1000,
       });
       return;
@@ -100,15 +97,15 @@ function CartListItem({
                   <MinusCircleIcon
                     size={20}
                     strokeWidth={1.5}
-                    color={count < 2 ? "lightGray" : "green"}
-                    onClick={() => handleCount("minus")}
+                    color={count < 2 ? 'lightGray' : 'green'}
+                    onClick={() => handleCount('minus')}
                   />
                   <p className="font-extrabold">{count}</p>
                   <PlusCircleIcon
                     size={20}
                     strokeWidth={1.5}
                     color="green"
-                    onClick={() => handleCount("plus")}
+                    onClick={() => handleCount('plus')}
                   />
                 </div>
                 <p className="text-sm font-extrabold">

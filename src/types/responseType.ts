@@ -71,7 +71,7 @@ export interface ImageByCartIdType {
 
 export interface PayItemType {
   id: 0;
-  name: "string";
+  name: 'string';
   price: 0;
   discountRate: 0;
   isInputOption: true;
@@ -80,23 +80,6 @@ export interface PayItemType {
 export interface ShippingDefaultIDType {
   shippingDefaultID: number;
 }
-
-export interface OrderListType {
-  purchaseCode: "string";
-  purchaseDate: "2024-09-27T06:26:45.430Z";
-  totalPrice: 0;
-  purchaseItems: [
-    {
-      optionId: 0;
-      productImage: "string";
-      optionName: "string";
-      price: 0;
-      qty: 0;
-      isReviewable: true;
-    },
-  ];
-}
-
 export interface ProductImagesType {
   url: string;
   isMainImage?: boolean;
@@ -111,3 +94,19 @@ export interface ProductDetailType {
   discountRate: number;
   wishCount: number | null;
 }
+
+export interface OrderListType {
+  purchaseCode: string;
+  purchaseDate: string;
+  totalPrice: number;
+  purchaseItems: {
+    optionId: number;
+    productImage: string;
+    optionName: string;
+    price: number;
+    qty: number;
+    isReviewable: boolean;
+  }[];
+}
+
+// test

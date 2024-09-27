@@ -1,36 +1,42 @@
-import React from "react";
-import Image from "next/image";
+import { getCartProductImageData } from '@/action/cartAction';
+import React from 'react';
 
-function OrderProduct() {
-  // 예시 데이터
-  const product = {
-    purchaseCode: "202409262542352647",
-    purchaseDateorderDate: "2024-09-27",
-    totalPrice: 37374,
-    purchaseItems: [
-      {
-        optionId: 112,
-        productImage:
-          "https://sitem.ssgcdn.com/75/41/08/item/2097001084175_i1_336.jpg",
-        optionName: "스타벅스 (새벽배송한정) [스타벅스] B.E.L.T 샌드위치 235g",
-        price: 56857,
-        qty: 3,
-        isReviewable: true,
-      },
-    ],
-  };
-
+async function OrderProduct() {
+  const productIImageData = await getCartProductImageData(page, size, year);
   return (
     <>
       <h2 className="px-5 pb-3 pt-20 text-2xl font-bold">주문 내역</h2>
 
-      <div>
-        <ul>
-          <li>{product.purchaseCode}</li>
-          <li>{product.purchaseDateorderDate}</li>
-          <li>{product.totalPrice}</li>
-        </ul>
-        <div>{product.purchaseItems[0].optionId}</div>
+      <div className="p-5">
+        <div className="mb-4 flex items-center justify-between">
+          <p className="flex-shrink-0 text-sm font-semibold">
+            상품 코드: 1234567890
+          </p>
+          <p className="flex-shrink-0 text-sm text-gray-500">
+            결제 날짜: 2024-09-27
+          </p>
+        </div>
+
+        <div className="border border-dashed border-gray-300 p-4">
+          <div className="flex items-center">
+            <div className="mr-4 h-20 w-20">
+              <img
+                src="https://via.placeholder.com/80"
+                alt="상품 이미지"
+                className="h-full w-full object-cover"
+              />
+            </div>
+
+            <div>
+              <p className="text-lg font-semibold">상품 이름</p>
+
+              <div className="mt-2 flex space-x-4">
+                <p className="text-sm text-gray-500">수량: 2개</p>
+                <p className="text-sm text-gray-500">가격: 50,000원</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
