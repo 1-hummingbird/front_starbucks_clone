@@ -6,6 +6,9 @@ import ScrollUpButton from '@/components/util/ScrollUpButton';
 import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
+  // icons: {
+  //   icon: '/favicon.ico',
+  // },
   title: {
     template: '%s | Hummingbird',
     default: 'Loading...',
@@ -20,6 +23,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/favicon.ico" />
       <body>
         <AuthProvider>
           {children}
