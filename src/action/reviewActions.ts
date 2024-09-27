@@ -1,5 +1,10 @@
 'use server';
-export const getReviewSummary = async (productId: number) => {
+
+import { CommonResType, ReviewTitleType } from '@/types/responseType';
+
+export const getReviewTitle = async (
+  productId: number,
+): Promise<ReviewTitleType> => {
   const response = await fetch(
     `${process.env.BASE_API_URL}/review/summary/${productId}`,
     {
@@ -7,6 +12,6 @@ export const getReviewSummary = async (productId: number) => {
     },
   );
 
-  const result = await response.json();
-  return result;
+  const result = (await response.json()) as CommonResType<ReviewTitleType>;
+  return result.result;
 };
