@@ -10,7 +10,7 @@ const LeftArrow = () => {
         router.back();
       }}
     >
-      <ChevronLeft />
+      <ChevronLeft strokeWidth={1} size={24} className="opacity-80" />
     </div>
   );
 };

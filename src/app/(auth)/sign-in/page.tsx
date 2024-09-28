@@ -2,7 +2,7 @@ import SignInForm from '@/components/form/SignInForm';
 
 const Page = () => {
   return (
-    <main className="flex flex-col items-center justify-center">
+    <main className="flex max-h-screen w-full flex-col justify-between bg-white">
       <SignInForm />
     </main>
   );
