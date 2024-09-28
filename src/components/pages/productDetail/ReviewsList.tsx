@@ -24,7 +24,7 @@ const ReviewsList = ({
       <p className="my-4 font-bold">전체 리뷰</p>
       {reviewIdList.map(async (id, idx) => {
         const reviewContent = await getRivewContent(id);
-        return <ReviewContent reviewContent={reviewContent} />;
+        return <ReviewContent key={idx} reviewContent={reviewContent} />;
       })}
     </section>
   );

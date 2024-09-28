@@ -127,7 +127,7 @@ export interface ReviewListType {
   pageable: {
     pageNumber: number;
     pageSize: number;
-    sort: Object;
+    sort: object;
     offset: number;
     paged: boolean;
     unpaged: boolean;

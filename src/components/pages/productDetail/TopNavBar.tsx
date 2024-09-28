@@ -7,29 +7,14 @@ const TopNavBar = ({ reviewCount }: { reviewCount: number }) => {
   console.log('🚀 ~ TopNavBar ~ isVisible:', isVisible);
 
   useEffect(() => {
-    let lastScrollTop = 0;
-
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
       if (currentScroll > 50) {
-        setIsVisible(true); // 스크롤이 50 이상일 때 보이게
+        setIsVisible(true);
       } else {
         setIsVisible(false);
       }
-      // } else if (currentScroll === 0) {
-      //   setIsVisible(false); // 최상단일 때만 숨기기
-      // }
-
-      // if (currentScroll > lastScrollTop && currentScroll > 50) {
-      //   setIsVisible(true);
-      // } else if (currentScroll < lastScrollTop) {
-      //   setIsVisible(false);
-      // }
-      // lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-      // console.log('🚀 ~ handleScroll ~ currentScroll:', currentScroll);
-      // console.log('🚀 ~ handleScroll ~ lastScrollTop:', lastScrollTop);
-      // console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ');
     };
 
     window.addEventListener('scroll', handleScroll);
