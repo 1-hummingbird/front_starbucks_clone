@@ -1,14 +1,31 @@
+import { getRivewContent } from '@/action/reviewActions';
 import StarsRating from '@/components/util/StarsRating';
-import React from 'react';
+import ReviewContent from './ReviewContent';
 
-const ReviewsList = ({ averageStar }: { averageStar: string }) => {
+interface ReviewListProps {
+  averageStar: string;
+  reviewCount: number;
+  reviewIdList: number[];
+}
+
+const ReviewsList = ({
+  averageStar,
+  reviewIdList,
+  reviewCount,
+}: ReviewListProps) => {
   return (
-    <section className="mb-5 ml-4 mt-10">
+    <section className="mb-20 ml-4 mt-10">
       <p className="mb-10 text-xl font-bold">고객리뷰</p>
-      <StarsRating rating={averageStar} />
-      asfasfasdfasdf asfasfasdfasdf asfasfasdfasdf asfasfasdfasdf asfasfasdfasdf
-      asfasfasdfasdf asfasfasdfasdf asfasfasdfasdf asfasfasdfasdf asfasfasdfasdf
-      asfasfasdfasdf
+      <div className="flex items-center gap-1">
+        <StarsRating rating={averageStar} color={'green-600'} />
+        <p className="text-xl font-bold">{averageStar}</p>
+        <p className="text-sm text-[#969696]">({reviewCount})</p>
+      </div>
+      <p className="my-4 font-bold">전체 리뷰</p>
+      {reviewIdList.map(async (id, idx) => {
+        const reviewContent = await getRivewContent(id);
+        return <ReviewContent reviewContent={reviewContent} />;
+      })}
     </section>
   );
 };

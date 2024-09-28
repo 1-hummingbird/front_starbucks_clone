@@ -121,3 +121,30 @@ export interface ReviewTitleType {
   photoReviewCount: number;
   averageStar: number;
 }
+
+export interface ReviewListType {
+  content: number[];
+  pageable: {
+    pageNumber: number;
+    pageSize: number;
+    sort: Object;
+    offset: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  numberOfElements: number;
+  size: number;
+  number: number;
+  sort: { unsorted: boolean; sorted: boolean; empty: boolean };
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
+
+export interface ReviewContentType {
+  nickName: string;
+  star: number;
+  createAt: string;
+  content: string;
+  commentCount: number;
+}

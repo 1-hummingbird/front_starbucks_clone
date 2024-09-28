@@ -5,7 +5,11 @@ import {
   ProductTitleType,
 } from '@/types/responseType';
 
-import { getReivewList, getReviewTitle } from '@/action/reviewActions';
+import {
+  getReivewList,
+  getReviewTitle,
+  getRivewContent,
+} from '@/action/reviewActions';
 import ProductDetail from '@/components/pages/productDetail/ProductDetail';
 import ProductImages from '@/components/pages/productDetail/ProductImages';
 import ProductTitle from '@/components/pages/productDetail/ProductTitle';
@@ -40,8 +44,6 @@ const page = async ({ params }: { params: { productId: number } }) => {
       getProductInfo<ProductDetailType>('detail', params.productId),
       getReivewList(params.productId),
     ]);
-  console.log('🚀 ~ page ~ reviewList:', reviewList);
-  reviewTitle.averageStar;
 
   return (
     <main>
@@ -59,7 +61,11 @@ const page = async ({ params }: { params: { productId: number } }) => {
       </div>
       {/* 리뷰 */}
       <div id="reviewList">
-        <ReviewsList averageStar={reviewTitle.averageStar.toFixed(1)} />
+        <ReviewsList
+          averageStar={reviewTitle.averageStar.toFixed(1)}
+          reviewCount={reviewTitle.reviewCount}
+          reviewIdList={reviewList.content}
+        />
       </div>
       {/* 별점, 리뷰 개수 */}
       {/* 포토 리뷰(사진만) */}
