@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { MinusCircleIcon, PlusCircleIcon } from 'lucide-react';
 import { Checkbox } from '../ui/checkbox';
@@ -12,7 +12,7 @@ function CartListItem({
   cartItem,
   isSelected,
   onSelect,
-  handleItemChange, // Receive the handleItemChange function
+  handleItemChange,
 }: {
   cartItem: number;
   isSelected: boolean;
@@ -32,6 +32,18 @@ function CartListItem({
   const [isAction, setIsAction] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
+
+  // Callback to calculate total price and discount, so we don't re-create it unnecessarily
+  const calculateTotalPrice = useCallback(() => {
+    if (cartItemData) {
+      const newTotalPrice = cartItemData.price * count;
+      const newTotalDiscount = cartItemData.discountRate * count;
+      setTotalPrice(newTotalPrice);
+      setTotalDiscount(newTotalDiscount);
+      // Update parent with the new values
+      handleItemChange(cartItem, newTotalPrice, newTotalDiscount);
+    }
+  }, [cartItem, count, cartItemData, handleItemChange]);
 
   const handleCount = (calCulType: string) => {
     if (calCulType === 'plus') {
@@ -61,17 +73,10 @@ function CartListItem({
     });
   }, [cartItem]);
 
+  // Effect to update total price and discount whenever cartItemData or count changes
   useEffect(() => {
-    if (cartItemData) {
-      const newTotalPrice = cartItemData.price * count;
-      const newTotalDiscount = cartItemData.discountRate * count;
-      setTotalPrice(newTotalPrice);
-      setTotalDiscount(newTotalDiscount);
-
-      // Call the parent update function whenever the total price or discount changes
-      handleItemChange(cartItem, newTotalPrice, newTotalDiscount);
-    }
-  }, [cartItemData, count]);
+    calculateTotalPrice(); // Now this is safely using the useCallback
+  }, [cartItemData, count, calculateTotalPrice]);
 
   useEffect(() => {
     if (isAction) {
