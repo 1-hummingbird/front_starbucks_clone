@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { CartListType } from '@/types/responseType';
 import CartListItem from './CartListItem';
 import { Checkbox } from '../ui/checkbox';
@@ -45,7 +45,7 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
   };
 
   // 선택된 항목들의 총 가격과 할인 금액을 계산하는 함수
-  const calculateTotalPrice = async () => {
+  const calculateTotalPrice = useCallback(async () => {
     let total = 0;
     let totalDiscount = 0;
 
@@ -58,12 +58,12 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
     setSelectedTotalPrice(total);
     setSelectedTotalDiscount(totalDiscount);
     setFinalPrice(total - totalDiscount);
-  };
+  }, [selectedItems]);
 
   // 선택된 항목이 변경될 때마다 총 가격과 할인 금액을 다시 계산
   useEffect(() => {
     calculateTotalPrice();
-  }, [selectedItems]);
+  }, [selectedItems, calculateTotalPrice]);
 
   const handleSelectItem = (id: number) => {
     setSelectedItems((prevSelected) =>
