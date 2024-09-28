@@ -26,7 +26,6 @@ const ProductImages = ({ images }: ProductImagesProps) => {
         }}
         keyboard={true}
         modules={[Pagination, Keyboard]}
-        loop={true}
       >
         {images.map((image, idx) => {
           return (

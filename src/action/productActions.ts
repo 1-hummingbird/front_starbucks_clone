@@ -2,8 +2,8 @@
 
 import {
   CommonResType,
-  ProductDetailType,
   ProductImagesType,
+  ProductTitleType,
 } from '@/types/responseType';
 
 import { ProductInfoType } from '@/types/requestType';
@@ -24,7 +24,6 @@ export const getProductInfo = async <T>(
   const result = (await response.json()) as CommonResType<T>;
 
   if (!result.isSuccess) {
-    console.log(result);
     return notFound();
   }
 
@@ -53,12 +52,12 @@ export const getProductImages = async (
 
 export const getProductDetail = async (
   productId: number,
-): Promise<ProductDetailType> => {
+): Promise<ProductTitleType> => {
   const response = await fetch(
     `${process.env.BASE_API_URL}/product/info/${productId}`,
     { method: 'GET' },
   );
-  const result = (await response.json()) as CommonResType<ProductDetailType>;
+  const result = (await response.json()) as CommonResType<ProductTitleType>;
   console.log(result.result);
   return result.result;
 };

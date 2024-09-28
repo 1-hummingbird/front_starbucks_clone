@@ -71,7 +71,7 @@ export interface ImageByCartIdType {
 
 export interface PayItemType {
   id: 0;
-  name: "string";
+  name: 'string';
   price: 0;
   discountRate: 0;
   isInputOption: true;
@@ -82,14 +82,14 @@ export interface ShippingDefaultIDType {
 }
 
 export interface OrderListType {
-  purchaseCode: "string";
-  purchaseDate: "2024-09-27T06:26:45.430Z";
+  purchaseCode: 'string';
+  purchaseDate: '2024-09-27T06:26:45.430Z';
   totalPrice: 0;
   purchaseItems: [
     {
       optionId: 0;
-      productImage: "string";
-      optionName: "string";
+      productImage: 'string';
+      optionName: 'string';
       price: 0;
       qty: 0;
       isReviewable: true;
@@ -102,7 +102,7 @@ export interface ProductImagesType {
   isMainImage?: boolean;
 }
 
-export interface ProductDetailType {
+export interface ProductTitleType {
   name: string;
   price: number;
   isNew: boolean;
@@ -110,4 +110,41 @@ export interface ProductDetailType {
   isDiscounted: boolean;
   discountRate: number;
   wishCount: number | null;
+}
+
+export interface ProductDetailType {
+  detail: string;
+}
+
+export interface ReviewTitleType {
+  reviewCount: number;
+  photoReviewCount: number;
+  averageStar: number;
+}
+
+export interface ReviewListType {
+  content: number[];
+  pageable: {
+    pageNumber: number;
+    pageSize: number;
+    sort: object;
+    offset: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  numberOfElements: number;
+  size: number;
+  number: number;
+  sort: { unsorted: boolean; sorted: boolean; empty: boolean };
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
+
+export interface ReviewContentType {
+  nickName: string;
+  star: number;
+  createAt: string;
+  content: string;
+  commentCount: number;
 }
