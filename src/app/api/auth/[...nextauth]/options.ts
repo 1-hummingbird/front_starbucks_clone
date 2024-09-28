@@ -32,7 +32,6 @@ export const options: NextAuthOptions = {
             cache: 'no-cache',
           });
           const user = (await res.json()) as CommonResType<User>;
-          console.log(user);
           return user.result;
         } catch (error) {
           console.error('error', error);
