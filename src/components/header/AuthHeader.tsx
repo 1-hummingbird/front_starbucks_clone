@@ -4,7 +4,7 @@ import LeftArrow from '../icons/LeftArrow';
 import React from 'react';
 import { useRouter } from 'next/navigation';
 
-const AuthHeader = ({ title }: { title: string }) => {
+const AuthHeader = ({ title }: { title?: string }) => {
   const router = useRouter();
   return (
     <header className="mx-4 mt-6 flex">
