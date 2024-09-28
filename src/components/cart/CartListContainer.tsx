@@ -5,7 +5,6 @@ import { CartListType } from '@/types/responseType';
 import CartListItem from './CartListItem';
 import { Checkbox } from '../ui/checkbox';
 import { Button } from '../ui/button';
-import CartPay from './CartPay';
 import { CreditCard, Gift } from 'lucide-react';
 import Link from 'next/link';
 import { getCartItemData } from '@/action/cartAction';
@@ -14,20 +13,54 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [cartItems, setCartItems] = useState<number[]>(cartDatas.cartIds);
   const [selectAll, setSelectAll] = useState(false);
-  const [selectedTotalPrice, setSelectedTotalPrice] = useState(0); // 총 가격 상태 추가
+  const [selectedTotalPrice, setSelectedTotalPrice] = useState(0); // 총 가격 상태
+  const [selectedTotalDiscount, setSelectedTotalDiscount] = useState(0); // 총 할인 금액 상태
+  const [finalPrice, setFinalPrice] = useState(0); // 최종 결제 금액 상태
 
-  // 선택된 항목들의 총 가격을 계산하는 함수
+  // 개별 항목의 가격과 할인을 업데이트하는 함수
+  const handleItemChange = (
+    id: number,
+    newTotalPrice: number,
+    newDiscount: number,
+  ) => {
+    const updatedItems = selectedItems.includes(id)
+      ? selectedItems
+      : [...selectedItems, id];
+    setSelectedItems(updatedItems);
+
+    // 가격과 할인 합산 계산
+    const updatedTotalPrice = updatedItems.reduce((total, itemId) => {
+      const item = cartItems.find((item) => item === itemId);
+      return total + (item ? newTotalPrice : 0);
+    }, 0);
+
+    const updatedTotalDiscount = updatedItems.reduce((total, itemId) => {
+      const item = cartItems.find((item) => item === itemId);
+      return total + (item ? newDiscount : 0);
+    }, 0);
+
+    setSelectedTotalPrice(updatedTotalPrice);
+    setSelectedTotalDiscount(updatedTotalDiscount);
+    setFinalPrice(updatedTotalPrice - updatedTotalDiscount);
+  };
+
+  // 선택된 항목들의 총 가격과 할인 금액을 계산하는 함수
   const calculateTotalPrice = async () => {
     let total = 0;
-    // 선택된 각 항목에 대해 가격을 가져와서 합산
+    let totalDiscount = 0;
+
     for (const itemId of selectedItems) {
       const itemData = await getCartItemData(itemId);
       total += itemData.price * itemData.cartQuantity;
+      totalDiscount += itemData.discountRate * itemData.cartQuantity;
     }
-    setSelectedTotalPrice(total); // 총 가격 상태 업데이트
+
+    setSelectedTotalPrice(total);
+    setSelectedTotalDiscount(totalDiscount);
+    setFinalPrice(total - totalDiscount);
   };
 
-  // 선택된 항목이 변경될 때마다 총 가격을 다시 계산
+  // 선택된 항목이 변경될 때마다 총 가격과 할인 금액을 다시 계산
   useEffect(() => {
     calculateTotalPrice();
   }, [selectedItems]);
@@ -116,6 +149,7 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
               cartItem={cartItem}
               isSelected={selectedItems.includes(cartItem)}
               onSelect={() => handleSelectItem(cartItem)}
+              handleItemChange={handleItemChange} // Pass the handleItemChange function
             />
           ))}
         </ul>
@@ -123,7 +157,27 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
         <div className="py-10 text-center">장바구니가 비어 있습니다.</div>
       )}
 
-      <CartPay />
+      {/* Price Summary Section */}
+      <div className="p-3">
+        <ul className="flex items-center justify-between">
+          <li>상품 금액</li>
+          <li className="text-lg font-bold">
+            {selectedTotalPrice.toLocaleString()}원 {/* 총 상품 금액 */}
+          </li>
+        </ul>
+        <ul className="flex items-center justify-between">
+          <li>할인 금액</li>
+          <li className="text-lg font-bold">
+            {selectedTotalDiscount.toLocaleString()}원 {/* 총 할인 금액 */}
+          </li>
+        </ul>
+        <ul className="flex items-center justify-between py-4">
+          <li>총 결제예정금액</li>
+          <li className="text-2xl font-bold">
+            {finalPrice.toLocaleString()}원 {/* 최종 결제 금액 */}
+          </li>
+        </ul>
+      </div>
 
       <div className="mx-4 mb-40 bg-[#F7F7F7] p-5 text-sm text-[#B8B8B8]">
         <span>
@@ -143,7 +197,7 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
               </span>
             </li>
             <li className="text-2xl font-bold">
-              {selectedTotalPrice.toLocaleString()}원 {/* 총 가격 표시 */}
+              {finalPrice.toLocaleString()}원 {/* 총 가격 표시 */}
             </li>
           </ul>
         </div>

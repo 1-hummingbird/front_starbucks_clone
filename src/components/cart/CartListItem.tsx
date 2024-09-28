@@ -7,16 +7,21 @@ import { Checkbox } from '../ui/checkbox';
 import { useToast } from '@/hooks/use-toast';
 import { CartItemType, ImageByCartIdType } from '@/types/responseType';
 import { getCartItemData, getCartProductImageData } from '@/action/cartAction';
-import CartPay from './CartPay';
 
 function CartListItem({
   cartItem,
   isSelected,
   onSelect,
+  handleItemChange, // Receive the handleItemChange function
 }: {
   cartItem: number;
   isSelected: boolean;
   onSelect: () => void;
+  handleItemChange: (
+    id: number,
+    newTotalPrice: number,
+    newDiscount: number,
+  ) => void;
 }) {
   const { toast } = useToast();
   const [cartItemData, setCartItemData] = useState<CartItemType | null>(null);
@@ -26,6 +31,7 @@ function CartListItem({
   const [count, setCount] = useState(0);
   const [isAction, setIsAction] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
 
   const handleCount = (calCulType: string) => {
     if (calCulType === 'plus') {
@@ -57,7 +63,13 @@ function CartListItem({
 
   useEffect(() => {
     if (cartItemData) {
-      setTotalPrice(cartItemData.price * count);
+      const newTotalPrice = cartItemData.price * count;
+      const newTotalDiscount = cartItemData.discountRate * count;
+      setTotalPrice(newTotalPrice);
+      setTotalDiscount(newTotalDiscount);
+
+      // Call the parent update function whenever the total price or discount changes
+      handleItemChange(cartItem, newTotalPrice, newTotalDiscount);
     }
   }, [cartItemData, count]);
 

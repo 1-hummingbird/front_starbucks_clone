@@ -1,8 +1,9 @@
 import { getCartProductImageData } from '@/action/cartAction';
+import { getorderproduct } from '@/action/orderAction';
 import React from 'react';
 
 async function OrderProduct() {
-  const productIImageData = await getCartProductImageData(page, size, year);
+  const getData = await getorderproduct();
   return (
     <>
       <h2 className="px-5 pb-3 pt-20 text-2xl font-bold">주문 내역</h2>
