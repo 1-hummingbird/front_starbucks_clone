@@ -19,4 +19,5 @@ export type ProductInfoType =
   | 'images'
   | 'detail'
   | 'detail/wish'
-  | 'detail/cart-quantity';
+  | 'detail/cart-quantity'
+  | 'list/image';

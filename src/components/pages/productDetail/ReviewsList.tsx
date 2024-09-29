@@ -14,7 +14,7 @@ const ReviewsList = ({
   reviewCount,
 }: ReviewListProps) => {
   return (
-    <section className="mb-20 ml-4 mt-10">
+    <section className="mb-20 ml-4 mt-4">
       <p className="mb-10 text-xl font-bold">고객리뷰</p>
       <div className="flex items-center gap-1">
         <StarsRating rating={averageStar} color={'green-600'} />

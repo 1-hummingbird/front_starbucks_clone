@@ -154,3 +154,8 @@ export interface ExhibitionListType {
   number: string;
   detail: string;
 }
+
+export interface ProductThumbnailType {
+  productId: number;
+  src: string;
+}
