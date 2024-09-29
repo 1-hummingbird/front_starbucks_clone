@@ -49,9 +49,8 @@ const page = async ({ params }: { params: { productId: number } }) => {
     getCustomerWishlist(),
   ]);
 
-  console.log('🚀 ~ page ~ customerWishlist:', customerWishlist);
   return (
-    <main>
+    <main className="relative">
       <TopNavBar reviewCount={reviewTitle.reviewCount} />
       <ProductImages images={productImages} />
       <ProductTitle {...productTitle} />

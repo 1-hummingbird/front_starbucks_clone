@@ -1,19 +1,18 @@
 'use client';
 import LeftArrow from '@/components/icons/LeftArrow';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const TopNavBar = ({ reviewCount }: { reviewCount: number }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
-  console.log('🚀 ~ TopNavBar ~ isVisible:', isVisible);
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScroll = window.scrollY;
 
-      if (currentScroll > 50) {
-        setIsVisible(true);
-      } else {
+      if (currentScroll === 0) {
         setIsVisible(false);
+      } else {
+        setIsVisible(true);
       }
     };
 
@@ -21,18 +20,34 @@ const TopNavBar = ({ reviewCount }: { reviewCount: number }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [window.scrollY]);
 
   const smoothScrollTo = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const elementPosition =
+        element.getBoundingClientRect().top + window.scrollY;
+      let offsetPosition;
+
+      if (id === 'productDetail') {
+        offsetPosition = elementPosition - 20;
+      } else {
+        offsetPosition = elementPosition - 55;
+      }
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
       setIsVisible(true);
     }
   };
 
   return (
-    <nav className={`sticky top-0 z-10 w-full ${isVisible ? '' : 'hidden'}`}>
+    <nav
+      className={`fixed left-0 top-0 w-full transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      style={{ zIndex: 10 }}
+    >
       <div className="flex justify-between bg-white p-3 px-4 shadow-lg">
         <div>
           <LeftArrow />
