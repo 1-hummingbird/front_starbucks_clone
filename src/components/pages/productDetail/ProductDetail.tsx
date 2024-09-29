@@ -15,7 +15,6 @@ const ProductDetail = ({ detail }: ProductDetailProps) => {
     <section className="mt-10">
       <ProductHr />
       <p className="mb-5 ml-4 text-xl font-bold">상세정보</p>
-      {/* 첫 번째 디테일 이미지 */}
       <Image
         src={detailImages[0]}
         alt="productDetail"

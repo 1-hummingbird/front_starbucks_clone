@@ -7,8 +7,8 @@ import '../../swiperComponent/style.css';
 import { Keyboard, Pagination } from 'swiper/modules';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
-import Image from 'next/image';
 import { ProductImagesType } from '@/types/responseType';
+import Image from 'next/image';
 import { useRef } from 'react';
 
 interface ProductImagesProps {
@@ -26,6 +26,7 @@ const ProductImages = ({ images }: ProductImagesProps) => {
         }}
         keyboard={true}
         modules={[Pagination, Keyboard]}
+        loop={true}
       >
         {images.map((image, idx) => {
           return (

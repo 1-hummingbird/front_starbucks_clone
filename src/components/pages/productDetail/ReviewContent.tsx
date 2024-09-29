@@ -20,7 +20,10 @@ const ReviewContent = ({
         />
         <p className="text-xs">{reviewContent.nickName}</p>
       </div>
-      {reviewContent.content}
+      <p>{reviewContent.content}</p>
+      <p className="pt-1 text-xs text-[#888]">
+        {reviewContent.createAt.substring(0, 10).replace(/-/g, '.')}
+      </p>
     </div>
   );
 };

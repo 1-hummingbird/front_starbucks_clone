@@ -58,6 +58,14 @@ export const getProductDetail = async (
     { method: 'GET' },
   );
   const result = (await response.json()) as CommonResType<ProductTitleType>;
-  console.log(result.result);
+  return result.result;
+};
+
+export const getCustomerWishlist = async (): Promise<number[]> => {
+  const response = await fetch(
+    `${process.env.BASE_API_URL}/product/most-wish/list`,
+    { method: 'GET' },
+  );
+  const result = (await response.json()) as CommonResType<number[]>;
   return result.result;
 };

@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Main",
+  title: 'Pay',
 };
 
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
