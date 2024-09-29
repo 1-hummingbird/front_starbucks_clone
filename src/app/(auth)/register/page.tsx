@@ -1,10 +1,19 @@
-import RegisterStep1Form from '@/components/pages/register/RegisterStep1Form';
-import React from 'react';
+import { RegisterFormType, RegisterValues } from '@/types/auth';
+
+import TermsAgreement from '@/components/pages/register/TermsAgreement';
+
+const formType: RegisterFormType<RegisterValues>[] = [
+  {
+    id: 1,
+    name: 'agree',
+    type: 'checkbox',
+  },
+];
 
 const page = () => {
   return (
-    <main>
-      <RegisterStep1Form />
+    <main className="mt-12 flex justify-center">
+      <TermsAgreement />
     </main>
   );
 };
