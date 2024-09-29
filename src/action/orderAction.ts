@@ -5,36 +5,6 @@ import { Session } from 'inspector/promises';
 import { getServerSession } from 'next-auth';
 import { string } from 'zod';
 
-// export const getorderData = async (
-//   page: number,
-//   size: number,
-//   year: number,
-// ): Promise<OrderListType> => {
-//   const session = await getServerSession(options);
-//   ('use server');
-//   console.log(session);
-
-//   if (!session) {
-//     throw new Error('session is null');
-//   }
-
-//   const res = await fetch(`${process.env.BASE_API_URL}/purchase/list`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       Authorization: `Bearer ${session.user?.accessToken}`,
-//     },
-//   });
-
-//   if (!res) {
-//     throw new Error('error');
-//   }
-
-//   const data = (await res.json()) as CommonResType<OrderListType>;
-//   console.log('data');
-//   return data.result;
-// };
-
 export const getorderproduct = async (
   page?: number,
   size?: number,
