@@ -27,7 +27,7 @@ const CustomerWishlistSwiper = ({
     <Swiper ref={swiperRef} slidesPerView={3}>
       {products.map((product) => (
         <SwiperSlide>
-          <div className="h-[221px] w-[112px]">
+          <div className="flex h-[221px] w-[112px] flex-col items-start">
             <Image
               src={`${product.thumbnail}`}
               alt={`${product.title}`}
@@ -36,18 +36,18 @@ const CustomerWishlistSwiper = ({
               sizes="100vw"
               style={{ width: '112px', height: '112px' }}
             />
-            <p className="overflow-hidden text-ellipsis whitespace-nowrap">
+            <p className="w-full overflow-hidden text-ellipsis whitespace-nowrap text-sm">
               {product.title}
             </p>
             {product.discountedPrice ? (
               <div className="flex gap-1">
                 <p className="text-2xl text-red-600">{product.discountRate}%</p>
-                <p className="overflow-hidden font-bold">
+                <p className="overflow-hidden text-[16px] font-bold">
                   {product.discountedPrice}원
                 </p>
               </div>
             ) : (
-              <p className="font-bold">{product.defaultPrice}원</p>
+              <p className="text-[16px] font-bold">{product.defaultPrice}원</p>
             )}
           </div>
         </SwiperSlide>
