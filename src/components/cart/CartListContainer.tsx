@@ -13,6 +13,10 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
   const [cartItems, setCartItems] = useState<number[]>(cartDatas.cartIds);
   const [selectAll, setSelectAll] = useState(false);
+  const [itemPrices, setItemPrices] = useState<{ [key: number]: number }>({});
+  const [itemDiscounts, setItemDiscounts] = useState<{ [key: number]: number }>(
+    {},
+  );
   const [selectedTotalPrice, setSelectedTotalPrice] = useState(0); // 총 가격 상태
   const [selectedTotalDiscount, setSelectedTotalDiscount] = useState(0); // 총 할인 금액 상태
   const [finalPrice, setFinalPrice] = useState(0); // 최종 결제 금액 상태
@@ -23,42 +27,31 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
     newTotalPrice: number,
     newDiscount: number,
   ) => {
-    const updatedItems = selectedItems.includes(id)
-      ? selectedItems
-      : [...selectedItems, id];
-    setSelectedItems(updatedItems);
+    setItemPrices((prevPrices) => ({
+      ...prevPrices,
+      [id]: newTotalPrice,
+    }));
 
-    // 가격과 할인 합산 계산
-    const updatedTotalPrice = updatedItems.reduce((total, itemId) => {
-      const item = cartItems.find((item) => item === itemId);
-      return total + (item ? newTotalPrice : 0);
-    }, 0);
-
-    const updatedTotalDiscount = updatedItems.reduce((total, itemId) => {
-      const item = cartItems.find((item) => item === itemId);
-      return total + (item ? newDiscount : 0);
-    }, 0);
-
-    setSelectedTotalPrice(updatedTotalPrice);
-    setSelectedTotalDiscount(updatedTotalDiscount);
-    setFinalPrice(updatedTotalPrice - updatedTotalDiscount);
+    setItemDiscounts((prevDiscounts) => ({
+      ...prevDiscounts,
+      [id]: newDiscount,
+    }));
   };
 
   // 선택된 항목들의 총 가격과 할인 금액을 계산하는 함수
-  const calculateTotalPrice = useCallback(async () => {
+  const calculateTotalPrice = useCallback(() => {
     let total = 0;
     let totalDiscount = 0;
 
     for (const itemId of selectedItems) {
-      const itemData = await getCartItemData(itemId);
-      total += itemData.price * itemData.cartQuantity;
-      totalDiscount += itemData.discountRate * itemData.cartQuantity;
+      total += itemPrices[itemId] || 0;
+      totalDiscount += itemDiscounts[itemId] || 0;
     }
 
     setSelectedTotalPrice(total);
     setSelectedTotalDiscount(totalDiscount);
     setFinalPrice(total - totalDiscount);
-  }, [selectedItems]);
+  }, [selectedItems, itemPrices, itemDiscounts]);
 
   // 선택된 항목이 변경될 때마다 총 가격과 할인 금액을 다시 계산
   useEffect(() => {
@@ -86,6 +79,8 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
     setCartItems([]);
     setSelectedItems([]);
     setSelectAll(false);
+    setItemPrices({});
+    setItemDiscounts({});
   };
 
   const handleDeleteSelected = () => {
@@ -95,6 +90,20 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
     setCartItems(remainingItems);
     setSelectedItems([]);
     setSelectAll(false);
+    setItemPrices((prevPrices) =>
+      Object.fromEntries(
+        Object.entries(prevPrices).filter(
+          ([key]) => !selectedItems.includes(Number(key)),
+        ),
+      ),
+    );
+    setItemDiscounts((prevDiscounts) =>
+      Object.fromEntries(
+        Object.entries(prevDiscounts).filter(
+          ([key]) => !selectedItems.includes(Number(key)),
+        ),
+      ),
+    );
   };
 
   const allItemsSelected =

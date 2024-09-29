@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { MinusCircleIcon, PlusCircleIcon } from 'lucide-react';
 import { Checkbox } from '../ui/checkbox';
@@ -12,7 +12,7 @@ function CartListItem({
   cartItem,
   isSelected,
   onSelect,
-  handleItemChange, // Receive the handleItemChange function
+  handleItemChange,
 }: {
   cartItem: number;
   isSelected: boolean;
@@ -32,6 +32,9 @@ function CartListItem({
   const [isAction, setIsAction] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalDiscount, setTotalDiscount] = useState(0);
+
+  const prevTotalPrice = useRef(totalPrice);
+  const prevTotalDiscount = useRef(totalDiscount);
 
   const handleCount = (calCulType: string) => {
     if (calCulType === 'plus') {
@@ -65,13 +68,23 @@ function CartListItem({
     if (cartItemData) {
       const newTotalPrice = cartItemData.price * count;
       const newTotalDiscount = cartItemData.discountRate * count;
+
       setTotalPrice(newTotalPrice);
       setTotalDiscount(newTotalDiscount);
-
-      // Call the parent update function whenever the total price or discount changes
-      handleItemChange(cartItem, newTotalPrice, newTotalDiscount);
     }
   }, [cartItemData, count]);
+
+  useEffect(() => {
+    // Only call handleItemChange if the total price or discount has actually changed
+    if (
+      totalPrice !== prevTotalPrice.current ||
+      totalDiscount !== prevTotalDiscount.current
+    ) {
+      handleItemChange(cartItem, totalPrice, totalDiscount);
+      prevTotalPrice.current = totalPrice;
+      prevTotalDiscount.current = totalDiscount;
+    }
+  }, [totalPrice, totalDiscount, handleItemChange, cartItem]);
 
   useEffect(() => {
     if (isAction) {
