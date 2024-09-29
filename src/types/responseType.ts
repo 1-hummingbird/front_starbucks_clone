@@ -148,3 +148,9 @@ export interface ReviewContentType {
   content: string;
   commentCount: number;
 }
+
+export interface ExhibitionListType {
+  id: number;
+  number: string;
+  detail: string;
+}

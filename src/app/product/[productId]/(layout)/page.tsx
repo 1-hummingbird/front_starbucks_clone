@@ -5,11 +5,7 @@ import {
   ProductTitleType,
 } from '@/types/responseType';
 
-import {
-  getReivewList,
-  getReviewTitle,
-  getRivewContent,
-} from '@/action/reviewActions';
+import { getReivewList, getReviewTitle } from '@/action/reviewActions';
 import ProductDetail from '@/components/pages/productDetail/ProductDetail';
 import ProductImages from '@/components/pages/productDetail/ProductImages';
 import ProductTitle from '@/components/pages/productDetail/ProductTitle';

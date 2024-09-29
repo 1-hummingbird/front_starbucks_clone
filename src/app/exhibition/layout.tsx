@@ -3,10 +3,10 @@ import { Metadata } from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'Products',
+  title: 'exhibition',
 };
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
       <MainHeader />

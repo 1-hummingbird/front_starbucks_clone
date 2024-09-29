@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   },
   title: {
     template: '%s | Hummingbird',
-    default: 'Loading...',
+    default: 'Team Hummingbird',
   },
   description: 'Spharos 5th Hummingbird',
 };

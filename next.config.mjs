@@ -33,6 +33,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'sstatic.ssgcdn.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'sui.ssgcdn.com',
+      },
     ],
   },
   env: {
