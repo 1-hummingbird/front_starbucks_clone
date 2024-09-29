@@ -61,3 +61,9 @@ export const getProductDetail = async (
   console.log(result.result);
   return result.result;
 };
+
+export const getProductDefaultImage = async (productId: number): Promise<string> => {
+  const response = await fetch(`${process.env.BASE_API_URL}/product/list/image/${productId}`);
+  const result = (await response.json()) as CommonResType<{src: string}>;
+  return result.result.src;
+};

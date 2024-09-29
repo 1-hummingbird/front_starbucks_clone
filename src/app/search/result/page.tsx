@@ -1,6 +1,8 @@
 import React from 'react';
 import { Product } from '@/types/responseType';
 import Link from 'next/link';
+import { getProductDefaultImage } from '@/action/productActions';
+import Image from 'next/image';
 
 interface SearchResultPageProps {
   searchParams: { query: string };
@@ -13,29 +15,47 @@ export default async function SearchResultPage({ searchParams }: SearchResultPag
       console.log('Product IDs:', productIds); // Add this line for debugging
   
       const products = await fetchProductsInfo(productIds);
-  
-      return (
-        <div>
-          <h1>Search Results for "{query}"</h1>
-          {products.length > 0 ? (
-            <ul>
-              {products.map((product: Product) => (
-                <li key={product.id}>{product.name}, {product.price}, <Link href={`/product/${product.id}`}>상세보기</Link></li>
-              ))}
-            </ul>
+      const productsWithImages = await Promise.all(products.map(async (product) => ({
+        ...product,
+        image: product.icon?.media || await getProductDefaultImage(product.id)
+      })));
 
-          ) : (
-            <p>No products found.</p>
-          )}
-        </div>
-      );
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      return <div>Error: Failed to fetch products. Please try again later.</div>;
-    }
+      const renderProducts = () => {
+        return (
+          <div>
+            <h1>Search Results for "{query}"</h1>
+            {productsWithImages.length > 0 ? (
+              <ul>
+              {productsWithImages.map((product) => (
+                <li key={product.id}>
+                  {product.name},
+                  <Image 
+                    src={product.image}
+                    alt={product.name} 
+                    width={100} 
+                    height={100} 
+                  />
+                  {product.price},
+                  <Link href={`/product/${product.id}`}>상세보기</Link>
+                </li>
+              ))}
+              </ul>
+
+              ) : (
+                <p>No products found.</p>
+              )}
+            </div>
+          );
+         }
+         return renderProducts();
+        } catch (error) {
+          console.error('Error fetching products:', error);
+          return <div>Error: Failed to fetch products. Please try again later.</div>;
+        }
   }
 
-async function fetchProductById(id: number | string): Promise<Product> {
+
+async function fetchProductById(id: number): Promise<Product> {
   const response = await fetch(`${process.env.BASE_API_URL}/product/info/${id}`);
   if (!response.ok) {
     throw new Error(`Failed to fetch product with id ${id}`);
@@ -46,6 +66,8 @@ async function fetchProductById(id: number | string): Promise<Product> {
   data.id = id;
   return data;
 }
+
+
 
 async function fetchProductsInfo(productIds: unknown): Promise<Product[]> {
   if (!Array.isArray(productIds)) {
