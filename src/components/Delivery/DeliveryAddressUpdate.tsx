@@ -7,7 +7,7 @@ import { UpdateDeliveryAddressRequest } from "@/types/updateDeliveryAddressReque
 import { DeliveryDto } from "@/types/deliveryDto";
 
 interface DeliveryAddressUpdateProps {
-	dto: DeliveryDto;
+	dto: string;
   }
 export default function DeliveryAddressUpdate({ dto }: DeliveryAddressUpdateProps) {
 	const router = useRouter();
