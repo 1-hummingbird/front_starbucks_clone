@@ -58,12 +58,13 @@ const ExhibitionSlide = ({
         {exhibitionList.map((item) => {
           return (
             <SwiperSlide key={item.id}>
-              <div className="relative h-[400px] w-full overflow-hidden">
+              <div className="relative h-[40vh] w-full overflow-hidden">
                 <Image
                   src={item.detail}
                   alt="exhibition image"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  className="absolute left-0 top-0"
                   priority
                 />
               </div>

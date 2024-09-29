@@ -1,31 +1,23 @@
-import { Suspense } from 'react';
-import { componentList } from '@/datas/initial/mainComponentList';
+import { getExhibitionList } from '@/action/exhibitionAction';
+import AllProducts from '@/components/pages/main/AllProducts';
+import BestItems from '@/components/pages/main/BestItems';
+import ExhibitionSlide from '@/components/pages/main/ExhibitionSlide';
+import NewProducts from '@/components/pages/main/NewProducts';
 import { getServerSession } from 'next-auth/next';
 import { options } from '../api/auth/[...nextauth]/options';
-import { getExhibitionList } from '@/action/exhibitionAction';
-import ExhibitionSlide from '@/components/pages/main/ExhibitionSlide';
 
 export default async function Page() {
   const session = await getServerSession(options);
   console.log(session);
 
   const exhibitionList = await getExhibitionList();
-  // console.log('🚀 ~ Page ~ exhibitionList:', exhibitionList);
 
   return (
-    <main className="min-h-screen w-full">
+    <main className="flex min-h-screen w-full flex-col gap-5">
       <ExhibitionSlide exhibitionList={exhibitionList} />
-      {/* <ul>
-        {componentList.map((item) => {
-          return (
-            <Suspense key={item.id} fallback={<div>skeleton</div>}>
-              <li className="mb-10">
-                <item.Component />
-              </li>
-            </Suspense>
-          );
-        })}
-      </ul> */}
+      <AllProducts />
+      <BestItems />
+      <NewProducts />
     </main>
   );
 }
