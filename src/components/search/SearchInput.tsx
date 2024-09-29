@@ -2,8 +2,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import LeftArrow from "../icons/LeftArrow";
+import { useRouter } from "next/navigation";
 
 function SearchInput() {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState(""); // 검색어 입력 상태
   const [recentSearches, setRecentSearches] = useState<string[]>([]); // 최근 검색어 리스트
 
@@ -16,12 +18,13 @@ function SearchInput() {
   }, []);
 
   // 최근 검색어 저장 함수 (최대 5개 저장)
-  const handleSearch = () => {
+  const handleSearch = async () => {
     if (searchTerm && !recentSearches.includes(searchTerm)) {
       const updatedSearches = [searchTerm, ...recentSearches].slice(0, 5); // 최대 5개 저장
       setRecentSearches(updatedSearches);
       localStorage.setItem("recentSearches", JSON.stringify(updatedSearches));
     }
+    router.push(`/search/result?query=${searchTerm}`);
     setSearchTerm(""); // 입력 필드 초기화
   };
 
