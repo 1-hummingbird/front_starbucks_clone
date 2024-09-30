@@ -4,7 +4,6 @@ import { getExhibitionList } from '@/action/exhibitionAction';
 
 const page = async () => {
   const exhibitionList = await getExhibitionList();
-  console.log('🚀 ~ page ~ exhibitionList:', exhibitionList);
 
   return (
     <main>
