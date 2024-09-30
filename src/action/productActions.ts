@@ -149,3 +149,26 @@ export const getNewItems = async (): Promise<Product[]> => {
   const productPromises = data.map((id: number) => fetchProductById(id));
   return Promise.all(productPromises);
 };
+
+export async function getProductIdsByCategory(category: string, page: number): Promise<Product[]> {
+  const response = await fetch(`${process.env.BASE_API_URL}/product/list?topCode=${category}&page=${page}`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch product IDs');
+  }
+  const jsonResponse = await response.json();
+  const data = jsonResponse.result.content;
+  const productPromises = data.map((id: number) => fetchProductById(id));
+  return Promise.all(productPromises);
+}
+
+export async function getCategoryName(code: string): Promise<string> {
+  const response = await fetch(`${process.env.BASE_API_URL}/category/top-category/${code}`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch category name');
+  }
+  const jsonResponse = await response.json();
+  const data = jsonResponse.result;
+  const trimmedCategoryName = data.topCategoryName.slice(2);
+  return trimmedCategoryName;
+}
