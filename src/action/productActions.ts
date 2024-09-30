@@ -130,13 +130,13 @@ export const getBestItems = async (): Promise<Product[]> => {
   }
   const jsonResponse = await response.json();
   const data = jsonResponse.result;
-  const list = data.slice(0, 8);
+  const list = data.slice(0, 12);
   const productPromises = list.map((id: number) => fetchProductById(id));
   return Promise.all(productPromises);
 };
 
 export const getNewItems = async (): Promise<Product[]> => {
-  const response = await fetch(`${process.env.BASE_API_URL}/product/list?orderCondition=NEWEST&size=8`);
+  const response = await fetch(`${process.env.BASE_API_URL}/product/list?orderCondition=NEWEST&size=12`);
   if (!response.ok) {
     throw new Error('Failed to fetch product IDs');
   }
