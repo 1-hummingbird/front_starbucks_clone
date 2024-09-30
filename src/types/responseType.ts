@@ -143,3 +143,9 @@ export interface ProductThumbnailType {
   productId: number;
   src: string;
 }
+
+export interface ReviewCommentType {
+  nickname: string;
+  content: string;
+  createAt: string;
+}

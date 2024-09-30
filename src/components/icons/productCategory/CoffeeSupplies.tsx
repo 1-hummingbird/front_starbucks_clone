@@ -1,14 +1,15 @@
-import React from "react";
+import React from 'react';
 
 const CoffeeSupplies = () => {
   return (
     <svg
-      width="82.5"
-      height="82.5"
+      width="110"
+      height="110"
       viewBox="0 0 83 83"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      className="rounded-full"
     >
       <rect width="82.5" height="82.5" fill="#D9D9D9" />
       <rect width="82.5" height="82.5" fill="url(#pattern0_2_77)" />

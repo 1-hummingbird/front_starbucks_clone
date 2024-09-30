@@ -5,11 +5,11 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 export function SelcetButton() {
   return (
-    <div className="my-3 flex justify-end px-3">
+    <div className="my-3 flex w-[10rem] justify-end px-3">
       <Select>
         <SelectTrigger className="w-1/2">
           <SelectValue placeholder="신상품순" />

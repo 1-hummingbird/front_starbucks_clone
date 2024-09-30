@@ -1,14 +1,15 @@
-import React from "react";
+import React from 'react';
 
 const Mugcup = () => {
   return (
     <svg
-      width="82.5"
-      height="82.5"
+      width="110"
+      height="110"
       viewBox="0 0 83 83"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
+      className="rounded-full"
     >
       <rect x="0.5" width="82.5" height="82.5" fill="#D9D9D9" />
       <rect x="0.5" width="82.5" height="82.5" fill="url(#pattern0_2_74)" />

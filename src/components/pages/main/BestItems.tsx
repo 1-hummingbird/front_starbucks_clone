@@ -1,12 +1,12 @@
-import { bestItems } from "@/datas/dummy/bestItems";
-import SectionTitle from "./SectionTitle";
-import ProductList from "./ProductList";
+import ProductList from './ProductList';
+import SectionTitle from './SectionTitle';
+import { bestItems } from '@/datas/dummy/bestItems';
 
 const BestItems = async () => {
   const bestItemData = bestItems;
 
   return (
-    <section>
+    <section className="px-5">
       <SectionTitle title="Best Items" />
       <ProductList items={bestItemData} />
     </section>

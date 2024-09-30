@@ -1,6 +1,7 @@
-import { getRivewContent } from '@/action/reviewActions';
+import { getRivewComments, getRivewContent } from '@/action/reviewActions';
+
+import ReviewCard from './ReviewCard';
 import StarsRating from '@/components/util/StarsRating';
-import ReviewContent from './ReviewContent';
 
 interface ReviewListProps {
   averageStar: string;
@@ -23,8 +24,7 @@ const ReviewsList = ({
       </div>
       <p className="my-4 font-bold">전체 리뷰</p>
       {reviewIdList.map(async (id, idx) => {
-        const reviewContent = await getRivewContent(id);
-        return <ReviewContent key={idx} reviewContent={reviewContent} />;
+        return <ReviewCard key={idx} reviewId={id} />;
       })}
     </section>
   );

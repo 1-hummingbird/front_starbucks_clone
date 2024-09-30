@@ -5,10 +5,10 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../../swiperComponent/style.css';
 
-import { ChevronRight, Pause, Play } from 'lucide-react';
-import { useRef, useState } from 'react';
 import { Autoplay, Keyboard, Pagination } from 'swiper/modules';
+import { ChevronRight, Pause, Play } from 'lucide-react';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { useRef, useState } from 'react';
 
 import { ExhibitionListType } from '@/types/responseType';
 import Image from 'next/image';
@@ -58,14 +58,13 @@ const ExhibitionSlide = ({
         {exhibitionList.map((item) => {
           return (
             <SwiperSlide key={item.id}>
-              <div className="relative h-[40vh] w-full overflow-hidden">
+              <div className="relative h-[55vh] w-full overflow-hidden">
                 <Image
                   src={item.detail}
                   alt="exhibition image"
                   fill
-                  style={{ objectFit: 'cover' }}
-                  className="absolute left-0 top-0"
                   priority
+                  className="overflow-clip object-cover"
                 />
               </div>
             </SwiperSlide>

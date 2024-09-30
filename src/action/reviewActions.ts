@@ -2,6 +2,7 @@
 
 import {
   CommonResType,
+  ReviewCommentType,
   ReviewContentType,
   ReviewListType,
   ReviewTitleType,
@@ -43,7 +44,7 @@ export const getReivewList = async (
 export const getRivewContent = async (
   reviewId: number,
 ): Promise<ReviewContentType> => {
-  'use client';
+  // 'use client';
   const response = await fetch(
     `${process.env.BASE_API_URL}/review/info/${reviewId}`,
     {
@@ -51,5 +52,19 @@ export const getRivewContent = async (
     },
   );
   const result = (await response.json()) as CommonResType<ReviewContentType>;
+  return result.result;
+};
+
+export const getRivewComments = async (
+  reviewId: number,
+): Promise<ReviewCommentType[]> => {
+  const response = await fetch(
+    `${process.env.BASE_API_URL}/review/list/comment/${reviewId}`,
+    {
+      method: 'GET',
+    },
+  );
+
+  const result = (await response.json()) as CommonResType<ReviewCommentType[]>;
   return result.result;
 };
