@@ -1,25 +1,27 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
-import Image from "next/image";
-import { MinusCircleIcon, PlusCircleIcon } from "lucide-react";
-import { Checkbox } from "../ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
-import { CartItemType, ImageByCartIdType } from "@/types/responseType";
-import {
-  getCartItemData,
-  getCartProductImageData,
-} from "@/action/cartDataFetch";
-import CartPay from "./CartPay";
+import React, { useEffect, useState, useCallback, useRef } from 'react';
+import Image from 'next/image';
+import { MinusCircleIcon, PlusCircleIcon } from 'lucide-react';
+import { Checkbox } from '../ui/checkbox';
+import { useToast } from '@/hooks/use-toast';
+import { CartItemType, ImageByCartIdType } from '@/types/responseType';
+import { getCartItemData, getCartProductImageData } from '@/action/cartAction';
 
 function CartListItem({
   cartItem,
   isSelected,
   onSelect,
+  handleItemChange,
 }: {
   cartItem: number;
   isSelected: boolean;
   onSelect: () => void;
+  handleItemChange: (
+    id: number,
+    newTotalPrice: number,
+    newDiscount: number,
+  ) => void;
 }) {
   const { toast } = useToast();
   const [cartItemData, setCartItemData] = useState<CartItemType | null>(null);
@@ -29,19 +31,23 @@ function CartListItem({
   const [count, setCount] = useState(0);
   const [isAction, setIsAction] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [totalDiscount, setTotalDiscount] = useState(0);
+
+  const prevTotalPrice = useRef(totalPrice);
+  const prevTotalDiscount = useRef(totalDiscount);
 
   const handleCount = (calCulType: string) => {
-    if (calCulType === "plus") {
+    if (calCulType === 'plus') {
       setCount((prevCount) => prevCount + 1);
       setIsAction(true);
-    } else if (calCulType === "minus" && count > 1) {
+    } else if (calCulType === 'minus' && count > 1) {
       setCount((prevCount) => prevCount - 1);
       setIsAction(true);
-    } else if (calCulType === "minus" && count === 1) {
+    } else if (calCulType === 'minus' && count === 1) {
       toast({
-        color: "white",
-        title: "최소 수량은 1개입니다.",
-        className: "bg-starbucks text-white",
+        color: 'white',
+        title: '최소 수량은 1개입니다.',
+        className: 'bg-starbucks text-white',
         duration: 1000,
       });
       return;
@@ -58,11 +64,28 @@ function CartListItem({
     });
   }, [cartItem]);
 
+  // Effect to update total price and discount whenever cartItemData or count changes
   useEffect(() => {
     if (cartItemData) {
-      setTotalPrice(cartItemData.price * count);
+      const newTotalPrice = cartItemData.price * count;
+      const newTotalDiscount = cartItemData.discountRate * count;
+
+      setTotalPrice(newTotalPrice);
+      setTotalDiscount(newTotalDiscount);
     }
   }, [cartItemData, count]);
+
+  useEffect(() => {
+    // Only call handleItemChange if the total price or discount has actually changed
+    if (
+      totalPrice !== prevTotalPrice.current ||
+      totalDiscount !== prevTotalDiscount.current
+    ) {
+      handleItemChange(cartItem, totalPrice, totalDiscount);
+      prevTotalPrice.current = totalPrice;
+      prevTotalDiscount.current = totalDiscount;
+    }
+  }, [totalPrice, totalDiscount, handleItemChange, cartItem]);
 
   useEffect(() => {
     if (isAction) {
@@ -100,15 +123,15 @@ function CartListItem({
                   <MinusCircleIcon
                     size={20}
                     strokeWidth={1.5}
-                    color={count < 2 ? "lightGray" : "green"}
-                    onClick={() => handleCount("minus")}
+                    color={count < 2 ? 'lightGray' : 'green'}
+                    onClick={() => handleCount('minus')}
                   />
                   <p className="font-extrabold">{count}</p>
                   <PlusCircleIcon
                     size={20}
                     strokeWidth={1.5}
                     color="green"
-                    onClick={() => handleCount("plus")}
+                    onClick={() => handleCount('plus')}
                   />
                 </div>
                 <p className="text-sm font-extrabold">
