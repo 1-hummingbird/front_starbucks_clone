@@ -1,19 +1,19 @@
-import { getCustomerWishlist, getProductInfo } from '@/action/productActions';
 import {
   ProductDetailType,
   ProductImagesType,
   ProductTitleType,
 } from '@/types/responseType';
-
+import { getCustomerWishlist, getProductInfo } from '@/action/productActions';
 import { getReivewList, getReviewTitle } from '@/action/reviewActions';
+
+import CustomerWishlist from '@/components/pages/productDetail/CustomerWishlist';
+import { Metadata } from 'next';
 import ProductDetail from '@/components/pages/productDetail/ProductDetail';
 import ProductImages from '@/components/pages/productDetail/ProductImages';
 import ProductTitle from '@/components/pages/productDetail/ProductTitle';
 import ReviewTitle from '@/components/pages/productDetail/ReviewTitle';
 import ReviewsList from '@/components/pages/productDetail/ReviewsList';
 import TopNavBar from '@/components/pages/productDetail/TopNavBar';
-import { Metadata } from 'next';
-import CustomerWishlist from '@/components/pages/productDetail/CustomerWishlist';
 
 export async function generateMetadata({
   params,
@@ -49,6 +49,7 @@ const page = async ({ params }: { params: { productId: number } }) => {
     getCustomerWishlist(),
   ]);
 
+  console.log('🚀 ~ page ~ reviewTitle:', reviewTitle);
   return (
     <main className="relative">
       <TopNavBar reviewCount={reviewTitle.reviewCount} />
