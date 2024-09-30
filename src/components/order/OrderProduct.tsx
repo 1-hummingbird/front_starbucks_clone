@@ -1,11 +1,8 @@
 import { getCartProductImageData } from '@/action/cartAction';
-import { getorderproduct } from '@/action/orderAction';
 import React from 'react';
 import Image from 'next/image';
 
 async function OrderProduct() {
-  const getData = await getorderproduct();
-
   // 더미 데이터
   const orderItems = [
     {
