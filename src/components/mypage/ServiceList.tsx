@@ -1,20 +1,20 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import SignOut from "../SignOut";
-import { KeyRound } from "lucide-react";
-import { Button } from "../ui/button";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import SignOut from '../SignOut';
+import { KeyRound } from 'lucide-react';
+import { Button } from '../ui/button';
 
 function ServiceList() {
   return (
     <div className="bg-gray-200">
       <h2 className="p-5 text-lg font-bold">서비스</h2>
       <ul className="space-y-4 px-3">
-        {" "}
+        {' '}
         <li className="flex items-center justify-between">
-          {" "}
+          {' '}
           <div className="flex items-center space-x-2">
-            {" "}
+            {' '}
             <Image
               width={32}
               height={32}
@@ -32,7 +32,7 @@ function ServiceList() {
         </li>
         <li className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Link href={"/review"}>
+            <Link href={'/myreview'}>
               <Image
                 width={32}
                 height={32}
@@ -42,7 +42,7 @@ function ServiceList() {
             </Link>
             <span>리뷰 관리</span>
           </div>
-          <Link href={"/review"}>
+          <Link href={'/myreview'}>
             <Image
               width={32}
               height={32}
@@ -87,7 +87,7 @@ function ServiceList() {
         </li>
         <li className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Link href={"/delivery"}>
+            <Link href={'/delivery'}>
               <Image
                 width={32}
                 height={32}
@@ -97,7 +97,7 @@ function ServiceList() {
             </Link>
             <span>배송지 관리</span>
           </div>
-          <Link href={"/delivery"}>
+          <Link href={'/delivery'}>
             <Image
               width={32}
               height={32}

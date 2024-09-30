@@ -1,5 +1,5 @@
-"use server";
-import { options } from "@/app/api/auth/[...nextauth]/options";
+'use server';
+import { options } from '@/app/api/auth/[...nextauth]/options';
 import {
   CartItemType,
   CartListType,
@@ -7,32 +7,32 @@ import {
   ImageByCartIdType,
   ShippingAddressType,
   ShippingDefaultIDType,
-} from "@/types/responseType";
-import { getServerSession } from "next-auth";
-import { revalidateTag } from "next/cache";
+} from '@/types/responseType';
+import { getServerSession } from 'next-auth';
+import { revalidateTag } from 'next/cache';
 
 // test
 
 export const getDefaultShippingID =
   async (): Promise<ShippingDefaultIDType> => {
     const session = await getServerSession(options);
-    ("use server");
+    ('use server');
 
     if (!session) {
-      throw new Error("session is null");
+      throw new Error('session is null');
     }
 
     const res = await fetch(`${process.env.BASE_API_URL}/shipping/default-id`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${session.user?.accessToken}`,
       },
-      cache: "no-cache",
+      cache: 'no-cache',
     });
 
     if (!res) {
-      throw new Error("error");
+      throw new Error('error');
     }
 
     const data = (await res.json()) as CommonResType<ShippingDefaultIDType>;
@@ -44,24 +44,24 @@ export const getShippingDetailByID = async (
   shippingDefaultID: number,
 ): Promise<ShippingAddressType> => {
   const session = await getServerSession(options);
-  ("use server");
+  ('use server');
 
   if (!session) {
-    throw new Error("session is null");
+    throw new Error('session is null');
   }
 
   const res = await fetch(`${process.env.BASE_API_URL}/shipping/get-detail`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${session.user?.accessToken}`,
     },
     body: JSON.stringify({ shippingDefaultID }), // 기본 배송지 ID를 POST 본문에 포함
-    cache: "no-cache",
+    cache: 'no-cache',
   });
 
   if (!res.ok) {
-    throw new Error("Failed to fetch shipping details");
+    throw new Error('Failed to fetch shipping details');
   }
 
   const data = (await res.json()) as CommonResType<ShippingAddressType>;
@@ -72,23 +72,23 @@ export const getShippingDetailByID = async (
 
 export const getCartDatas = async (): Promise<CartListType> => {
   const session = await getServerSession(options);
-  ("use server");
+  ('use server');
 
   if (!session) {
-    throw new Error("session is null");
+    throw new Error('session is null');
   }
 
   const res = await fetch(`${process.env.BASE_API_URL}/cart/items/member`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${session.user?.accessToken}`,
     },
-    cache: "no-cache",
+    cache: 'no-cache',
   });
 
   if (!res) {
-    throw new Error("error");
+    throw new Error('error');
   }
 
   const data = (await res.json()) as CommonResType<CartListType>;
@@ -99,33 +99,33 @@ export const getCartDatas = async (): Promise<CartListType> => {
 export const getCartItemData = async (
   cartId: number,
 ): Promise<CartItemType> => {
-  ("use server");
+  ('use server');
   const session = await getServerSession(options);
 
   console.log(session);
 
   if (!session) {
-    throw new Error("session is null");
+    throw new Error('session is null');
   }
 
   const res = await fetch(
     `${process.env.BASE_API_URL}/cart/item/info/${cartId}`,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${session.user?.accessToken}`,
       },
-      next: { tags: ["getCart"] },
+      next: { tags: ['getCart'] },
     },
   );
 
   if (!res) {
-    throw new Error("error");
+    throw new Error('error');
   }
 
   const data = (await res.json()) as CommonResType<CartItemType>;
-  console.log("get cart ---- : ", data);
+  console.log('get cart ---- : ', data);
   return data.result;
 };
 
@@ -134,27 +134,27 @@ export const getCartProductImageData = async (
   cartId: number,
 ): Promise<ImageByCartIdType> => {
   const session = await getServerSession(options);
-  ("use server");
+  ('use server');
   console.log(session);
 
   if (!session) {
-    throw new Error("session is null");
+    throw new Error('session is null');
   }
 
   const res = await fetch(
     `${process.env.BASE_API_URL}/cart/item/image/${cartId}`,
     {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${session.user?.accessToken}`,
       },
-      cache: "no-cache",
+      cache: 'no-cache',
     },
   );
 
   if (!res) {
-    throw new Error("error");
+    throw new Error('error');
   }
 
   const data = (await res.json()) as CommonResType<ImageByCartIdType>;

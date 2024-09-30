@@ -1,7 +1,7 @@
-import { getCartDatas, getDefaultShippingID } from "@/action/cartDataFetch";
-import CartListContainer from "@/components/cart/CartListContainer";
-import ShippingDefaultAddress from "@/components/cart/ShippingDefaultAddress";
-import React from "react";
+import { getCartDatas } from '@/action/cartAction';
+import CartListContainer from '@/components/cart/CartListContainer';
+import ShippingDefaultAddress from '@/components/cart/ShippingDefaultAddress';
+import React from 'react';
 
 async function page() {
   const [cartDatas] = await Promise.all([getCartDatas()]);

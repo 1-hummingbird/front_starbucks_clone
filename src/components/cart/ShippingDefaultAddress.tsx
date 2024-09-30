@@ -1,15 +1,13 @@
 import {
   getDefaultShippingID,
   getShippingDetailByID,
-} from "@/action/cartDataFetch";
-import Link from "next/link";
+} from '@/action/cartAction';
+import Link from 'next/link';
 
 async function ShippingDefaultAddress() {
   const shippingDefaultID = (await getDefaultShippingID()).shippingDefaultID;
-  // const ShippingDefaultID = getDefaultShippingID.shippingDefaultID
-  // console.log(shippingDefaultID);
+  console.log(shippingDefaultID);
 
-  // 가져온 ID로 세부 정보를 요청
   const shippingDetail = await getShippingDetailByID(shippingDefaultID);
   console.log(shippingDetail);
   return (
@@ -31,7 +29,7 @@ async function ShippingDefaultAddress() {
             </button>
           </div>
         </ul>
-        <p className="py-2 text-sm">{shippingDetail.address} </p>
+        <p className="py-2 text-sm">{shippingDetail.address}</p>
       </div>
     </section>
   );
