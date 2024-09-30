@@ -1,10 +1,10 @@
 import ProductList from './ProductList';
 import React from 'react';
 import SectionTitle from './SectionTitle';
-import { newProducts } from '@/datas/dummy/newProducts';
+import { getNewItems } from '@/action/productActions';
 
 const NewProducts = async () => {
-  const newProductsData = newProducts;
+  const newProductsData = await getNewItems();
 
   return (
     <section className="px-5 pb-16">

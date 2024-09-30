@@ -1,9 +1,9 @@
 import ProductList from './ProductList';
 import SectionTitle from './SectionTitle';
-import { bestItems } from '@/datas/dummy/bestItems';
+import { getBestItems } from '@/action/productActions';
 
 const BestItems = async () => {
-  const bestItemData = bestItems;
+  const bestItemData = await getBestItems();
 
   return (
     <section className="px-5">
