@@ -95,6 +95,10 @@ function SearchInput() {
               <div
                 key={index}
                 className="flex justify-between rounded-lg border border-slate-200 p-2"
+                onClick={() => {
+                  setSearchTerm(term);
+                  handleSearch();
+                }}
               >
                 <div className="font-bold">{term}</div>
                 <div

@@ -1,6 +1,6 @@
 import { options } from '@/app/api/auth/[...nextauth]/options';
 import { ProductInfoType } from '@/types/requestType';
-import { CommonResType, GetProductListIdsResponse } from '@/types/responseType';
+import { CommonResType } from '@/types/responseType';
 import { getServerSession } from 'next-auth';
 import { notFound } from 'next/navigation';
 

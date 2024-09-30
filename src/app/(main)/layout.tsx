@@ -11,8 +11,10 @@ export const metadata: Metadata = {
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <>
-      <MainHeader />
-      <TopNavigationBar />
+      <section className="sticky top-0 z-50">
+        <MainHeader />
+        <TopNavigationBar />
+      </section>
       {children}
       <BottomNavigationBar />
     </>

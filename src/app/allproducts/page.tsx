@@ -11,7 +11,10 @@ async function ProductFilter() {
   // const allproduct = await productFilter
   // const onelist = await getProductInfolist();
   // const oneimage = await getProductInfoimage();
-  // console.log('allproduct', (await productFilter()));
+
+  const allproduct = await productFilter;
+  console.log('allproduct', await productFilter());
+
   return (
     <>
       <AllFilter />

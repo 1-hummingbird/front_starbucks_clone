@@ -13,7 +13,7 @@ const navs: Nav[] = [
 
 const Header = () => {
   return (
-    <header className="flex h-14 w-full justify-between bg-white">
+    <header className="m-0 flex h-14 w-full justify-between bg-white p-0">
       <h1 className="flex items-center text-[0px]">
         Starbucks
         <HomeLogo />

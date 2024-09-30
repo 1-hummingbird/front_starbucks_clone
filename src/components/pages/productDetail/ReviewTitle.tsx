@@ -8,6 +8,8 @@ const ReviewTitle = ({
   photoReviewCount,
   averageStar,
 }: ReviewTitleProps) => {
+  console.log('🚀 ~ averageStar:', averageStar);
+  console.log('🚀 ~ reviewCount:', reviewCount);
   return (
     <section className="mb-4 mt-3 flex items-center gap-2 px-4">
       <div className="flex items-center gap-1">

@@ -1,11 +1,12 @@
 'use client';
+
 import React, { useState } from 'react';
-import FilterSection from './CategoryFilter/FilterSection';
+
 import ChildrenCategoryList from './CategoryFilter/ChildrenCategoryList';
-import { SelcetButton } from './CategoryFilter/SelectButton';
-import Link from 'next/link';
+import FilterSection from './CategoryFilter/FilterSection';
 import Image from 'next/image';
-import { GetProductListIdsResponse } from '@/types/responseType';
+import Link from 'next/link';
+import { SelcetButton } from './CategoryFilter/SelectButton';
 
 // allproduct: GetProductListIdsResponse
 const AllFilter = () => {
@@ -271,34 +272,38 @@ const AllFilter = () => {
         </div>
       )}
 
-      <div className="">
+      <div className="flex justify-end">
         <SelcetButton />
       </div>
       {/* 상품 목록 */}
 
-      <div className="grid grid-cols-2 gap-1">
+      <div className="flex flex-wrap justify-around">
         {filteredProducts.map((product) => (
           <Link href={`/product/${product.id}`} key={product.id}>
-            <div className="flex transform justify-center transition-transform hover:scale-105">
-              <div className="product-content box-border rounded-lg p-6 shadow-lg">
+            <div className="flex justify-center">
+              <div className="product-content box-border rounded-lg p-6">
                 <Image
                   className="rounded-lg"
                   src={product.img}
                   alt={product.name}
-                  width={112}
-                  height={112}
+                  width={160}
+                  height={170}
                 />
-                <div className="mt-4 text-start">
-                  <div className="flex justify-between">
-                    <p className="text-xs italic text-green-500">
-                      {product.type}
-                    </p>
+                <div className="mt-4 flex items-end justify-between text-start">
+                  <div>
+                    <div className="flex justify-between">
+                      <p className="text-xs italic text-green-500">
+                        {product.type}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <h3 className="text-lg">{product.name}</h3>
+                      <p className="text-lg font-bold text-gray-700">
+                        {product.price.toLocaleString()} 원
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-base">{product.name}</h3>
-                  <p className="font-semibold text-gray-700">
-                    {product.price.toLocaleString()} 원
-                  </p>
-                  <div className="text-lm flex items-center">
+                  {/* <div className="text-lm flex flex-col items-center">
                     <p>
                       <Image
                         src="https://img.icons8.com/?size=100&id=581&format=png&color=000000"
@@ -307,7 +312,8 @@ const AllFilter = () => {
                         alt="하트"
                       ></Image>
                     </p>
-                  </div>
+                    <p className="text-xs">{product.wish}</p>
+                  </div> */}
                 </div>
               </div>
             </div>
