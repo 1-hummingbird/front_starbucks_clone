@@ -18,6 +18,8 @@ export const getReviewTitle = async (
   );
 
   const result = (await response.json()) as CommonResType<ReviewTitleType>;
+  console.log('🚀 ~ result:', result);
+
   return result.result;
 };
 

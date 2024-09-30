@@ -1,6 +1,8 @@
 'use client';
-import LeftArrow from '@/components/icons/LeftArrow';
+
 import { useEffect, useState } from 'react';
+
+import LeftArrow from '@/components/icons/LeftArrow';
 
 const TopNavBar = ({ reviewCount }: { reviewCount: number }) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -20,7 +22,7 @@ const TopNavBar = ({ reviewCount }: { reviewCount: number }) => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [window.scrollY]);
+  }, []);
 
   const smoothScrollTo = (id: string) => {
     const element = document.getElementById(id);
