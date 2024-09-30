@@ -21,7 +21,7 @@ const ReviewCotent = ({
       <div className="mb-4 flex items-center gap-2">
         <StarsRating
           rating={reviewContent.star.toFixed(1)}
-          color={'black'}
+          color={'green-600'}
           size={'4'}
           gap={'0'}
         />
