@@ -17,7 +17,6 @@ export default async function SearchResultPage({ searchParams }: SearchResultPag
         ...product,
         image: product.icon?.media || await getProductDefaultImage(product.id)
       })));
-
       const renderProducts = () => {
         return (
           <div className="p-4">
