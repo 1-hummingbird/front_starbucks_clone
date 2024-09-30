@@ -1,7 +1,7 @@
 import React from 'react';
-import { Product } from '@/types/responseType';
 import Link from 'next/link';
 import { getProductDefaultImage } from '@/action/productActions';
+import { fetchProductsInfo, getProductIdsByQuery } from '@/action/productActions';
 import Image from 'next/image';
 
 interface SearchResultPageProps {
@@ -25,7 +25,7 @@ export default async function SearchResultPage({ searchParams }: SearchResultPag
             {productsWithImages.length > 0 ? (
               <div className="grid grid-cols-2 gap-4">
                 {productsWithImages.map((product) => (
-                  <Link href={`/product/${product.id}`} key={product.id}>
+                  <Link href={product.link} key={product.id}>
                     <div className="transform transition-transform hover:scale-105">
                       <div className="product-content rounded-lg p-4 shadow-lg">
                         <Image 
@@ -55,44 +55,4 @@ export default async function SearchResultPage({ searchParams }: SearchResultPag
       console.error('Error fetching products:', error);
       return <div>Error: Failed to fetch products. Please try again later.</div>;
     }
-
- 
-
-async function fetchProductById(id: number): Promise<Product> {
-  const response = await fetch(`${process.env.BASE_API_URL}/product/info/${id}`);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch product with id ${id}`);
-  }
-  const jsonResponse = await response.json();
-  const data = jsonResponse.result;
-  // append product id to data
-  data.id = id;
-  return data;
-}
-
-
-
-async function fetchProductsInfo(productIds: unknown): Promise<Product[]> {
-  if (!Array.isArray(productIds)) {
-    console.error('productIds is not an array:', productIds);
-    return [];
-  }
-
-  const productPromises = productIds.map(id => fetchProductById(id));
-  return Promise.all(productPromises);
-}
-
-
-
-async function getProductIdsByQuery(query: string): Promise<(number | string)[]> {
-  const response = await fetch(`${process.env.BASE_API_URL}/product/list?productName=${query}`);
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch product IDs');
-  }
-  const jsonResponse = await response.json();
-  const data = jsonResponse.result.content;
-
-  return data;
-}
 }

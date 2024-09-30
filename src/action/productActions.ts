@@ -4,8 +4,8 @@ import {
   CommonResType,
   ProductImagesType,
   ProductTitleType,
+  Product
 } from '@/types/responseType';
-
 import { ProductInfoType } from '@/types/requestType';
 import { notFound } from 'next/navigation';
 
@@ -78,4 +78,74 @@ export const getProductDefaultImage = async (
   );
   const result = (await response.json()) as CommonResType<{ src: string }>;
   return result.result.src;
+};
+
+
+export async function fetchProductById(id: number): Promise<Product> {
+  const response = await fetch(`${process.env.BASE_API_URL}/product/info/${id}`);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch product with id ${id}`);
+  }
+  const jsonResponse = await response.json();
+  const data = jsonResponse.result;
+  // Ensure data and data.icon exist
+  if (!data.icon) {
+    data.icon = {};
+  }
+  // append product id to data
+  data.id = id;
+  data.link = `/product/${id}`;
+  data.icon.media = await getProductDefaultImage(id);
+  return data;
+}
+
+export async function fetchProductsInfo(productIds: unknown): Promise<Product[]> {
+  if (!Array.isArray(productIds)) {
+    console.error('productIds is not an array:', productIds);
+    return [];
+  }
+  const productPromises = productIds.map(id => fetchProductById(id));
+  return Promise.all(productPromises);
+}
+
+
+
+export async function getProductIdsByQuery(query: string): Promise<(number | string)[]> {
+  const response = await fetch(`${process.env.BASE_API_URL}/product/list?productName=${query}`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch product IDs');
+  }
+  const jsonResponse = await response.json();
+  const data = jsonResponse.result.content;
+  const productPromises = data.map((id: number) => fetchProductById(id));
+  return Promise.all(productPromises);
+}
+
+export const getBestItems = async (): Promise<Product[]> => {
+  const response = await fetch(`${process.env.BASE_API_URL}/product/best-list/cup`);
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch product IDs');
+  }
+  const jsonResponse = await response.json();
+  const data = jsonResponse.result;
+  const list = data.slice(0, 8);
+  const productPromises = list.map((id: number) => fetchProductById(id));
+  return Promise.all(productPromises);
+};
+
+export const getNewItems = async (): Promise<Product[]> => {
+  const response = await fetch(`${process.env.BASE_API_URL}/product/list?orderCondition=NEWEST&size=8`);
+  if (!response.ok) {
+    throw new Error('Failed to fetch product IDs');
+  }
+  const jsonResponse = await response.json();
+  const data = jsonResponse.result.content;
+  if (!Array.isArray(data)) {
+    console.error('Unexpected data format:', data);
+    return []; // Return an empty array if data is not as expected
+  }
+  const productPromises = data.map((id: number) => fetchProductById(id));
+  return Promise.all(productPromises);
 };
