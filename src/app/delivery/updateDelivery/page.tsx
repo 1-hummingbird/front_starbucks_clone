@@ -1,25 +1,16 @@
 import DeliveryHeader from "@/components/Delivery/DeliveryHeader";
-import { DeliveryDto } from "@/types/deliveryDto";
+import DeliveryAddressUpdate from '@/components/Delivery/DeliveryAddressUpdate';
+import React from "react";
 
-interface DeliveryAddressUpdateProps {
-  dto: DeliveryDto;
-}
 
-const DeliveryAddressUpdate: React.FC<DeliveryAddressUpdateProps> = ({ dto }) => {
+function page({ searchParams }: { searchParams: { dto: string } }) {
+  const decodedDto = decodeURIComponent(searchParams.dto);
+  const deliveryDto = JSON.parse(decodedDto);
+  console.log(deliveryDto);
   return (
-    <>
+    <>  
       <DeliveryHeader />
-      <DeliveryAddressUpdate dto={dto} />
-    </>
-  );
-};
-
-function page({ searchParams }: { searchParams: { deliveryDto: DeliveryDto } }) {
-  const dto = searchParams.deliveryDto;
-  return (
-    <>
-      <DeliveryHeader />
-      <DeliveryAddressUpdate dto={dto} />
+      <DeliveryAddressUpdate dto={deliveryDto} />
     </>
   );
 }

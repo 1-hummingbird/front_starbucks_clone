@@ -5,15 +5,21 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../../swiperComponent/style.css';
 
-import { Autoplay, Keyboard, Pagination } from 'swiper/modules';
 import { ChevronRight, Pause, Play } from 'lucide-react';
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { useRef, useState } from 'react';
+import { Autoplay, Keyboard, Pagination } from 'swiper/modules';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 
+import { ExhibitionListType } from '@/types/responseType';
 import Image from 'next/image';
-import { exhibitions } from '@/datas/dummy/exhibitions';
 
-const ExhibitionSlide = () => {
+type ExhibitionSlideProps = ExhibitionListType;
+
+const ExhibitionSlide = ({
+  exhibitionList,
+}: {
+  exhibitionList: ExhibitionSlideProps[];
+}) => {
   const swiperRef = useRef<SwiperRef>(null);
   const [isAutoplay, setIsAutoplay] = useState<boolean>(true);
 
@@ -29,6 +35,7 @@ const ExhibitionSlide = () => {
     }
   };
 
+  console.log('🚀 ~ exhibitionList:', exhibitionList);
   return (
     <section className="w-full">
       <Swiper
@@ -48,18 +55,19 @@ const ExhibitionSlide = () => {
         loop={true}
         className="w-full"
       >
-        {exhibitions.map((item) => {
+        {exhibitionList.map((item) => {
           return (
             <SwiperSlide key={item.id}>
-              <Image
-                src={item.img}
-                alt="exhibition image"
-                width={0}
-                height={0}
-                sizes="100vh"
-                style={{ width: '100%', height: 'auto' }}
-                priority
-              />
+              <div className="relative h-[40vh] w-full overflow-hidden">
+                <Image
+                  src={item.detail}
+                  alt="exhibition image"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  className="absolute left-0 top-0"
+                  priority
+                />
+              </div>
             </SwiperSlide>
           );
         })}

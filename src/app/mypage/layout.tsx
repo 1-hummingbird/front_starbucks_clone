@@ -4,7 +4,7 @@ import React from 'react';
 import TopNavigationBar from '@/components/TopNavigationBar';
 
 export const metadata: Metadata = {
-  title: 'Main',
+  title: 'My Page',
 };
 
 const layout = ({ children }: Readonly<{ children: React.ReactNode }>) => {

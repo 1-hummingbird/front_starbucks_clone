@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const SignInLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-      <AuthHeader title="로그인" />
+      <AuthHeader />
       {children}
     </>
   );

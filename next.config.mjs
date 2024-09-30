@@ -24,6 +24,19 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'img.icons8.com',
       },
+      {
+        protocol: 'https',
+        hostname:
+          'prod-starbucks-product-details.s3.ap-northeast-2.amazonaws.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'sstatic.ssgcdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'sui.ssgcdn.com',
+      },
     ],
   },
   env: {

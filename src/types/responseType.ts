@@ -80,12 +80,13 @@ export interface PayItemType {
 export interface ShippingDefaultIDType {
   shippingDefaultID: number;
 }
+
 export interface ProductImagesType {
   url: string;
   isMainImage?: boolean;
 }
 
-export interface ProductDetailType {
+export interface ProductTitleType {
   name: string;
   price: number;
   isNew: boolean;
@@ -95,45 +96,50 @@ export interface ProductDetailType {
   wishCount: number | null;
 }
 
-export interface OrderListType {
-  purchaseCode: string;
-  purchaseDate: string;
-  totalPrice: number;
-  purchaseItems: {
-    optionId: number;
-    productImage: string;
-    optionName: string;
-    price: number;
-    qty: number;
-    isReviewable: boolean;
-  }[];
+export interface ProductDetailType {
+  detail: string;
 }
 
-// product
+export interface ReviewTitleType {
+  reviewCount: number;
+  photoReviewCount: number;
+  averageStar: number;
+}
 
-export interface GetProductListIdsResponse {
+export interface ReviewListType {
+  content: number[];
+  pageable: {
+    pageNumber: number;
+    pageSize: number;
+    sort: object;
+    offset: number;
+    paged: boolean;
+    unpaged: boolean;
+  };
+  numberOfElements: number;
+  size: number;
+  number: number;
+  sort: { unsorted: boolean; sorted: boolean; empty: boolean };
   first: boolean;
   last: boolean;
-  size: number;
-  content: number[];
-  number: number;
-  sort: Sort;
-  pageable: Pageable;
-  numberOfElements: number;
   empty: boolean;
 }
 
-interface Sort {
-  empty: boolean;
-  unsorted: boolean;
-  sorted: boolean;
+export interface ReviewContentType {
+  nickName: string;
+  star: number;
+  createAt: string;
+  content: string;
+  commentCount: number;
 }
 
-interface Pageable {
-  offset: number;
-  sort: Sort;
-  pageSize: number;
-  pageNumber: number;
-  paged: boolean;
-  unpaged: boolean;
+export interface ExhibitionListType {
+  id: number;
+  number: string;
+  detail: string;
+}
+
+export interface ProductThumbnailType {
+  productId: number;
+  src: string;
 }

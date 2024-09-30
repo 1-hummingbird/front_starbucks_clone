@@ -1,14 +1,15 @@
 'use client';
 
-import { Button } from '../ui/button';
-import Image from 'next/image';
-import Input from '../ui/input';
-import Link from 'next/link';
+import { useToast } from '@/hooks/use-toast';
 import { User } from '@/types/requestType';
 import { signIn } from 'next-auth/react';
-import { useForm } from 'react-hook-form';
-import { useToast } from '@/hooks/use-toast';
 import { useTransition } from 'react';
+import { useForm } from 'react-hook-form';
+import SignInHeader from '../pages/signin/SignInHeader';
+import SignInLinkList from '../pages/signin/SignInLinkList';
+import { Button } from '../ui/button';
+import Input from '../ui/input';
+import ShowToast from '../util/ShowToast';
 
 const SignInForm = () => {
   const { toast } = useToast();
@@ -17,75 +18,73 @@ const SignInForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<User>();
 
   const onSubmit = async (values: User) => {
     startTransition(async () => {
-      await signIn('credentials', {
+      const result = await signIn('credentials', {
         loginID: values.loginID,
         password: values.password,
-        redirect: true,
-        callbackUrl: '/',
+        redirect: false,
       });
+      if (result?.ok) {
+        window.location.href = '/';
+      } else {
+        setError('loginID', {
+          type: 'manual',
+          message: '아이디를 확인해 주세요',
+        });
+        setError('password', {
+          type: 'manual',
+          message: '비밀번호를 확인해 주세요',
+        });
+      }
     });
   };
 
   return (
-    <section className="flex h-full w-5/6 flex-col justify-center">
-      <Image
-        src={'https://drive.google.com/uc?id=1PVPlrCLtSsnBdBG8mb0vKhBQj7L04llO'}
-        alt="logo"
-        width={300}
-        height={300}
-        className="mx-auto mt-20"
-        priority
-      />
+    <section className="px-7 pt-10">
+      <SignInHeader />
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mt-12 flex w-full flex-col justify-center gap-2"
+        className="mx-auto mt-10 w-full max-w-md rounded-lg text-black"
       >
         <div className="mb-4 w-full">
           <Input
-            className="custom-input focus-visible:ring-transparent"
+            className="border-none px-0 focus-visible:ring-transparent"
             type="text"
             placeholder="아이디"
             {...register('loginID', {
               required: ' 아이디를 입력해주세요',
             })}
           />
+          <hr className="border-1 border-gray-300" />
           <p className="text-[#e71212]">{errors.loginID?.message}</p>
         </div>
         <div className="mb-4 w-full">
           <Input
-            className="custom-input focus-visible:ring-transparent"
+            className="border-none px-0 focus-visible:ring-transparent"
             type="password"
             placeholder="비밀번호"
             {...register('password', {
               required: ' 비밀번호를 입력해주세요',
             })}
           />
+          <hr className="border-1 border-gray-300" />
           <p className="text-[#e71212]">{errors.password?.message}</p>
         </div>
-        <Button className="custom-button w-full" type="submit">
-          <p className="text-lg">로그인</p>
-        </Button>
-        <Button
-          className="custom-button custom-button-kakao"
-          type="button"
-          onClick={() => {
-            signIn('kakao');
-          }}
-        >
-          <p className="text-lg">카카오 로그인</p>
-        </Button>
+        <div className="fixed bottom-5 grid w-full grid-cols-12 gap-2 px-5">
+          <Button
+            className="col-span-10 w-full bg-starbucks py-6"
+            style={{ borderRadius: '30px' }}
+            type="submit"
+          >
+            로그인하기
+          </Button>
+        </div>
       </form>
-      <div className="mt-10 flex justify-center gap-6">
-        <p>아이디 찾기</p>
-        <p>비밀번호 찾기</p>
-        <Link href="/register">
-          <p>회원가입</p>
-        </Link>
-      </div>
+      <SignInLinkList />
     </section>
   );
 };

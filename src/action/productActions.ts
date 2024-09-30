@@ -2,8 +2,8 @@
 
 import {
   CommonResType,
-  ProductDetailType,
   ProductImagesType,
+  ProductTitleType,
 } from '@/types/responseType';
 
 import { ProductInfoType } from '@/types/requestType';
@@ -24,7 +24,6 @@ export const getProductInfo = async <T>(
   const result = (await response.json()) as CommonResType<T>;
 
   if (!result.isSuccess) {
-    console.log(result);
     return notFound();
   }
 
@@ -53,12 +52,30 @@ export const getProductImages = async (
 
 export const getProductDetail = async (
   productId: number,
-): Promise<ProductDetailType> => {
+): Promise<ProductTitleType> => {
   const response = await fetch(
     `${process.env.BASE_API_URL}/product/info/${productId}`,
     { method: 'GET' },
   );
-  const result = (await response.json()) as CommonResType<ProductDetailType>;
-  console.log('getProductDetail : ', result.result);
+  const result = (await response.json()) as CommonResType<ProductTitleType>;
   return result.result;
+};
+
+export const getCustomerWishlist = async (): Promise<number[]> => {
+  const response = await fetch(
+    `${process.env.BASE_API_URL}/product/most-wish/list`,
+    { method: 'GET' },
+  );
+  const result = (await response.json()) as CommonResType<number[]>;
+  return result.result;
+};
+
+export const getProductDefaultImage = async (
+  productId: number,
+): Promise<string> => {
+  const response = await fetch(
+    `${process.env.BASE_API_URL}/product/list/image/${productId}`,
+  );
+  const result = (await response.json()) as CommonResType<{ src: string }>;
+  return result.result.src;
 };

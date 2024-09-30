@@ -7,4 +7,6 @@ export const routes = {
   cart: '/cart',
   mypage: '/mypage',
   home: '/',
+  allProducts: '/allproducts',
+  order: '/order',
 };

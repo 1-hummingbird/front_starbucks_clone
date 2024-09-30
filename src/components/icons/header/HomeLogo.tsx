@@ -15,6 +15,7 @@ const HomeLogo = ({ w = 120, h = 40 }: HomeLogoProps) => {
         alt=""
         width={w}
         height={h}
+        style={{ width: 'auto', height: 'auto' }}
         priority
       />
     </Link>
