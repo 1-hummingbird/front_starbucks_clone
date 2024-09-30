@@ -24,7 +24,7 @@ export const getRecentSearches = async (): Promise<string[]> => {
       }
 
       const response = await fetch(`${process.env.BASE_API_URL}/product/search/list`, {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Add the Authentication header
@@ -93,8 +93,8 @@ export async function deleteRecentSearch(searchTerm: string) {
         throw new Error('Authentication token not found');
       }
 
-      const response = await fetch(`${process.env.BASE_API_URL}/product/search/word/delete`, {
-        method: 'POST',
+      const response = await fetch(`${process.env.BASE_API_URL}/product/search/word`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Add the Authentication header
@@ -128,8 +128,8 @@ export async function deleteAllRecentSearches() {
         throw new Error('Authentication token not found');
       }
 
-      const response = await fetch(`${process.env.BASE_API_URL}/product/search/word/delete-all`, {
-        method: 'POST',
+      const response = await fetch(`${process.env.BASE_API_URL}/product/search/word/all`, {
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`, // Add the Authentication header

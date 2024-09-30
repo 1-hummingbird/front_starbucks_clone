@@ -79,7 +79,7 @@ export const getCartDatas = async (): Promise<CartListType> => {
   }
 
   const res = await fetch(`${process.env.BASE_API_URL}/cart/items/member`, {
-    method: 'POST',
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${session.user?.accessToken}`,
