@@ -70,10 +70,10 @@ export interface ImageByCartIdType {
 }
 
 export interface PayItemType {
-  id: 0;
+  id: number;
   name: 'string';
-  price: 0;
-  discountRate: 0;
+  price: number;
+  discountRate: number;
   isInputOption: true;
 }
 
@@ -142,4 +142,33 @@ export interface ExhibitionListType {
 export interface ProductThumbnailType {
   productId: number;
   src: string;
+}
+
+// productFilter
+
+export interface GetProductListIdsResponse {
+  first: boolean;
+  last: boolean;
+  size: number;
+  content: number[];
+  number: number;
+  sort: Sort;
+  pageable: Pageable;
+  numberOfElements: number;
+  empty: boolean;
+}
+
+interface Sort {
+  empty: boolean;
+  unsorted: boolean;
+  sorted: boolean;
+}
+
+interface Pageable {
+  offset: number;
+  sort: Sort;
+  pageSize: number;
+  pageNumber: number;
+  paged: boolean;
+  unpaged: boolean;
 }

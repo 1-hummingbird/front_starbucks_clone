@@ -1,8 +1,17 @@
-import AllFilter from "@/components/mainFilter/AllFilter";
+import {
+  getProductInfoimage,
+  getProductInfolist,
+  productFilter,
+} from '@/action/productFilterAction';
+import AllFilter from '@/components/mainFilter/AllFilter';
 
-import React from "react";
+import React from 'react';
 
-function ProductFilter() {
+async function ProductFilter() {
+  // const allproduct = await productFilter
+  // const onelist = await getProductInfolist();
+  // const oneimage = await getProductInfoimage();
+  // console.log('allproduct', (await productFilter()));
   return (
     <>
       <AllFilter />
