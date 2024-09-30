@@ -50,7 +50,7 @@ const page = async ({ params }: { params: { productId: number } }) => {
   ]);
 
   return (
-    <main className="relative">
+    <main>
       <TopNavBar reviewCount={reviewTitle.reviewCount} />
       <ProductImages images={productImages} />
       <ProductTitle {...productTitle} />

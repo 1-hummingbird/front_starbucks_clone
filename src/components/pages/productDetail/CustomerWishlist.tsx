@@ -29,7 +29,7 @@ const CustomerWishlist = async ({
     }),
   );
   return (
-    <section className="mt-8 h-[250px] w-[412px]">
+    <section className="mt-8 h-[250px]">
       <p className="pl-4 font-bold">다른 고객이 함께 찜한 상품</p>
       <CustomerWishlistSwiper products={products} />
     </section>
