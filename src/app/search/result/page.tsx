@@ -12,8 +12,6 @@ export default async function SearchResultPage({ searchParams }: SearchResultPag
     const query = decodeURIComponent(searchParams.query);
     try {
       const productIds = await getProductIdsByQuery(query);
-      console.log('Product IDs:', productIds); // Add this line for debugging
-  
       const products = await fetchProductsInfo(productIds);
       const productsWithImages = await Promise.all(products.map(async (product) => ({
         ...product,
@@ -22,38 +20,43 @@ export default async function SearchResultPage({ searchParams }: SearchResultPag
 
       const renderProducts = () => {
         return (
-          <div>
-            <h1>Search Results for "{query}"</h1>
+          <div className="p-4">
+            <h1 className="mb-4 text-2xl font-bold">검색결과 "{query}"</h1>
             {productsWithImages.length > 0 ? (
-              <ul>
-              {productsWithImages.map((product) => (
-                <li key={product.id}>
-                  {product.name},
-                  <Image 
-                    src={product.image}
-                    alt={product.name} 
-                    width={100} 
-                    height={100} 
-                  />
-                  {product.price},
-                  <Link href={`/product/${product.id}`}>상세보기</Link>
-                </li>
-              ))}
-              </ul>
+              <div className="grid grid-cols-2 gap-4">
+                {productsWithImages.map((product) => (
+                  <Link href={`/product/${product.id}`} key={product.id}>
+                    <div className="transform transition-transform hover:scale-105">
+                      <div className="product-content rounded-lg p-4 shadow-lg">
+                        <Image 
+                          src={product.image}
+                          alt={product.name} 
+                          width={112} 
+                          height={112}
+                          className="mx-auto rounded-lg"
+                        />
+                        <div className="mt-4 text-start">
+                          <h3 className="text-base font-semibold">{product.name}</h3>
+                          <p className="font-semibold text-gray-700">{product.price.toLocaleString()} 원</p>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            ) : (
+              <p>No products found.</p>
+            )}
+          </div>
+        );
+      }
+      return renderProducts();
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      return <div>Error: Failed to fetch products. Please try again later.</div>;
+    }
 
-              ) : (
-                <p>No products found.</p>
-              )}
-            </div>
-          );
-         }
-         return renderProducts();
-        } catch (error) {
-          console.error('Error fetching products:', error);
-          return <div>Error: Failed to fetch products. Please try again later.</div>;
-        }
-  }
-
+ 
 
 async function fetchProductById(id: number): Promise<Product> {
   const response = await fetch(`${process.env.BASE_API_URL}/product/info/${id}`);
@@ -91,4 +94,5 @@ async function getProductIdsByQuery(query: string): Promise<(number | string)[]>
   const data = jsonResponse.result.content;
 
   return data;
+}
 }
