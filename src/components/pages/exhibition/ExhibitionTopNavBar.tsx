@@ -6,11 +6,11 @@ import ExhibitionImage from './ExhibitionImage';
 import { ExhibitionListType } from '@/types/responseType';
 import ExhibitionProductList from './ExhibitionProductList';
 
-function ExhibitionTopNavBar({
+const ExhibitionTopNavBar = ({
   exhibitionList,
 }: {
   exhibitionList: ExhibitionListType[];
-}): JSX.Element {
+}) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
   const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
   const exhibitionTitles = exhibitionList.map((exhibition) => exhibition.name);
