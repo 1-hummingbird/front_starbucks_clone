@@ -135,7 +135,7 @@ export interface ReviewContentType {
 
 export interface ExhibitionListType {
   id: number;
-  number: string;
+  name: string;
   detail: string;
 }
 
@@ -148,4 +148,12 @@ export interface ReviewCommentType {
   nickname: string;
   content: string;
   createAt: string;
+}
+
+export interface ExhibitionImageType {
+  detail: string;
+}
+
+export interface ProductThumbnailImg {
+  src: string;
 }

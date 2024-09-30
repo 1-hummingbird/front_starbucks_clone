@@ -27,13 +27,11 @@ const StarsRating = ({
             key={star}
             className={`relative h-${size} w-${size} text-gray-300`}
           >
-            {/* 빈 별 */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              // className="h-6 w-6"
               className={`h-${size} w-${size}`}
             >
               <path
@@ -44,7 +42,6 @@ const StarsRating = ({
               />
             </svg>
 
-            {/* 채워진 별 */}
             <div
               className="absolute left-0 top-0 overflow-hidden"
               style={{ width: `${fillPercentage}%` }}

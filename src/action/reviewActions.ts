@@ -44,7 +44,6 @@ export const getReivewList = async (
 export const getRivewContent = async (
   reviewId: number,
 ): Promise<ReviewContentType> => {
-  // 'use client';
   const response = await fetch(
     `${process.env.BASE_API_URL}/review/info/${reviewId}`,
     {
