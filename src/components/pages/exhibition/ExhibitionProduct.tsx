@@ -34,6 +34,7 @@ const ExhibitionProduct = ({ productId }: { productId: number }) => {
   }, [productId]);
 
   const data = {
+    productId: productId,
     productName: productName,
     productImgSrc: productImgSrc,
     price: price,

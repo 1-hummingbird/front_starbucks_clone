@@ -16,7 +16,7 @@ const ExhibitionProductList = ({ id }: { id: number }) => {
     fetchExhibitionProductList();
   }, [id]);
   return (
-    <section className="flex flex-wrap gap-1">
+    <section className="grid grid-cols-2 gap-1">
       {exhibitionProductList.map((productId, idx) => {
         return <ExhibitionProduct key={idx} productId={productId} />;
       })}
