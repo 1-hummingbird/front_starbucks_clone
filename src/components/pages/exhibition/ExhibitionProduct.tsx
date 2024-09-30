@@ -1,7 +1,12 @@
-import { ProductImagesType, ProductTitleType } from '@/types/responseType';
+import {
+  ProductImagesType,
+  ProductThumbnailImg,
+  ProductTitleType,
+} from '@/types/responseType';
 import React, { useEffect, useState } from 'react';
 
 import { getProductInfo } from '@/action/productActions';
+import ProductThumbnail from '@/components/ProductThumbnail';
 
 const ExhibitionProduct = ({ productId }: { productId: number }) => {
   const [productName, setProductName] = useState<string>('');
@@ -14,20 +19,33 @@ const ExhibitionProduct = ({ productId }: { productId: number }) => {
   useEffect(() => {
     const fetchProductInfo = async () => {
       const [imgSrc, productInfo] = await Promise.all([
-        getProductInfo<ProductImagesType[]>('list/image', productId),
+        getProductInfo<ProductThumbnailImg>('list/image', productId),
         getProductInfo<ProductTitleType>('info', productId),
       ]);
 
-      // 이미지 불러오기
       setProductName(productInfo.name);
-      // setProductImgSrc(imgSrc)
+      setProductImgSrc(imgSrc.src);
       setPrice(productInfo.price);
       setIsNew(productInfo.isNew);
       setIsDiscounted(productInfo.isDiscounted);
       setDiscountRate(productInfo.discountRate);
     };
+    fetchProductInfo();
   }, [productId]);
-  return <div></div>;
+
+  const data = {
+    productName: productName,
+    productImgSrc: productImgSrc,
+    price: price,
+    isNew: isNew,
+    isDiscounted: isDiscounted,
+    discountRate: discountRate,
+  };
+  return (
+    <div>
+      <ProductThumbnail {...data} />
+    </div>
+  );
 };
 
 export default ExhibitionProduct;

@@ -11,7 +11,7 @@ const ExhibitionTopNavBar = ({
 }: {
   exhibitionList: ExhibitionListType[];
 }) => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
   const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
   const exhibitionTitles = exhibitionList.map((exhibition) => exhibition.name);
 
@@ -25,7 +25,7 @@ const ExhibitionTopNavBar = ({
 
   return (
     <section>
-      <section className="scrollbar-hide w-full overflow-x-auto whitespace-nowrap border-b-2 border-gray-300 bg-white pb-3 pt-1">
+      <section className="w-full overflow-x-auto whitespace-nowrap border-b-2 border-gray-300 bg-white pb-3 pt-1 scrollbar-hide">
         <div className="flex gap-1 px-2">
           {exhibitionTitles.map((item, idx) => (
             <div

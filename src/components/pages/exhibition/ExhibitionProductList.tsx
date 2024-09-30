@@ -16,9 +16,9 @@ const ExhibitionProductList = ({ id }: { id: number }) => {
     fetchExhibitionProductList();
   }, [id]);
   return (
-    <section>
+    <section className="flex flex-wrap gap-1">
       {exhibitionProductList.map((productId, idx) => {
-        return <ExhibitionProduct productId={productId} />;
+        return <ExhibitionProduct key={idx} productId={productId} />;
       })}
     </section>
   );

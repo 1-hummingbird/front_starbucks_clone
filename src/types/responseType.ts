@@ -153,3 +153,7 @@ export interface ReviewCommentType {
 export interface ExhibitionImageType {
   detail: string;
 }
+
+export interface ProductThumbnailImg {
+  src: string;
+}
