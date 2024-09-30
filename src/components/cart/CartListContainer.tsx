@@ -165,7 +165,6 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
       ) : (
         <div className="py-10 text-center">장바구니가 비어 있습니다.</div>
       )}
-
       {/* Price Summary Section */}
       <div className="p-3">
         <ul className="flex items-center justify-between">
@@ -187,7 +186,6 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
           </li>
         </ul>
       </div>
-
       <div className="mx-4 mb-40 bg-[#F7F7F7] p-5 text-sm text-[#B8B8B8]">
         <span>
           장바구니에는 최대 20개까지 담을 수 있으며, 담긴 상품은 최대 2개월간
@@ -196,7 +194,6 @@ function CartListContainer({ cartDatas }: { cartDatas: CartListType }) {
           있습니다.
         </span>
       </div>
-
       <div className="fixed bottom-0 left-0 z-20 w-full bg-white shadow-[0_-5px_15px_-5px_rgba(0,0,0,0.1)]">
         <div>
           <ul className="flex items-center justify-between px-10 py-5">

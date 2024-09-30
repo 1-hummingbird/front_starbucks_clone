@@ -109,4 +109,31 @@ export interface OrderListType {
   }[];
 }
 
-// test
+// product
+
+export interface GetProductListIdsResponse {
+  first: boolean;
+  last: boolean;
+  size: number;
+  content: number[];
+  number: number;
+  sort: Sort;
+  pageable: Pageable;
+  numberOfElements: number;
+  empty: boolean;
+}
+
+interface Sort {
+  empty: boolean;
+  unsorted: boolean;
+  sorted: boolean;
+}
+
+interface Pageable {
+  offset: number;
+  sort: Sort;
+  pageSize: number;
+  pageNumber: number;
+  paged: boolean;
+  unpaged: boolean;
+}

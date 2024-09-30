@@ -64,6 +64,7 @@ function CartListItem({
     });
   }, [cartItem]);
 
+  // Effect to update total price and discount whenever cartItemData or count changes
   useEffect(() => {
     if (cartItemData) {
       const newTotalPrice = cartItemData.price * count;

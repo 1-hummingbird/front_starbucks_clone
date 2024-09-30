@@ -59,6 +59,6 @@ export const getProductDetail = async (
     { method: 'GET' },
   );
   const result = (await response.json()) as CommonResType<ProductDetailType>;
-  console.log(result.result);
+  console.log('getProductDetail : ', result.result);
   return result.result;
 };
