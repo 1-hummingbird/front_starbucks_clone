@@ -49,7 +49,6 @@ const page = async ({ params }: { params: { productId: number } }) => {
     getCustomerWishlist(),
   ]);
 
-  console.log('🚀 ~ page ~ reviewTitle:', reviewTitle);
   return (
     <main className="relative">
       <TopNavBar reviewCount={reviewTitle.reviewCount} />

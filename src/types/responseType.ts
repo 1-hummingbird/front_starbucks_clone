@@ -135,7 +135,7 @@ export interface ReviewContentType {
 
 export interface ExhibitionListType {
   id: number;
-  number: string;
+  name: string;
   detail: string;
 }
 
