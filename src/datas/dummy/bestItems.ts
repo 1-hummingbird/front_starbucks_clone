@@ -9,7 +9,7 @@ export const bestItems: Product[] = [
     icon: {
       media: "https://sitem.ssgcdn.com/10/30/71/item/1000355713010_i1_336.jpg",
     },
-    link: "/product/detail/1",
+    link: "/product/1",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ export const bestItems: Product[] = [
     icon: {
       media: "https://sitem.ssgcdn.com/03/79/58/item/1000614587903_i1_336.jpg",
     },
-    link: "/product/detail/2",
+    link: "/product/2",
   },
   {
     id: 3,
@@ -29,7 +29,7 @@ export const bestItems: Product[] = [
     icon: {
       media: "https://sitem.ssgcdn.com/61/03/56/item/1000541560361_i1_336.jpg",
     },
-    link: "/product/detail/3",
+    link: "/product/3",
   },
   {
     id: 4,
@@ -39,7 +39,7 @@ export const bestItems: Product[] = [
     icon: {
       media: "https://sitem.ssgcdn.com/97/49/57/item/1000614574997_i1_336.jpg",
     },
-    link: "/product/detail/4",
+    link: "/product/4",
   },
   {
     id: 5,
@@ -49,7 +49,7 @@ export const bestItems: Product[] = [
     icon: {
       media: "https://sitem.ssgcdn.com/91/85/58/item/1000614588591_i1_336.jpg",
     },
-    link: "/product/detail/5",
+    link: "/product/5",
   },
   {
     id: 6,
@@ -59,7 +59,7 @@ export const bestItems: Product[] = [
     icon: {
       media: "https://sitem.ssgcdn.com/64/12/85/item/1000612851264_i1_336.jpg",
     },
-    link: "/product/detail/6",
+    link: "/product/6",
   },
   {
     id: 7,
@@ -69,7 +69,7 @@ export const bestItems: Product[] = [
     icon: {
       media: "https://sitem.ssgcdn.com/48/69/58/item/1000614586948_i1_336.jpg",
     },
-    link: "/product/detail/7",
+    link: "/product/7",
   },
   {
     id: 8,
@@ -79,6 +79,6 @@ export const bestItems: Product[] = [
     icon: {
       media: "https://sitem.ssgcdn.com/11/88/17/item/1000561178811_i1_336.jpg",
     },
-    link: "/product/detail/8",
+    link: "/product/8",
   },
 ];
