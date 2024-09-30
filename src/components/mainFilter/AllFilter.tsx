@@ -280,7 +280,7 @@ const AllFilter = () => {
         {filteredProducts.map((product) => (
           <Link href={`/product/${product.id}`} key={product.id}>
             <div className="flex justify-center">
-              <div className="product-content box-border rounded-lg p-6">
+              <div className="product-content box-border rounded-lg p-4">
                 <Image
                   className="rounded-lg"
                   src={product.img}
