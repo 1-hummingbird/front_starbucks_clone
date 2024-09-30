@@ -4,12 +4,11 @@ import { getExhibitionList } from '@/action/exhibitionAction';
 
 const page = async () => {
   const exhibitionList = await getExhibitionList();
-  const exhibitionTitles = exhibitionList.map((exhibition) => exhibition.name);
-  console.log('🚀 ~ page ~ exhibitionTitles:', exhibitionTitles);
+  console.log('🚀 ~ page ~ exhibitionList:', exhibitionList);
 
   return (
     <main>
-      <ExhibitionTopNavBar exhibitionTitles={exhibitionTitles} />
+      <ExhibitionTopNavBar exhibitionList={exhibitionList} />
     </main>
   );
 };

@@ -149,3 +149,7 @@ export interface ReviewCommentType {
   content: string;
   createAt: string;
 }
+
+export interface ExhibitionImageType {
+  detail: string;
+}
