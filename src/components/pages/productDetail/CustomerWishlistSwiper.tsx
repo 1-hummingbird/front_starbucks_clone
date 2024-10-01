@@ -30,7 +30,7 @@ const CustomerWishlistSwiper = ({
     <Swiper ref={swiperRef} slidesPerView={3}>
       {products.map((product) => (
         <SwiperSlide key={product.id}>
-          <Link href={`/product/${product.id}`}>
+          <Link key={product.id} href={`/product/${product.id}`}>
             <div className="flex h-[221px] w-[112px] flex-col items-start">
               <Image
                 src={`${product.thumbnail}`}
