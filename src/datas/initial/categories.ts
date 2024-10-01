@@ -29,7 +29,7 @@ export const categories: Category[] = [
     component: LifeStyle,
   },
   { id: 5, category: "e-gift", url: "category/gift/1", component: EGift },
-  { id: 6, category: "디저트", url: "category/dessert/1", component: Dessert },
+  { id: 6, category: "디저트", url: "category/cake/1", component: Dessert },
   // { id: 7, category: "베이커리", url: "category/bakery", component: Bakery },
   // {
   //   id: 8,

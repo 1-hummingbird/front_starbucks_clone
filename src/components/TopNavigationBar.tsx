@@ -4,8 +4,8 @@ import NavList from './nav/NavList';
 const navs: Nav[] = [
   { id: 1, url: '/', label: '메인', isActive: true },
   { id: 2, url: 'exhibition', label: '기획전', isActive: false },
-  { id: 3, url: 'best', label: '베스트', isActive: false },
-  { id: 4, url: 'new', label: '새 상품', isActive: false },
+  { id: 3, url: 'best/cup', label: '베스트', isActive: false },
+  { id: 4, url: 'new/1', label: '새 상품', isActive: false },
 ];
 
 const TopNavigationBar = () => {

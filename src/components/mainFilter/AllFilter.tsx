@@ -7,7 +7,7 @@ import FilterSection from './CategoryFilter/FilterSection';
 import Image from 'next/image';
 import Link from 'next/link';
 import { SelcetButton } from './CategoryFilter/SelectButton';
-
+import { getAllProducts } from '@/action/productActions';
 const AllFilter = () => {
   const [visibleCategoryIndex, setVisibleCategoryIndex] = useState<
     number | null
