@@ -135,7 +135,7 @@ export const getBestItems = async (): Promise<Product[]> => {
   return Promise.all(productPromises);
 };
 
-export const getNewItems = async (): Promise<Product[]> => {
+export const getNewItems = async () => {
   const response = await fetch(`${process.env.BASE_API_URL}/product/list?orderCondition=NEWEST&size=12`);
   if (!response.ok) {
     throw new Error('Failed to fetch product IDs');
@@ -146,8 +146,22 @@ export const getNewItems = async (): Promise<Product[]> => {
     console.error('Unexpected data format:', data);
     return []; // Return an empty array if data is not as expected
   }
-  const productPromises = data.map((id: number) => fetchProductById(id));
-  return Promise.all(productPromises);
+
+  const product: Product[] = [];
+  for await (const id of data) {
+    product.push(await fetchProductById(id));
+  }
+  return product;
+
+  // tip: Return에 promise가 들어가지 않도록 잘 풀어야만 해요 (Feat. @ewlkkf)
+  // promise가 있으면 jsx에서 렌더링 되지 않아요
+  // 로딩창 돌릴 때는 Promise 반환 통해서 로딩중인 상황을 보여줄 수 있어요
+  // 그럼 if else로 type 체크를 해야 하는 상황이 오는데 shit happens
+  // UX를 고려 했을 때 promise가 client에서 깨지면 사용자가 느려져서 기분 나빠요
+  // +map은 타입 추론 안 될 때 있어요. nullable 할 때 주로 실패해요
+  
+  // const productPromises = data.map((id: number) => fetchProductById(id));
+  // return await Promise.all(productPromises);
 };
 
 export async function getProductIdsByCategory(category: string, page: number): Promise<Product[]> {
